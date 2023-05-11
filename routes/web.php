@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,75 +13,87 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-//Login
-Route::get('/login/loginForm', function () {
-    return view('login.loginForm');
-})->name('login');
+// login
+Route::get('/', function () {
+    return redirect('/login');
+});
+Route::get('/login', [AccountController::class, 'main'])
+    ->name('login');
 
-// Route::post('/login/loginForm', [AccountController::class, 'login'])->name('login');
+Route::post('/login', [AccountController::class, 'check'])
+    ->name('login.check');
+
+Route::get('/signUp', [AccountController::class, 'signUp'])
+    ->name('signUp');
+
+Route::post('/signUp', [AccountController::class, 'store'])
+    ->name('signUp.store');
 
 
-//Pengusul
-Route::get('/pengusul.pengusul_alat',function(){
+
+
+
+// pengusul
+Route::get('/pengusul.pengusul_alat', function () {
     return view('pengusul.pengusul_alat');
-}) ->name('pengusul.pengusul_alat');
+})->name('pengusul.pengusul_alat');
 
-Route::get('/pengusul.pengusul_ruang',function(){
+Route::get('/pengusul.pengusul_ruang', function () {
     return view('pengusul.pengusul_ruang');
-}) ->name('pengusul.pengusul_ruang');
+})->name('pengusul.pengusul_ruang');
 
-Route::get('/pengusul.pengusul_home',function(){
+Route::get('/pengusul.pengusul_home', function () {
     return view('pengusul.pengusul_home');
-}) ->name('pengusul.pengusul_home');
+})->name('pengusul.pengusul_home');
 
-Route::get('/pengusul.pengusul_histori',function(){
+Route::get('/pengusul.pengusul_histori', function () {
     return view('pengusul.pengusul_histori');
-}) ->name('pengusul.pengusul_histori');
+})->name('pengusul.pengusul_histori');
 
-//Penangung_jawab
-Route::get('/penanggung_jawab.pj_histori',function(){
+//penangungJawab
+Route::get('/penanggung_jawab.pj_histori', function () {
     return view('penanggung_jawab.pj_histori');
-}) ->name('penanggung_jawab.pj_histori');
+})->name('penanggung_jawab.pj_histori');
 
-Route::get('/penanggung_jawab.pj_home',function(){
+Route::get('/penanggung_jawab.pj_home', function () {
     return view('penanggung_jawab.pj_home');
-}) ->name('penanggung_jawab.pj_home');
+})->name('penanggung_jawab.pj_home');
 
 
-//pic_lab
-Route::get('/pic_lab.pic_home',function(){
+// picLab
+Route::get('/pic_lab.pic_home', function () {
     return view('pic_lab.pic_home');
-}) ->name('pic_lab.pic_home');
+})->name('pic_lab.pic_home');
 
-Route::get('/pic_lab.pic_kelolaalat',function(){
+Route::get('/pic_lab.pic_kelolaalat', function () {
     return view('pic_lab.pic_kelolaalat');
-}) ->name('pic_lab.pic_kelolaalat');
+})->name('pic_lab.pic_kelolaalat');
 
-Route::get('/pic_lab.pic_kelolaruang',function(){
+Route::get('/pic_lab.pic_kelolaruang', function () {
     return view('pic_lab.pic_kelolaruang');
-}) ->name('pic_lab.pic_kelolaruang');
+})->name('pic_lab.pic_kelolaruang');
 
-Route::get('/pic_lab.pic_histori',function(){
+Route::get('/pic_lab.pic_histori', function () {
     return view('pic_lab.pic_histori');
-}) ->name('pic_lab.pic_histori');
+})->name('pic_lab.pic_histori');
 
 //administrator
-Route::get('/administrator.admin_home',function(){
+Route::get('/administrator.admin_home', function () {
     return view('administrator.admin_home');
-}) ->name('administrator.admin_home');
+})->name('administrator.admin_home');
 
-Route::get('/administrator.admin_histori',function(){
+Route::get('/administrator.admin_histori', function () {
     return view('administrator.admin_histori');
-}) ->name('administrator.admin_histori');
+})->name('administrator.admin_histori');
 
-Route::get('/administrator.admin_kelolaalat',function(){
+Route::get('/administrator.admin_kelolaalat', function () {
     return view('administrator.admin_kelolaalat');
-}) ->name('administrator.admin_kelolaalat');
+})->name('administrator.admin_kelolaalat');
 
-Route::get('/administrator.admin_kelolaruang',function(){
+Route::get('/administrator.admin_kelolaruang', function () {
     return view('administrator.admin_kelolaruang');
-}) ->name('administrator.admin_kelolaruang');
+})->name('administrator.admin_kelolaruang');
 
-Route::get('/administrator.admin_manajemen_user',function(){
+Route::get('/administrator.admin_manajemen_user', function () {
     return view('administrator.admin_manajemen_user');
-}) ->name('administrator.admin_manajemen_user');
+})->name('administrator.admin_manajemen_user');
