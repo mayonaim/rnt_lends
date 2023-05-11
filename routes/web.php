@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Login
-Route::get('/', function () {
-    return view('main/main_pengusul');
-});
+Route::get('/login/loginForm', function () {
+    return view('login.loginForm');
+})->name('login');
+
+// Route::post('/login/loginForm', [AccountController::class, 'login'])->name('login');
+
+
 //Pengusul
 Route::get('/pengusul.pengusul_alat',function(){
     return view('pengusul.pengusul_alat');
