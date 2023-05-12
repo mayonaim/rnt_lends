@@ -20,14 +20,15 @@ class AccountController extends Controller
 
     public function check(Request $request)
     {
-        $username = $request->input('username');
+        $username = $request->input('name');
         $password = $request->input('password');
 
-        $account = Account::where('username', $username)->first();
+        $account = Account::where('name', $username)->first();
 
         if ($account && Hash::check($password, $account->password)) {
-            return redirect()->route('pengusul.home');
+            return redirect()->route('pengusul.pengusul_home');
         } else {
+            return back();
         }
     }
 

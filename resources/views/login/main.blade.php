@@ -19,7 +19,8 @@
         </div>
         <div class="card-body">
             <div class="d-flex justify-content-center align-items-center">
-                <form action="{{ route('login') }}" method="POST">
+                <form action="{{ route('login.check') }}" method="POST">
+                    @csrf
                     <div class="form-group">
                         <select class="form-control" name="role" required>
                             <option value="">Pilih Jenis User</option>

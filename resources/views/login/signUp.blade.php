@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Login Page</title>
+    <title>Register</title>
 
 </head>
 
@@ -14,19 +14,13 @@
     <div class="card mx-auto" style="max-width: 400px; margin-top: 100px;">
         <div class="card-head">
             <div class="d-flex justify-content-center align-items-center">
-            <img src="{{ asset('/img/logo.jpg') }}" width="200px">
+                <img src="{{ asset('/img/logo.jpg') }}" width="200px">
             </div>
         </div>
         <div class="card-body">
             <div class="d-flex justify-content-center align-items-center">
-                <form action="{{ route('login') }}" method="POST">
-                    <div class="form-group">
-                        <select class="form-control" name="role" required>
-                            <option value="">Pilih Jenis User</option>
-                            <option value="Internal">Mahasiswa</option>
-                            <option>Dosen</option>
-                        </select>
-                    </div>
+                <form action="{{ route('signUp.store') }}" method="POST">
+                    @csrf
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -50,8 +44,9 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <input type="hidden" name="role" value="student">
                         <button type="submit" class="btn btn-primary btn-block" name="login" value="Login">Sign
-                            In</button>
+                            Up</button>
                     </div>
                 </form>
             </div>

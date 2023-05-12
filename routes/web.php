@@ -13,6 +13,7 @@ use App\Http\Controllers\AccountController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 // login
 Route::get('/', function () {
     return redirect('/login');
@@ -28,10 +29,6 @@ Route::get('/signUp', [AccountController::class, 'signUp'])
 
 Route::post('/signUp', [AccountController::class, 'store'])
     ->name('signUp.store');
-
-
-
-
 
 // pengusul
 Route::get('/pengusul.pengusul_alat', function () {
