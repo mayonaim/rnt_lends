@@ -14,9 +14,10 @@
     <!-- Custom fonts for this template-->
     @include('partials.css')
 </head>
+
 <body id="page-top">
-      <!-- Page Wrapper -->
-      <div id="wrapper">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
         <!--Sidebar-->
         @include('partials.sidebar_admin')
@@ -30,27 +31,27 @@
                 <!-- Topbar -->
                 @include('partials.topbar')
 
-                 <!-- Begin Page Content -->
-                 @yield('mainadmin')
-                 <!-- /.container-fluid -->
-             </div>
-             <!-- End of Main Content -->
-         </div>
-         <!-- End of Content Wrapper -->
-     </div>
-     <!-- End of Page Wrapper -->
+                <!-- Begin Page Content -->
+                @yield('mainadmin')
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
 
-     <!-- Scroll to Top Button-->
-     <a class="scroll-to-top rounded" href="#page-top">
-         <i class="fas fa-angle-up"></i>
-     </a>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-     <!-- Logout Modal-->
-     @include('partials.modalbawah')
+    <!-- Logout Modal-->
+    @include('partials.modalbawah')
 
-     <!-- Bootstrap core JavaScript-->
-     @include('partials.js')
+    <!-- Bootstrap core JavaScript-->
+    @include('partials.js')
 
- </body>
+</body>
 
 </html>

@@ -18,7 +18,7 @@ use App\Http\Controllers\AccountController;
 Route::get('/', function () {
     return redirect('/login');
 });
-Route::get('/login', [AccountController::class, 'main'])
+Route::get('/login', [AccountController::class, 'login'])
     ->name('login');
 
 Route::post('/login', [AccountController::class, 'check'])

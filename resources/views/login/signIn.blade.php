@@ -14,7 +14,7 @@
     <div class="card mx-auto" style="max-width: 400px; margin-top: 100px;">
         <div class="card-head">
             <div class="d-flex justify-content-center align-items-center">
-            <img src="{{ asset('/img/logo.jpg') }}" width="200px">
+                <img src="{{ asset('/img/logo.jpg') }}" width="200px">
             </div>
         </div>
         <div class="card-body">
@@ -50,9 +50,10 @@
                                 placeholder="Password" required="">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <button type="submit" class="btn btn-primary btn-block" name="login" value="Login">Sign
                             In</button>
+                        <a href="/signUp" class="btn btn-link">Buat akun baru</a>
                     </div>
                 </form>
             </div>

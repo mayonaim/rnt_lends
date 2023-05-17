@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use App\Models\Account;
 
 class AccountController extends Controller
 {
+    //View Controller
     public function main()
     {
-        return view('login.main');
+        return view('login.signIn');
     }
 
     public function signUp()
@@ -18,20 +20,7 @@ class AccountController extends Controller
         return view('login.signUp');
     }
 
-    public function check(Request $request)
-    {
-        $username = $request->input('name');
-        $password = $request->input('password');
-
-        $account = Account::where('name', $username)->first();
-
-        if ($account && Hash::check($password, $account->password)) {
-            return redirect()->route('pengusul.pengusul_home');
-        } else {
-            return back();
-        }
-    }
-
+    //Method buat akun baru
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -51,9 +40,40 @@ class AccountController extends Controller
         $account->save();
 
         if ($account->save()) {
-            return redirect('/login');
+            return redirect()->route('login');
         } else {
             return back()->with('error', 'Failed to save the account');
         }
+    }
+
+    //Method to Login
+    public function check(Request $request)
+    {
+        $username = $request->input('name');
+        $password = $request->input('password');
+
+        $account = Account::where('name', $username)->first();
+
+        if ($account && Hash::check($password, $account->password)) {
+            Session::put('loggedIn', true);
+            return redirect()->route('pengusul.pengusul_home');
+        } else {
+            return back();
+        }
+    }
+
+    public function isLoggedIn()
+    {
+        return Session::get('loggedIn') === true;
+    }
+
+
+    public function logout()
+    {
+        Session::forget('loggedIn');
+        Session::flush(); // Optional: Clear all session data
+
+        // Redirect the user to the login page or any other desired destination
+        return redirect()->route('login');
     }
 }

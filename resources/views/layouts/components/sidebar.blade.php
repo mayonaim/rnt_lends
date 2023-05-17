@@ -1,8 +1,10 @@
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background: #54BBC0">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"
+            style="background: #54BBC0">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('penanggung_jawab.pj_home') }}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center"
+                href="{{ route('pengusul.pengusul_home') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -14,7 +16,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('penanggung_jawab.pj_home') }}">
+                <a class="nav-link" href="{{ route('@stack('homepage-link')') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -27,14 +29,7 @@
                 Interface
             </div>
 
-           
-
-             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('penanggung_jawab.pj_histori') }}">
-                   <i class="fas fa-fw fa-folder"></i>
-                    <span>History</span></a>
-            </li>
+            @yield('sidebar-content')
 
             <!-- Divider -->
             <hr class="sidebar-divider">

@@ -43,10 +43,11 @@
                                 placeholder="Password" required="">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <input type="hidden" name="role" value="student">
                         <button type="submit" class="btn btn-primary btn-block" name="login" value="Login">Sign
                             Up</button>
+                        <a href="/login" class="btn btn-link">Kembali</a>
                     </div>
                 </form>
             </div>
