@@ -5,12 +5,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Register</title>
-
+    <!-- Custom fonts for this template-->
+    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- Bootsrap-->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 </head>
 
-
 <body style="background-color: #008b91">
-    @include('partials.css')
     <div class="card mx-auto" style="max-width: 400px; margin-top: 100px;">
         <div class="card-head">
             <div class="d-flex justify-content-center align-items-center">
@@ -52,7 +56,8 @@
                 </form>
             </div>
         </div>
-        @include('partials.js')
+        <!-- Bootsrap-->
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 </body>
 
 
