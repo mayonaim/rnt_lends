@@ -13,6 +13,8 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <!-- Bootsrap-->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     @stack('addon-script-head')
@@ -26,10 +28,10 @@
         <div id="content-wrapper" class="d-flex flex-column">
             <!-- Main Content -->
             <div id="content">
-                @include("layouts.components.topbar")
+                @include('layouts.components.topbar')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    @yield("content")
+                    @yield('content')
                 </div>
                 <!-- End of Main Content -->
             </div>
@@ -51,7 +53,6 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
     <!-- Page level plugins -->
-    <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
     @stack('addon-script-footer')
     <!-- Page level custom scripts -->
 </body>

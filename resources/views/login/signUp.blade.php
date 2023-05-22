@@ -23,7 +23,7 @@
         </div>
         <div class="card-body">
             <div class="d-flex justify-content-center align-items-center">
-                <form action="{{ route('signUp.store') }}" method="POST">
+                <form action="{{ route('register.new') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <div class="input-group">

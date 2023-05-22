@@ -1,5 +1,6 @@
-@extends('main.main_pengusul')
-@section('mainpengusul')
+@extends('layouts.layoutPeminjam')
+
+@section('content')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
