@@ -11,6 +11,34 @@
       background-color: $gray-300;
     }
   }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px;
+    color: white;
+  }
+
+  .checkout-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .checkout-button:hover {
+    background-color: #45a049;
+  }
+  
+  .checkout-button:active {
+    background-color: #3e8e41;
+  }
+  
   .navbar-search {
     width: 25rem;
     input {

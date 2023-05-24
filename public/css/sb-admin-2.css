@@ -552,8 +552,8 @@ pre code {
 .container-lg,
 .container-xl {
   width: 100%;
-  padding-right: 0.75rem;
-  padding-left: 0.75rem;
+  padding-right: 0.90rem;
+  padding-left: 0.90rem;
   margin-right: auto;
   margin-left: auto;
 }
@@ -9816,6 +9816,15 @@ a:focus {
   padding-right: 1.5rem;
 }
 
+.scroll-horizontal {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.scroll-horizontal .item {
+  display: inline-block;
+}
+
 .scroll-to-top {
   position: fixed;
   right: 1rem;
@@ -10191,6 +10200,35 @@ a:focus {
 .topbar .navbar-search input {
   font-size: 0.85rem;
   height: auto;
+}
+/* Button Checkout */
+
+.navbar-right {
+  display: relative;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #333;
+  padding: 10px;
+  color: white;
+  
+}
+
+.btn-primary {
+  padding: 5px 16px;
+  font-size: 16px;
+  background-color: #be2617;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: #45a049;
+}
+
+.btn-primary:active {
+  background-color: #3e8e41;
 }
 
 .topbar .topbar-divider {

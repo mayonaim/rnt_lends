@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Register</title>
+    <title>Login Page</title>
 
 </head>
 
@@ -19,8 +19,21 @@
         </div>
         <div class="card-body">
             <div class="d-flex justify-content-center align-items-center">
-                <form action="{{ route('signUp.store') }}" method="POST">
+                <form action="{{ route('login.check') }}" method="POST">
                     @csrf
+
+                    @if ($errors->has('login'))
+                    <div class="alert alert-danger">
+                        {{ $errors->first('login') }}
+                    </div>
+                    @endif
+                    <div class="form-group">
+                        <select class="form-control" name="role" required>
+                            <option value="">Pilih Jenis User</option>
+                            <option value="Internal">Mahasiswa</option>
+                            <option>Dosen</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -44,10 +57,9 @@
                         </div>
                     </div>
                     <div class="form-group text-center">
-                        <input type="hidden" name="role" value="student">
                         <button type="submit" class="btn btn-primary btn-block" name="login" value="Login">Sign
-                            Up</button>
-                        <a href="/login" class="btn btn-link">Kembali</a>
+                            In</button>
+                        <a href="/signUp" class="btn btn-link">Buat akun baru</a>
                     </div>
                 </form>
             </div>

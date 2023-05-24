@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="card-body">
                                     <p>Kami mengerti bahwa mencari dan memesan ruangan atau alat bisa menjadi tugas yang melelahkan dan memakan waktu. Itulah sebabnya kami hadir untuk memberikan solusi cepat dan mudah untuk kebutuhan peminjaman Anda. Dengan platform peminjaman online yang modern dan inovatif, Anda dapat memesan ruangan atau alat dengan cepat dan mudah.</p>
-                                    <p class="mb-0">R&B LENDS adalah platform peminjaman ruangan dan alat yang bertujuan untuk memudahkan pengguna dalam mencari dan menggunakan ruangan atau alat yang mereka butuhkan. Dengan fitur pencarian yang mudah dan ketersediaan yang lengkap, kami menyediakan solusi untuk kebutuhan peminjaman sementara atau acara khusus Anda.</p>
+                                    <p class="mb-0">R&T Lends adalah platform peminjaman ruangan dan alat yang bertujuan untuk memudahkan pengguna dalam mencari dan menggunakan ruangan atau alat yang mereka butuhkan. Dengan fitur pencarian yang mudah dan ketersediaan yang lengkap, kami menyediakan solusi untuk kebutuhan peminjaman sementara atau acara khusus Anda.</p>
                                 </div>
                             </div>
 
