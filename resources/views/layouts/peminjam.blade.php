@@ -20,7 +20,7 @@
     <div id="wrapper">
 
         <!--Sidebar-->
-        @include('layouts.components.sidebar')
+        @include('layouts.components.sidebar_peminjam')
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
