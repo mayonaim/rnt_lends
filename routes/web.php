@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AssetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,16 +35,16 @@ Route::post('logout', [UsertController::class, 'logout'])->name('logout');
 
 // peminjam
 Route::get('/peminjam/daftarRuangan', function () {
-    return view('peminjam.daftarRuangan');
-})->name('peminjam.daftarRuangan');
+    return view('peminjam.daftarAsset');
+})->name('borrower.daftarAsset');
 
 Route::get('/peminjam/dashboard', function () {
     return view('peminjam.dashboard');
-})->name('peminjam.dashboard');
+})->name('borrower.dashboard');
 
 Route::get('/peminjam/history', function () {
     return view('peminjam.riwayatPeminjaman');
-})->name('peminjam.history');
+})->name('borrower.history');
 
 
 
@@ -52,7 +53,7 @@ Route::get('/admin/dashboard',[AdminController::class, 'home'])->name('admin.das
 
 Route::get('/admin/kelolaAsset',[AdminController::class, 'assetIndex'])->name('admin.kelolaAsset');
 
-Route::post('/admin/kelolaAsset',[AdminController::class, 'createAsset'])->name('admin.kelolaAsset.post');
+Route::post('/admin/kelolaAsset',[AssetController::class, 'createAsset'])->name('admin.tambahAsset');
 
 Route::get('/admin/history', function () {
     return view('admin.riwayatPeminjaman');

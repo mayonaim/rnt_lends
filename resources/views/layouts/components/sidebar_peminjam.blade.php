@@ -31,7 +31,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('borrower.daftarRAsset') }}">
+                <a class="nav-link" href="{{ route('borrower.daftarAsset') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Peminjaman</span></a>
             </li>

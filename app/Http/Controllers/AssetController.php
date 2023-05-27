@@ -13,16 +13,26 @@ class AssetController extends Controller
         return view('assets.index', compact('assets'));
     }
 
-    public function create()
+    public function createAsset(Request $request)
     {
-        return view('assets.create');
+        // Validate the request data
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'category' => 'required|string',
+            'stock' => 'required|integer',
+            'pic_id' => 'required|exists:pics,id',
+        ]);
+
+        // Create a new asset instance
+        $asset = Asset::create($validatedData);
+
+        // Optionally, you can perform additional operations or validation here
+
+        // Redirect to the asset index page or desired page
+        return redirect()->route('admin.kelolaAsset');
     }
 
-    public function store(Request $request)
-    {
-        $asset = Asset::create($request->all());
-        return redirect()->route('assets.index')->with('success', 'Asset created successfully');
-    }
 
     public function edit(Asset $asset)
     {
