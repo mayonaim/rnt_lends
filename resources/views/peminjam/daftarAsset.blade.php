@@ -5,49 +5,70 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h2 class="h3 mb-0 text-gray-800">Pengajuan Ruangan & Lab</h2>
+            <h2 class="h3 mb-0 text-gray-800">Pengajuan Ruangan & Alat</h2>
+        </div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">PERATURAN DALAM PEMINJAMAN!</h6>
+            </div>
+            <div class="card-body">
+                <p>1. Peminjaman diajukan seminggu sebelum acara, dan setelah itu, tim peminjaman akan memproses permohonan,
+                    meninjau ketersediaan fasilitas, dan mengonfirmasi status peminjaman kepada pihak yang mengajukan.</p>
+                <p>2. Ruangan dan Alat hanya dapat dipinjam 1x dalam seminggu, untuk Alat hanya dapat meminjam
+                    1 jenis, sebanyak 3 jumlah barang.</p>
+                <p>3. Peminjaman akan di setujui jika ruangan dan alat praktikum digunakan untuk kegiatan
+                    kampus atau kegiatan dalam belajar.</p>
+                <p>4. Setelah peminjaman di setujui , maka saat waktu peminjaman telah habis pengusul wajib mengembalikan
+                    alat praktikum dan meninggalkan ruangan sesuai dengan waktu yang telah di tentukan</p>
+                <p>5. Jika terjadi kerusakan maka akan di kenakan sanksi, dimana sanksi yang akan diberikan oleh penanggung
+                    jawab</p>
+            </div>
+        </div>
+        <div class="filter">
+            <label for="alat">Filter</label>
+            <select id="alat" onchange="filter()">
+                <option value="semua">Semua</option>
+                <option value="alat1">Ruangan</option>
+                <option value="alat2">Alat</option>
+            </select>
         </div>
         <div class="card-body">
-            <p class="mb-4">Data Ruangan & Lab </p>
-            <!-- Checkbox -->
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="checkboxRuangan">
-                <label class="form-check-label" for="checkboxRuangan">Ruangan</label>
-            </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="checkboxAlat">
-                <label class="form-check-label" for="checkboxAlat">Alat</label>
-            </div>
             <table id="table1" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Nama Ruangan</th>
-                        <th>Kategori</th>
+                        <th>Nama Ruangan/Alat</th>
                         <th>Jumlah</th>
                         <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="text-center">
-                            <input type="checkbox">
-                        </td>
+                        <td class="text-center"></td>
                         <td>
                             <a data-toggle="modal" data-target="#ruanganModal">
                                 <img src="img/ruangan.jpg" width="100" style="float: left; margin-right: 10px;">
                                 TA 11.5
                             </a>
                         </td>
-                        <td>Kosong</td>
                         <td>1</td>
                         <td class="h5 mb-0 font-weight-bold">
                             <span style="color: rgb(0, 255, 42);">
                                 Tersedia
                             </span>
                         </td>
+                        <td>
+                            <div class="modal-footer, button-center">
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#formPengajuanModal">
+                                    Borrow
+                                </button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
+
 
                 <!-- Modal -->
                 <div class="modal fade" id="ruanganModal" tabindex="-1" role="dialog" aria-labelledby="ruanganModalLabel"
@@ -97,18 +118,16 @@
                             </div>
                         </div>
                     </div>
+
                     <tbody>
                         <tr>
-                            <td class="text-center">
-                                <input type="checkbox">
-                            </td>
+                            <td class="text-center"></td>
                             <td>
                                 <a data-toggle="modal" data-target="#alatModal">
                                     <img src="img/pro1.png" width="100" style="float: left; margin-right: 10px;">
                                     HEADSET
                                 </a>
                             </td>
-                            <td>Kosong</td>
                             <td>
                                 <div class="form-group">
                                     <label for="quantity"></label>
@@ -130,6 +149,14 @@
                                 <span style="color: rgb(0, 255, 42);">
                                     Tersedia
                                 </span>
+                            </td>
+                            <td>
+                                <div class="modal-footer, button-center">
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#formPengajuanModal">
+                                        Borrow
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -157,13 +184,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                            data-bs-target="#formPengajuanModal">
-                            Borrow
-                        </button>
                     </div>
 
                     <!-- Modal untuk form pengajuan peminjaman alat 1 -->

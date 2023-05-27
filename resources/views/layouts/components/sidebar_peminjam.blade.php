@@ -18,7 +18,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('borrower.dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Beranda</span></a>
             </li>
 
             <!-- Divider -->
@@ -33,13 +33,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('borrower.daftarRAsset') }}">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Rooms</span></a>
+                    <span>Peminjaman</span></a>
             </li>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('borrower.history') }}">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>History</span></a>
+                    <span>Riwayat</span></a>
             </li>
 
             <!-- Divider -->
