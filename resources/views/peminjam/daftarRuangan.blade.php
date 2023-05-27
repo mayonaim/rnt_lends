@@ -14,9 +14,23 @@
             <div class="card-body">
                 <p>1. Peminjaman diajukan seminggu sebelum acara, dan setelah itu, tim peminjaman akan memproses permohonan,
                     meninjau ketersediaan fasilitas, dan mengonfirmasi status peminjaman kepada pihak yang mengajukan.</p>
-                <p class="mb-0">2. Ruangan dan Alat hanya dapat dipinjam 1x dalam seminggu, untuk Alat hanya dapat meminjam
+                <p>2. Ruangan dan Alat hanya dapat dipinjam 1x dalam seminggu, untuk Alat hanya dapat meminjam
                     1 jenis, sebanyak 3 jumlah barang.</p>
+                <p>3. Peminjaman akan di setujui jika ruangan dan alat praktikum digunakan untuk kegiatan
+                    kampus atau kegiatan dalam belajar.</p>
+                <p>4. Setelah peminjaman di setujui , maka saat waktu peminjaman telah habis pengusul wajib mengembalikan
+                    alat praktikum dan meninggalkan ruangan sesuai dengan waktu yang telah di tentukan</p>
+                <p>5. Jika terjadi kerusakan maka akan di kenakan sanksi, dimana sanksi yang akan diberikan oleh penanggung
+                    jawab</p>
             </div>
+        </div>
+        <div class="filter">
+            <label for="alat">Filter</label>
+            <select id="alat" onchange="filter()">
+                <option value="semua">Semua</option>
+                <option value="alat1">Ruangan</option>
+                <option value="alat2">Alat</option>
+            </select>
         </div>
         <div class="card-body">
             <table id="table1" class="table table-striped" style="width:100%">
