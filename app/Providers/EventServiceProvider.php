@@ -18,6 +18,11 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        UserCreated::class => [
+            CreateBorrowerRecord::class,
+            CreatePICRecord::class,
+            CreateSupervisorRecord::class,
+        ],
     ];
 
     /**

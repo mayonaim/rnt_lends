@@ -4,23 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Login Page</title>
+    <title>Register</title>
 
-    @include('layouts.components.stylesheets')
 </head>
 
 
 <body style="background-color: #008b91">
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+    @include('layouts.components.stylesheets')
     <div class="card mx-auto" style="max-width: 400px; margin-top: 100px;">
         <div class="card-head">
             <div class="d-flex justify-content-center align-items-center">
@@ -29,14 +19,15 @@
         </div>
         <div class="card-body">
             <div class="d-flex justify-content-center align-items-center">
-                <form action="{{ route('login.verify') }}" method="POST">
+                <form action="{{ route('register.post') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="role">Role</label>
                         <select name="role" id="role" class="form-control" required>
-                            @foreach ($roles as $id => $name)
-                                <option value="{{ $id }}">{{ $name }}</option>
-                            @endforeach
+                                <option value="borrower">Peminjam</option>
+                                <option value="supervisor">Penanggung Jawab</option>
+                                <option value="pic">PIC Lab</option>
+                                <option value="admin">Admin</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -46,8 +37,8 @@
                                     <i class="fa fa-user"></i>
                                 </span>
                             </div>
-                            <input type="text" name="name" id="username" class="form-control"
-                                placeholder="ID User" autocomplete="off" required="">
+                            <input type="text" name="username" id="username" class="form-control"
+                                placeholder="Username" autocomplete="off" required="">
                         </div>
                     </div>
                     <div class="form-group">
@@ -63,8 +54,8 @@
                     </div>
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-primary btn-block" name="login" value="Login">Sign
-                            In</button>
-                        <a href="{{ route('register') }}" class="btn btn-link">Buat akun baru</a>
+                            Up</button>
+                        <a href="{{ route('login') }}" class="btn btn-link">Kembali</a>
                     </div>
                 </form>
             </div>

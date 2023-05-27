@@ -4,7 +4,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
-                href="{{ route('penanggung_jawab.pj_home') }}">
+                href="{{ route('supervisor.dashboard') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -16,7 +16,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('penanggung_jawab.pj_home') }}">
+                <a class="nav-link" href="{{ route('supervisor.dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -33,7 +33,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('penanggung_jawab.pj_histori') }}">
+                <a class="nav-link" href="{{ route('supervisor.history') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>History</span></a>
             </li>
