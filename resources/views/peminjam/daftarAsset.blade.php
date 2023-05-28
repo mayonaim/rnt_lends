@@ -133,14 +133,14 @@
                                     <label for="quantity"></label>
                                     <div class="input-group">
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" onclick="decrement()"
-                                                style="width: 30px;">-</button>
+                                            <button type="button" class="btn btn-default, btn-center"
+                                                onclick="decrement()" style="width: 30px;">-</button>
                                         </span>
-                                        <input type="text" id="quantity" class="form-control" value="0"
-                                            style="width: 30px;">
+                                        <input type="text" id="quantity" class="form-control, btn-center"
+                                            value="0" style="width: 30px;">
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" onclick="increment()"
-                                                style="width: 30px;">+</button>
+                                            <button type="button" class="btn btn-default, btn-center"
+                                                onclick="increment()" style="width: 30px;">+</button>
                                         </span>
                                     </div>
                                 </div>
