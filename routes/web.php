@@ -19,16 +19,16 @@ Route::get('/', function () {
     return redirect('/peminjam/dashboard');
 });
 // Route::get('/login', [UserController::class, 'showLoginForm'])
-    // ->name('login');
+// ->name('login');
 //
 // Route::post('/login', [UserController::class, 'verifyLogin'])
-    // ->name('login.verify');
+// ->name('login.verify');
 //
 // Route::get('/register', [UserController::class, 'showRegistrationForm'])
-    // ->name('register');
+// ->name('register');
 //
 // Route::post('/register', [UserController::class, 'store'])
-    // ->name('register.store');
+// ->name('register.store');
 //
 // pengusul
 Route::get('/peminjam/daftarRuangan', function () {
@@ -76,10 +76,10 @@ Route::get('/admin/kelolaUser', function () {
 })->name('admin.kelolaUser');
 
 //penangungJawab
-Route::get('/penanggung_jawab.pj_histori', function () {
-    return view('penanggung_jawab.pj_histori');
+Route::get('/penanggungJawab/history', function () {
+    return view('penanggungJawab.pj_histori');
 })->name('penanggung_jawab.pj_histori');
 
-Route::get('/penanggung_jawab.pj_home', function () {
-    return view('penanggung_jawab.pj_home');
+Route::get('/penanggungJawab/dashboard', function () {
+    return view('penanggungJawab.pj_home');
 })->name('penanggung_jawab.pj_home');
