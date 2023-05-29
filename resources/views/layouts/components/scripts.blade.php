@@ -37,8 +37,4 @@
         table.buttons().container()
             .appendTo('#table1_wrapper .col-md-6:eq(0)');
     });
-    
-    //script untuk tambah ruang admin
-
-    
 </script>
