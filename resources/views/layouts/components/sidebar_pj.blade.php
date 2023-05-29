@@ -33,7 +33,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('supervisor.history') }}">
+                <a class="nav-link" href="{{ route('supervisor.riwayatPeminjaman') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>History</span></a>
             </li>

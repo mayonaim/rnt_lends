@@ -78,8 +78,7 @@ Route::get('/pic/history', function () {
 
 //Penangung Jawab
 Route::get('/penanggung-jawab/dashboard', function () {
-    return view('penanggungJawab.dashboard');
-})->name('supervisor.dashboard');
+    return view('penanggungJawab.dashboard'); })->name('supervisor.dashboard');
 
 Route::get('/penanggung-jawab/history', function () {
     return view('penanggungJawab.riwayatPeminjaman');
