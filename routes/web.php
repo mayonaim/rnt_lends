@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AssetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,73 +15,72 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// root
 
-// login
 Route::get('/', function () {
-    return redirect('/peminjam/dashboard');
+    return redirect('/login');
 });
-// Route::get('/login', [UserController::class, 'showLoginForm'])
-// ->name('login');
-//
-// Route::post('/login', [UserController::class, 'verifyLogin'])
-// ->name('login.verify');
-//
-// Route::get('/register', [UserController::class, 'showRegistrationForm'])
-// ->name('register');
-//
-// Route::post('/register', [UserController::class, 'store'])
-// ->name('register.store');
-//
-// pengusul
+
+// auth
+
+Route::get('login', [UserController::class, 'showLoginForm'])->name('login');
+
+Route::post('login', [UserController::class, 'login'])->name('login.post');
+
+Route::get('register', [UserController::class, 'showRegisterForm'])->name('register');
+
+Route::post('register', [UserController::class, 'createUser'])->name('register.post');
+
+Route::post('logout', [UsertController::class, 'logout'])->name('logout');
+
+// peminjam
 Route::get('/peminjam/daftarRuangan', function () {
-    return view('peminjam.daftarRuangan');
-})->name('peminjam.daftarRuangan');
+    return view('peminjam.daftarAsset');
+})->name('borrower.daftarAsset');
 
 Route::get('/peminjam/dashboard', function () {
     return view('peminjam.dashboard');
-})->name('peminjam.dashboard');
+})->name('borrower.dashboard');
 
 Route::get('/peminjam/history', function () {
     return view('peminjam.riwayatPeminjaman');
-})->name('peminjam.history');
+})->name('borrower.history');
 
 
-
-// picLab
-Route::get('/picLab/dashboard', function () {
-    return view('picLab.dashboard');
-})->name('picLab.dashboard');
-
-Route::get('/picLab/kelolaRuangan', function () {
-    return view('picLab.kelolaRuangan');
-})->name('picLab.kelolaRuangan');
-
-Route::get('/picLab/history', function () {
-    return view('picLab.riwayatPeminjaman');
-})->name('picLab.history');
 
 //admin
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
+Route::get('/admin/dashboard',[AdminController::class, 'home'])->name('admin.dashboard');
+
+Route::get('/admin/kelolaAsset',[AdminController::class, 'assetIndex'])->name('admin.kelolaAsset');
+
+Route::post('/admin/kelolaAsset',[AssetController::class, 'createAsset'])->name('admin.tambahAsset');
 
 Route::get('/admin/history', function () {
     return view('admin.riwayatPeminjaman');
 })->name('admin.history');
 
-Route::get('/admin/kelolaRuangan', function () {
-    return view('admin.kelolaRuangan');
-})->name('admin.kelolaRuangan');
-
 Route::get('/admin/kelolaUser', function () {
     return view('admin.kelolaUser');
 })->name('admin.kelolaUser');
 
-//penangungJawab
-Route::get('/penanggungJawab/history', function () {
-    return view('penanggungJawab.pj_histori');
-})->name('penanggung_jawab.pj_histori');
+// PIC Lab
+Route::get('/pic/dashboard', function () {
+    return view('picLab.dashboard');
+})->name('pic.dashboard');
 
-Route::get('/penanggungJawab/dashboard', function () {
-    return view('penanggungJawab.pj_home');
-})->name('penanggung_jawab.pj_home');
+Route::get('/pic/kelolaRuangan', function () {
+    return view('picLab.kelolaRuangan');
+})->name('pic.kelolaRuangan');
+
+Route::get('/pic/history', function () {
+    return view('picLab.riwayatPeminjaman');
+})->name('pic.history');
+
+//Penangung Jawab
+Route::get('/penanggung-jawab/dashboard', function () {
+    return view('penanggungJawab.dashboard');
+})->name('supervisor.dashboard');
+
+Route::get('/penanggung-jawab/history', function () {
+    return view('penanggungJawab.riwayatPeminjaman');
+})->name('supervisor.riwayatPeminjaman');

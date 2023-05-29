@@ -4,7 +4,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
-                href="{{ route('peminjam.dashboard') }}">
+                href="{{ route('borrower.dashboard') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -16,7 +16,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('peminjam.dashboard') }}">
+                <a class="nav-link" href="{{ route('borrower.dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Beranda</span></a>
             </li>
@@ -31,13 +31,13 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('peminjam.daftarRuangan') }}">
+                <a class="nav-link" href="{{ route('borrower.daftarAsset') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Peminjaman</span></a>
             </li>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('peminjam.history') }}">
+                <a class="nav-link" href="{{ route('borrower.history') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Riwayat</span></a>
             </li>

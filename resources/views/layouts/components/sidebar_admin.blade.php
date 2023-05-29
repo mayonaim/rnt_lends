@@ -30,7 +30,7 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.kelolaRuangan') }}">
+                <a class="nav-link" href="{{ route('admin.kelolaAsset') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Rooms</span></a>
             </li>

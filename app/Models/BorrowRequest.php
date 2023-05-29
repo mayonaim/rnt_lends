@@ -6,16 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class BorrowRequest extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'borrower_id', 'supervisor_id', 'start_timestamp', 'end_timestamp',
+        'borrowed_amount', 'asset_id', 'status'
+    ];
 
-    // Relationships
-    public function user()
+    public function borrower()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Borrower::class, 'borrower_id');
     }
 
-    public function requestedAssets()
+    public function supervisor()
     {
-        return $this->hasMany(RequestedAsset::class);
+        return $this->belongsTo(Supervisor::class, 'supervisor_id');
+    }
+
+    public function asset()
+    {
+        return $this->belongsTo(Asset::class);
     }
 }

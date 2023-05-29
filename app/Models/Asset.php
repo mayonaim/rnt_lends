@@ -6,16 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Asset extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'name', 'description', 'category', 'stock', 'pic_id'
+    ];
 
-    // Relationships
-    public function category()
+    public function pic()
     {
-        return $this->belongsTo(Category::class);
-    }
-
-    public function requestedAssets()
-    {
-        return $this->hasMany(RequestedAsset::class);
+        return $this->belongsTo(PIC::class, 'pic_id');
     }
 }
