@@ -30,13 +30,13 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('picLab.kelolaRuangan') }}">
+                <a class="nav-link" href="{{ route('pic.kelolaRuangan') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Rooms</span></a>
             </li>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('picLab.history') }}">
+                <a class="nav-link" href="{{ route('pic.history') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>History</span></a>
             </li>
