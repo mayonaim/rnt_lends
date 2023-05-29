@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 // use App\Models\Admin;
 use App\Models\Asset;
+use App\Models\AssetImage;
+use App\Models\PIC;
 // use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,10 +15,11 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function assetIndex()
+    public function assets()
     {
         $assets = Asset::all();
-
-        return view('admin.kelolaAsset', ['assets' => $assets]);
+        $images = AssetImage::all();
+        $pics = PIC::all();
+        return view('admin.kelolaAsset', compact('assets', 'images', 'pics'));
     }
 }

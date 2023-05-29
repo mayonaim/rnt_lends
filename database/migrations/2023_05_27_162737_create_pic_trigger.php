@@ -17,7 +17,7 @@ class CreatePICTrigger extends Migration
            AFTER INSERT ON users
            FOR EACH ROW
            BEGIN
-               IF NEW.role = "people_in_charge" THEN
+               IF NEW.role = "pic" THEN
                    INSERT INTO people_in_charge (user_id, created_at, updated_at)
                    VALUES (NEW.user_id, NOW(), NOW());
                END IF;

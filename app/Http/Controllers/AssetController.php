@@ -3,46 +3,84 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asset;
+use App\Models\AssetImage;
 use Illuminate\Http\Request;
 
 class AssetController extends Controller
 {
-    public function index()
+    public function store(Request $request)
     {
-        $assets = Asset::all();
-        return view('assets.index', compact('assets'));
+        $validator = validator($request->all(), [
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'category' => 'required|string',
+            'stock' => 'required|integer',
+            'pic_id' => 'required|exists:people_in_charge,pic_id',
+            'images.*' => 'required|image|max:2048', // Maximum file size of 2MB for each image
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Create the asset record
+        $asset = Asset::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'category' => $request->category,
+            'stock' => $request->stock,
+            'pic_id' => $request->pic_id,
+        ]);
+
+        // Process and associate the images
+        foreach ($request->file('images') as $image) {
+            $imageName = $image->getClientOriginalName();
+            $imagePath = $image->store('assets', $imageName, 'public');
+
+            AssetImage::create([
+                'asset_id' => $asset->asset_id,
+                'name' => $imagePath,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Asset created successfully');
     }
 
-    public function createAsset(Request $request)
+    public function update(Request $request, Asset $asset)
     {
-        // Validate the request data
         $validatedData = $request->validate([
             'name' => 'required|string',
             'description' => 'required|string',
             'category' => 'required|string',
             'stock' => 'required|integer',
-            'pic_id' => 'required|exists:pics,id',
+            'pic_id' => 'required|exists:people_in_charge,pic_id',
+            'images.*' => 'nullable|image|max:2048', // Maximum file size of 2MB for each image
         ]);
 
-        // Create a new asset instance
-        $asset = Asset::create($validatedData);
+        // Update the asset record
+        $asset->update([
+            'name' => $validatedData['name'],
+            'description' => $validatedData['description'],
+            'category' => $validatedData['category'],
+            'stock' => $validatedData['stock'],
+            'pic_id' => $validatedData['pic_id'],
+        ]);
 
-        // Optionally, you can perform additional operations or validation here
+        // Process and associate the images
+        if ($request->hasFile('images')) {
+            // Delete existing images
+            $asset->image()->delete();
 
-        // Redirect to the asset index page or desired page
-        return redirect()->route('admin.kelolaAsset');
-    }
+            foreach ($request->file('images') as $image) {
+                $imagePath = $image->store('assets', 'public');
 
+                $asset->image()->create([
+                    'image' => $imagePath,
+                ]);
+            }
+        }
 
-    public function edit(Asset $asset)
-    {
-        return view('assets.edit', compact('asset'));
-    }
-
-    public function update(Request $request, Asset $asset)
-    {
-        $asset->update($request->all());
-        return redirect()->route('assets.index')->with('success', 'Asset updated successfully');
+        return redirect()->back()->with('success', 'Asset updated successfully');
     }
 
     public function destroy(Asset $asset)

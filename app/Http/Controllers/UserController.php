@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use App\Events\UserCreated;
 
 class UserController extends Controller
 {
@@ -16,7 +15,7 @@ class UserController extends Controller
         return view('auth.register');
     }
 
-    public function createUser(Request $request)
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'username' => 'required|string|unique:users',
@@ -33,9 +32,28 @@ class UserController extends Controller
 
         // You can optionally log in the user after creating the account
         // Auth::login($user);
+        if ($user) {
+            // Redirect to the user's profile or desired page
+            return redirect()->intended(route('login'));
+        }
 
-        // Redirect to the user's profile or desired page
-        return redirect()->intended('/');
+        return back()->withErrors([]);
+    }
+
+    public function destroy($user_id)
+    {
+        $user = User::findOrFail($user_id);
+
+        // Delete the related records
+        $user->borrower()->delete();
+        $user->supervisor()->delete();
+        $user->pic()->delete();
+        $user->admin()->delete();
+
+        // Delete the user
+        $user->delete();
+
+        return redirect()->back()->with('success', 'User deleted successfully');
     }
 
     public function showLoginForm()
@@ -50,11 +68,11 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             // Authentication passed...
             $role = $credentials['role'];
-            return redirect()->intended(route($role.'.dashboard'));
+            return redirect()->intended(route($role . '.dashboard'));
         }
 
         return back()->withErrors([
-            'username' => 'User tidak ditemukan.',
+            'username' => 'Username atau password anda salah'
         ]);
     }
 

@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $primaryKey = 'user_id';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -41,4 +43,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function borrower()
+    {
+        return $this->hasOne(Borrower::class, 'user_id');
+    }
+
+    public function supervisor()
+    {
+        return $this->hasOne(Supervisor::class, 'user_id');
+    }
+
+    public function pic()
+    {
+        return $this->hasOne(PIC::class, 'user_id');
+    }
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class, 'user_id');
+    }
 }

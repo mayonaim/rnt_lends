@@ -17,4 +17,8 @@ class Supervisor extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function borrow()
+    {
+        return $this->hasMany(BorrowRequest::class, 'supervisor_id');
+    }
 }

@@ -4,6 +4,10 @@
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+
+import 'select2';
+import 'select2/dist/css/select2.css';
+
 import axios from 'axios';
 window.axios = axios;
 

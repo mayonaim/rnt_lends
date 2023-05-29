@@ -12,7 +12,7 @@
     <title>R&T Lends</title>
 
     <!-- Custom fonts for this template-->
-    @include('layouts.components.stylesheets')
+    @include('layouts.components.css')
 </head>
 
 <body id="page-top">
@@ -50,7 +50,7 @@
     @include('layouts.components.modalbawah')
 
     <!-- Bootstrap core JavaScript-->
-    @include('layouts.components.scripts')
+    @include('layouts.components.js')
 
 </body>
 

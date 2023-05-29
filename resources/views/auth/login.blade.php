@@ -6,14 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Login</title>
 
-    @include('layouts.components.stylesheets')
+    @include('layouts.components.css')
 </head>
 
 
 <body style="background-color: #008b91">
-    @if (session('error'))
+    @if ($errors->any())
         <div class="alert alert-danger">
-            {{ session('error') }}
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
     @endif
     <div class="card mx-auto" style="max-width: 400px; margin-top: 100px;">
@@ -27,10 +31,9 @@
                 <form action="{{ route('login.post') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="role">Role</label>
                         <select name="role" id="role" class="form-control" required>
-                            <option value="borrower">peminjam</option>
-                            <option value="supervisor">penanggung jawab</option>
+                            <option value="borrower">Peminjam</option>
+                            <option value="supervisor">Penanggung Jawab</option>
                             <option value="pic">PIC Lab</option>
                             <option value="admin">Admin</option>
                         </select>
@@ -42,8 +45,8 @@
                                     <i class="fa fa-user"></i>
                                 </span>
                             </div>
-                            <input type="text" name="name" id="username" class="form-control"
-                                placeholder="ID User" autocomplete="off" required="">
+                            <input type="text" name="username" id="username" class="form-control"
+                                placeholder="Username" autocomplete="off" required="">
                         </div>
                     </div>
                     <div class="form-group">
@@ -58,14 +61,14 @@
                         </div>
                     </div>
                     <div class="form-group text-center">
-                        <button type="submit" class="btn btn-primary btn-block" name="login" value="Login">Sign
+                        <button type="submit" class="btn btn-primary btn-block">Sign
                             In</button>
                         <a href="{{ route('register') }}" class="btn btn-link">Buat akun baru</a>
                     </div>
                 </form>
             </div>
         </div>
-        @include('layouts.components.scripts')
+        @include('layouts.components.js')
 </body>
 
 

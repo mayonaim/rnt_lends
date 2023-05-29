@@ -18,7 +18,7 @@ use App\Http\Controllers\AssetController;
 // root
 
 Route::get('/', function () {
-    return redirect('/login');
+    return redirect('login');
 });
 
 // auth
@@ -29,7 +29,7 @@ Route::post('login', [UserController::class, 'login'])->name('login.post');
 
 Route::get('register', [UserController::class, 'showRegisterForm'])->name('register');
 
-Route::post('register', [UserController::class, 'createUser'])->name('register.post');
+Route::post('register', [UserController::class, 'store'])->name('register.post');
 
 Route::post('logout', [UsertController::class, 'logout'])->name('logout');
 
@@ -51,9 +51,9 @@ Route::get('/peminjam/history', function () {
 //admin
 Route::get('/admin/dashboard',[AdminController::class, 'home'])->name('admin.dashboard');
 
-Route::get('/admin/kelolaAsset',[AdminController::class, 'assetIndex'])->name('admin.kelolaAsset');
+Route::get('/admin/kelolaAsset',[AdminController::class, 'assets'])->name('admin.kelolaAsset');
 
-Route::post('/admin/kelolaAsset',[AssetController::class, 'createAsset'])->name('admin.tambahAsset');
+Route::post('/admin/kelolaAsset',[AssetController::class, 'store'])->name('admin.tambahAsset');
 
 Route::get('/admin/history', function () {
     return view('admin.riwayatPeminjaman');
