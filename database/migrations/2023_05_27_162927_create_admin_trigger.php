@@ -19,7 +19,7 @@ class CreateAdminTrigger extends Migration
            BEGIN
                IF NEW.role = "admin" THEN
                    INSERT INTO admins (user_id, created_at, updated_at)
-                   VALUES (NEW.user_id, NOW(), NOW());
+                   VALUES (NEW.id, NOW(), NOW());
                END IF;
            END
        ');

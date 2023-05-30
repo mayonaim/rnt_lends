@@ -35,11 +35,11 @@ class AssetController extends Controller
         // Process and associate the images
         foreach ($request->file('images') as $image) {
             $imageName = $image->getClientOriginalName();
-            $imagePath = $image->storeAs('assets', $imageName, 'public');
+            $image->storeAs('assets', $imageName, 'public');
 
             AssetImage::create([
-                'asset_id' => $asset->asset_id,
-                'name' => $imagePath,
+                'asset_id' => $asset->id,
+                'name' => $imageName,
             ]);
         }
 
@@ -85,7 +85,12 @@ class AssetController extends Controller
 
     public function destroy(Asset $asset)
     {
+        // Delete the associated images
+        $asset->image()->delete();
+
+        // Delete the asset
         $asset->delete();
-        return redirect()->route('assets.index')->with('success', 'Asset deleted successfully');
+
+        return redirect()->back()->with('success', 'Asset deleted successfully');
     }
-}
+    }

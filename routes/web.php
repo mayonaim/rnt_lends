@@ -53,7 +53,9 @@ Route::get('/admin/dashboard',[AdminController::class, 'home'])->name('admin.das
 
 Route::get('/admin/kelolaAsset',[AdminController::class, 'assets'])->name('admin.kelolaAsset');
 
-Route::post('/admin/kelolaAsset',[AssetController::class, 'store'])->name('admin.tambahAsset');
+Route::post('/admin/kelolaAsset/tambah',[AssetController::class, 'store'])->name('tambahAsset');
+
+Route::post('/admin/kelolaAsset/edit',[AssetController::class, 'update'])->name('editAsset');
 
 Route::get('/admin/history', function () {
     return view('admin.riwayatPeminjaman');

@@ -19,7 +19,7 @@ class CreateSupervisorTrigger extends Migration
            BEGIN
                IF NEW.role = "supervisor" THEN
                    INSERT INTO supervisors (user_id, created_at, updated_at)
-                   VALUES (NEW.user_id, NOW(), NOW());
+                   VALUES (NEW.id, NOW(), NOW());
                END IF;
            END
        ');

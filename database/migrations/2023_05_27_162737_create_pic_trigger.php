@@ -19,7 +19,7 @@ class CreatePICTrigger extends Migration
            BEGIN
                IF NEW.role = "pic" THEN
                    INSERT INTO people_in_charge (user_id, created_at, updated_at)
-                   VALUES (NEW.user_id, NOW(), NOW());
+                   VALUES (NEW.id, NOW(), NOW());
                END IF;
            END
        ');

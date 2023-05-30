@@ -19,7 +19,7 @@ class CreateBorrowerTrigger extends Migration
             BEGIN
                 IF NEW.role = "borrower" THEN
                     INSERT INTO borrowers (user_id, created_at, updated_at)
-                    VALUES (NEW.user_id, NOW(), NOW());
+                    VALUES (NEW.id, NOW(), NOW());
                 END IF;
             END
         ');

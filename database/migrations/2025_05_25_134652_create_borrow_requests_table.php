@@ -9,7 +9,7 @@ class CreateBorrowRequestsTable extends Migration
     public function up()
     {
         Schema::create('borrow_requests', function (Blueprint $table) {
-            $table->id('request_id');
+            $table->id();
             $table->unsignedBigInteger('borrower_id');
             $table->unsignedBigInteger('supervisor_id');
             $table->unsignedBigInteger('asset_id');
@@ -19,9 +19,9 @@ class CreateBorrowRequestsTable extends Migration
             $table->string('status');
             $table->timestamps();
 
-            $table->foreign('borrower_id')->references('borrower_id')->on('borrowers');
-            $table->foreign('supervisor_id')->references('supervisor_id')->on('supervisors');
-            $table->foreign('asset_id')->references('asset_id')->on('assets');
+            $table->foreign('borrower_id')->references('id')->on('borrowers');
+            $table->foreign('supervisor_id')->references('id')->on('supervisors');
+            $table->foreign('asset_id')->references('id')->on('assets');
         });
     }
 
