@@ -11,10 +11,9 @@ class PIC extends Model
 
     protected $table = 'people_in_charge';
 
-    protected $primaryKey = 'pic_id';
 
     protected $fillable = [
-        'pic_id', 'user_id',
+        'user_id', 'name', 'phone',
     ];
 
     public function user()

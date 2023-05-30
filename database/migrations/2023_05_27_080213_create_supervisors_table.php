@@ -9,11 +9,12 @@ class CreateSupervisorsTable extends Migration
     public function up()
     {
         Schema::create('supervisors', function (Blueprint $table) {
-            $table->id('supervisor_id');
+            $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('name')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
-
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

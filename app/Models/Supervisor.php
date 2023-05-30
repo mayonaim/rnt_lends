@@ -9,12 +9,12 @@ class Supervisor extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'supervisor_id', 'user_id',
+        'user_id', 'name', 'phone',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'id');
     }
 
     public function borrow()

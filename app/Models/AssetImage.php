@@ -9,7 +9,7 @@ class AssetImage extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'image_id', 'asset_id', 'name'
+        'asset_id', 'name',
     ];
 
     public function asset()
