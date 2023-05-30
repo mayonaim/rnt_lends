@@ -35,7 +35,7 @@ class AssetController extends Controller
         // Process and associate the images
         foreach ($request->file('images') as $image) {
             $imageName = $image->getClientOriginalName();
-            $imagePath = $image->store('assets', $imageName, 'public');
+            $imagePath = $image->storeAs('assets', $imageName, 'public');
 
             AssetImage::create([
                 'asset_id' => $asset->asset_id,

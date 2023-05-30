@@ -31,7 +31,7 @@ Route::get('register', [UserController::class, 'showRegisterForm'])->name('regis
 
 Route::post('register', [UserController::class, 'store'])->name('register.post');
 
-Route::post('logout', [UsertController::class, 'logout'])->name('logout');
+Route::post('logout', [UserController::class, 'logout'])->name('logout');
 
 // peminjam
 Route::get('/peminjam/daftarRuangan', function () {

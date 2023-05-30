@@ -100,7 +100,7 @@
                     <!-- Alat 2 -->
                     <tr>
                         <td>
-                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
+                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#meModal">
                                 <img src="/images/pro3.jpg" alt="Gambar Alat 2" width="100"></button><h6>Alat 2</h6>
                         </td>
                         <td>10</td>
@@ -111,7 +111,7 @@
                     </tr>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal fade" id="meModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">

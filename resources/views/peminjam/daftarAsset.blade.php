@@ -146,8 +146,8 @@
                                 </div>
                             </td>
                             <td class="h5 mb-0 font-weight-bold">
-                                <span style="color: rgb(0, 255, 42);">
-                                    Tersedia
+                                <span style="color: #de3b1b;">
+                                    Sedang dipinjam
                                 </span>
                             </td>
                             <td>
