@@ -3,8 +3,7 @@
             style="background: #54BBC0">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center"
-                href="{{ route('pic.dashboard') }}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('pic.dashboard') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -30,13 +29,13 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('picLab.kelolaRuangan') }}">
+                <a class="nav-link" href="{{ route('pic.kelolaRuangan') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Rooms</span></a>
             </li>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('picLab.history') }}">
+                <a class="nav-link" href="{{ route('pic.history') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>History</span></a>
             </li>

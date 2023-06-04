@@ -5,16 +5,16 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h2 class="h3 mb-0 text-gray-800">Kelola Alat</h2>
+            <h2 class="h3 mb-0 text-gray-800">Ruang Kelola</h2>
         </div>
         <div class="card-body">
             <p class="mb-4">Data Alat</p>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambahModal">Tambah Alat</button>
             <table id="table1" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
                         <th>Nama Alat</th>
                         <th>Stok</th>
+                        <th>Keterangan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -27,10 +27,13 @@
                             </button>
                         </td>
                         <td>10</td>
+                        <td class="h5 mb-0 font-weight-bold" style="color: rgb(0, 255, 42);">Tersedia
+                        </td>
                         <td>
                             <button type="button" class="btn btn-warning btn-sm text-white">Edit</button>
                             <button type="button" class="btn btn-danger btn-sm text-white">Hapus</button>
                         </td>
+
                     </tr>
 
                     <!-- Modal -->
@@ -81,9 +84,12 @@
                             </div>
                         </div>
                     </div>
+
                     <tr>
                         <td>Alat 2</td>
                         <td>10</td>
+                        <td class="h5 mb-0 font-weight-bold" style="color: rgb(255, 38, 0);">Tidak Tersedia
+                        </td>
                         <td>
                             <button type="button" class="btn btn-warning btn-sm text-white"> Edit
                             </button>
@@ -91,9 +97,12 @@
                             </button>
                         </td>
                     </tr>
+
                     <tr>
                         <td>Alat 3</td>
                         <td>10</td>
+                        <td class="h5 mb-0 font-weight-bold" style="color: rgb(255, 38, 0);">Tidak Tersedia
+                        </td>
                         <td>
                             <button type="button" class="btn btn-warning btn-sm text-white"> Edit
                             </button>
@@ -104,6 +113,8 @@
                     <tr>
                         <td>Alat 4</td>
                         <td>10</td>
+                        <td class="h5 mb-0 font-weight-bold" style="color: rgb(0, 255, 42);">Tersedia
+                        </td>
                         <td>
                             <button type="button" class="btn btn-warning btn-sm text-white"> Edit
 
@@ -117,6 +128,8 @@
                     <tr>
                         <td>Alat 5</td>
                         <td>10</td>
+                        <td class="h5 mb-0 font-weight-bold" style="color: rgb(0, 255, 42);">Tersedia
+                        </td>
                         <td>
                             <button type="button" class="btn btn-warning btn-sm text-white"> Edit
 
@@ -130,6 +143,8 @@
                     <tr>
                         <td>Alat 6</td>
                         <td>10</td>
+                        <td class="h5 mb-0 font-weight-bold" style="color: rgb(0, 255, 42);">Tersedia
+                        </td>
                         <td>
                             <button type="button" class="btn btn-warning btn-sm text-white"> Edit
 
@@ -143,6 +158,8 @@
                     <tr>
                         <td>Alat 7</td>
                         <td>10</td>
+                        <td class="h5 mb-0 font-weight-bold" style="color: rgb(255, 38, 0);">Tidak Tersedia
+                        </td>
                         <td>
                             <button type="button" class="btn btn-warning btn-sm text-white"> Edit
 
