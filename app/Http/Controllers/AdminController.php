@@ -16,7 +16,7 @@ class AdminController extends Controller
 
     public function assets()
     {
-        $assets = Asset::with('pic', 'image')->get();
+        $assets = Asset::with('pic', 'images')->get();
         $pics = PIC::all();
         return view('admin.kelolaAsset', compact('assets','pics'));
     }

@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Supervisor extends Model
 {
-    use HasFactory;
     protected $fillable = [
         'user_id', 'name', 'phone',
     ];
@@ -17,7 +15,7 @@ class Supervisor extends Model
         return $this->belongsTo(User::class, 'id');
     }
 
-    public function borrow()
+    public function borrowRequests()
     {
         return $this->hasMany(BorrowRequest::class, 'supervisor_id');
     }

@@ -32,7 +32,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.kelolaAsset') }}">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Rooms</span></a>
+                    <span>Assets</span></a>
             </li>
             <!-- Nav Item - Charts -->
             <li class="nav-item">

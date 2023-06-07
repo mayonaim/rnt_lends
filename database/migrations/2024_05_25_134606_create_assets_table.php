@@ -16,7 +16,6 @@ class CreateAssetsTable extends Migration
             $table->string('category');
             $table->integer('stock');
             $table->timestamps();
-
             $table->foreign('pic_id')->references('id')->on('people_in_charge');
         });
     }

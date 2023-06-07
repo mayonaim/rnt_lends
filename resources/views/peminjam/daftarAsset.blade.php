@@ -36,7 +36,6 @@
             <table id="table1" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
-                        <th></th>
                         <th>Nama Ruangan/Alat</th>
                         <th>Jumlah</th>
                         <th>Status</th>

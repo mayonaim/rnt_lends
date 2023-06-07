@@ -20,7 +20,7 @@
     <div id="wrapper">
 
         <!--Sidebar-->
-        @include('layouts.components.sidebar_admin')
+        @include('layouts.components.sidebar.admin')
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -45,9 +45,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Logout Modal-->
-    @include('layouts.components.modalbawah')
 
     <!-- Bootstrap core JavaScript-->
     @include('layouts.components.js')

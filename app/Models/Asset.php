@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Asset extends Model
 {
-    protected $primaryKey = 'asset_id';
 
     protected $fillable = [
         'name', 'description', 'category', 'stock', 'pic_id'
@@ -17,8 +16,7 @@ class Asset extends Model
         return $this->belongsTo(PIC::class, 'pic_id');
     }
 
-    public function image()
+    public function images()
     {
         return $this->hasMany(AssetImage::class, 'asset_id');
-    }
-}
+    }}

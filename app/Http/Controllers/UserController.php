@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -17,29 +18,26 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'username' => 'required|string|unique:users',
             'password' => 'required|string|min:6',
             'role' => 'required|string',
         ]);
 
-        // Create a new user instance
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validatedData = $validator->validated();
+
         $user = User::create([
             'username' => $validatedData['username'],
             'role' => $validatedData['role'],
             'password' => Hash::make($validatedData['password']),
         ]);
 
-        // You can optionally log in the user after creating the account
-        // Auth::login($user);
-        if ($user) {
-            // Redirect to the user's profile or desired page
-            return redirect()->intended(route('login'));
-        }
-
-        return back()->withErrors([]);
+        return redirect()->intended(route('login'))->with('success', 'Account created successfully');
     }
-
     public function destroy($user_id)
     {
         $user = User::findOrFail($user_id);

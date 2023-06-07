@@ -16,9 +16,9 @@ class CreateBorrowRequestsTable extends Migration
             $table->integer('amount_borrowed');
             $table->timestamp('start_timestamp');
             $table->timestamp('end_timestamp')->nullable();
+            $table->string('description');
             $table->string('status');
             $table->timestamps();
-
             $table->foreign('borrower_id')->references('id')->on('borrowers');
             $table->foreign('supervisor_id')->references('id')->on('supervisors');
             $table->foreign('asset_id')->references('id')->on('assets');
