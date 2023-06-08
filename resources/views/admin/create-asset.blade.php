@@ -4,34 +4,34 @@
     <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endpush
-<div class="modal fade" id="addAssetModal" tabindex="-1" role="dialog" aria-labelledby="addAssetModalLabel"
+<div class="modal fade" id="CreateAssetModal" tabindex="-1" role="dialog" aria-labelledby="CreateAssetModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="tambahModalLabel">Tambah Data Asset</h5>
+                <h5 class="modal-title" id="CreateAssetModalLabel">Tambah Data Asset</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('addAsset') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('asset.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="jenis">Jenis Asset</label>
-                        <select name="category" id="jenis" class="form-control" required>
+                        <select class="form-control" id="jenis" name="category" required>
                             <option value="room">Ruangan</option>
                             <option value="tool">Alat</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="namaAsset">Nama Asset</label>
-                        <input type="text" name="name" class="form-control" id="namaAsset"
+                        <input type="text" class="form-control" id="namaAsset" name="name"
                             placeholder="Nama Asset">
                     </div>
                     <div class="form-group">
                         <label for="pic">PIC</label>
-                        <select name="pic_id" id="pic" class="form-control" required>
+                        <select class="form-control" id="pic" name="pic_id" required>
                             <option value="">pic</option>
                             @foreach ($pics as $pic)
                                 <option value="{{ $pic->id }}">{{ $pic->name }}</option>
@@ -39,8 +39,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="deskripsi">Deskripsi</label>
-                        <textarea name="description" class="form-control" id="deskripsi" placeholder="Deskripsi"></textarea>
+                        <label for="aktivitas">Aktivitas</label>
+                        <textarea name="activity" class="form-control" id="aktivitas" placeholder="aktivitas"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="stock">Stock</label>

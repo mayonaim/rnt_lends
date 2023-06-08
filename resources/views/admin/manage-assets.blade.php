@@ -37,11 +37,10 @@
                             <td>{{ $asset->pic->name }}</td>
                             <td>
                                 <a type="button" class="btn btn-warning btn-sm text-white" data-toggle="modal"
-                                    data-target="#ediAssetModal{{ $asset->id }}">Edit</a>
-                                <form action="{{ route('hapusAsset', $asset->id) }}" method="POST" id="deleteForm">
+                                    data-target="#editAssetModal{{ $asset->id }}">Edit</a>
+                                <form action="{{ route('asset.destroy', $asset->id) }}" method="POST" id="deleteForm">
                                     @csrf
                                     @method('DELETE')
-
                                     <button type="submit" class="btn btn-danger btn-sm text-white"
                                         onclick="confirmDelete(event)">Delete</button>
                                 </form>
@@ -58,12 +57,12 @@
                                 @endpush
                             </td>
                         </tr>
-                        @include('layouts.components.modalForm.editAsset')
+                        @include('admin.edit-asset')
                 </tbody>
                 @endforeach
                 </tbody>
             </table>
         </div>
-        @include('layouts.components.modalForm.tambahAsset')
+        @include('admin.create-asset')
     </div>
 @endsection

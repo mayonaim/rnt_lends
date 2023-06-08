@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BorrowerController;
+use App\Http\Controllers\PICController;
+use App\Http\Controllers\SupervisorController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssetController;
+use App\Http\Controllers\BorrowRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,66 +27,57 @@ Route::get('/', function () {
 
 // auth
 
-Route::get('login', [UserController::class, 'showLoginForm'])->name('login');
+Route::get('login', [UserController::class, 'index'])->name('login');
 
-Route::post('login', [UserController::class, 'login'])->name('login.post');
+Route::get('register', [UserController::class, 'create'])->name('register');
 
-Route::get('register', [UserController::class, 'showRegisterForm'])->name('register');
+Route::post('register', [UserController::class, 'store'])->name('user.store');
 
-Route::post('register', [UserController::class, 'store'])->name('register.post');
+Route::post('login', [UserController::class, 'login'])->name('user.login');
 
-Route::post('logout', [UserController::class, 'logout'])->name('logout');
+Route::post('logout', [UserController::class, 'logout'])->name('user.logout');
 
-Route::middleware('auth')->group(function () {
-    // peminjam
-    Route::get('/peminjam/dashboard', [BorrowerController::class, 'home'])->name('borrower.dashboard');
+Route::middleware('role:borrower')->group(function () {
+    Route::get('/peminjam/home', [BorrowerController::class, 'home'])->name('borrower.index');
 
-    Route::get('/peminjam/daftarRuangan', [BorrowerController::class, 'assets'])->name('borrower.daftarAsset');
+    Route::get('/peminjam/view/assets', [BorrowerController::class, 'assets'])->name('borrower.view_assets');
 
-    Route::get('/peminjam/history', function () {
-        return view('peminjam.riwayatPeminjaman');
-    })->name('borrower.history');
+    Route::get('/peminjam/view/borrowing-requests', [BorrowerController::class, 'borrowing_requests'])->name('borrower.view_borrowing_requests');
 
-    //admin
-    Route::get('/admin/dashboard', [AdminController::class, 'home'])->name('admin.dashboard');
+    Route::post('/peminjam/manage/borrowing-requests/create', [BorrowRequestController::class, 'store'])->name('borrow_request.store');
 
-    Route::get('/admin/kelolaAsset', [AdminController::class, 'assets'])->name('admin.kelolaAsset');
+    Route::post('/peminjam/manage/borrowing-requests/edit', [BorrowRequestController::class, 'update'])->name('borrow_request.update');
 
-    Route::post('/admin/kelolaAsset/tambah-asset', [AssetController::class, 'store'])->name('addAsset');
+    Route::patch('/peminjam/manage/borrowing-requests/{id}/finish', [BorrowRequestController::class, 'update'])->name('borrow_request.update_status_finished');
 
-    Route::put('/admin/kelolaAsset/edit-asset', [AssetController::class, 'update'])->name('editAsset');
+    Route::delete('/peminjam/manage/borrowing-requests/{id}/delete', [BorrowRequestController::class, 'destroy'])->name('borrow_request.destroy');
+});
+Route::middleware('role:supervisor')->group(function () {
+    Route::get('/supervisor/home', [SupervisorController::class, 'index'])->name('supervisor.index');
 
-    Route::post('/admin/kelolaAsset/upload-gambar-asset', [AssetController::class, 'uploadAssetImage'])->name('uploadAssetImage');
+    Route::get('/penanggung-jawab/view/borrowing-requests', [SupervisorController::class, 'borrowing_requests'])->name('borrower.view_borrowing_requests');
 
-    Route::delete('/admin/kelolaAsset/hapus-asset', [AssetController::class, 'destroy'])->name('hapusAsset');
+    Route::patch('/penanggung-jawab/manage/borrowing-requests/{id}/validate', [BorrowRequestController::class, 'update'])->name('borrow_request.update_status_validated');
 
-    Route::get('/admin/history', function () {
-        return view('admin.riwayatPeminjaman');
-    })->name('admin.history');
+    Route::patch('/penanggung-jawab/manage/borrowing-requests/{id}/reject', [BorrowRequestController::class, 'update'])->name('borrow_request.update_status_rejected');
+});
+Route::middleware('role:pic')->group(function () {
+    Route::get('/pic/home', [PICController::class, 'index'])->name('pic.index');
 
-    Route::get('/admin/kelolaUser', function () {
-        return view('admin.kelolaUser');
-    })->name('admin.kelolaUser');
+    Route::get('/pic/view/borrowing-requests', [PICController::class, 'borrowing_requests'])->name('borrower.view_borrowing_requests');
 
-    // PIC Lab
-    Route::get('/pic/dashboard', function () {
-        return view('picLab.dashboard');
-    })->name('pic.dashboard');
+    Route::patch('/pic/manage/borrowing-requests/{id}/validate', [BorrowRequestController::class, 'update'])->name('borrow_request.update_status_validated');
 
-    Route::get('/pic/kelolaRuangan', function () {
-        return view('picLab.kelolaRuangan');
-    })->name('pic.kelolaRuangan');
+    Route::patch('/pic/manage/borrowing-requests/{id}/reject', [BorrowRequestController::class, 'update'])->name('borrow_request.update_status_rejected');
+});
+Route::middleware('role:admin')->group(function () {
+    Route::get('/admin/home', [AdminController::class, 'index'])->name('admin.index');
 
-    Route::get('/pic/history', function () {
-        return view('picLab.riwayatPeminjaman');
-    })->name('pic.history');
+    Route::get('/admin/view/assets', [AdminController::class, 'assets'])->name('admin.view_assets');
 
-    //Penangung Jawab
-    Route::get('/penanggung-jawab/dashboard', function () {
-        return view('penanggungJawab.dashboard');
-    })->name('supervisor.dashboard');
+    Route::post('/admin/manage/assets/create', [AssetController::class, 'store'])->name('asset.store');
 
-    Route::get('/penanggung-jawab/history', function () {
-        return view('penanggungJawab.riwayatPeminjaman');
-    })->name('supervisor.riwayatPeminjaman');
+    Route::put('/admin/manage/assets/edit', [AssetController::class, 'update'])->name('asset.edit');
+
+    Route::delete('/admin/manage/assets/delete', [AssetController::class, 'destroy'])->name('asset.destroy');
 });

@@ -16,7 +16,6 @@ class PIC extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
     public function assets()
     {
         return $this->hasMany(Asset::class, 'pic_id');

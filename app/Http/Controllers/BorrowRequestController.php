@@ -24,15 +24,15 @@ class BorrowRequestController extends Controller
         $validator = Validator::make($request->all(), [
             'borrower_id' => 'required|exists:borrowers,id',
             'supervisor_id' => 'required|exists:supervisors,id',
-            'start_timestamp' => 'required|date',
-            'end_timestamp' => 'nullable|date',
-            'borrowed_amount' => 'required|integer',
             'asset_id' => 'required|exists:assets,id',
+            'start_timestamp' => 'required|date',
+            'end_timestamp' => 'required|date|after:start_timestamp',
+            'borrowed_amount' => 'required|integer',
             'status' => 'required|string'
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return back()->withErrors($validator)->withInput();
         }
 
         $borrowRequest = BorrowRequest::create($request->all());

@@ -13,10 +13,10 @@ class CreateBorrowRequestsTable extends Migration
             $table->unsignedBigInteger('borrower_id');
             $table->unsignedBigInteger('supervisor_id');
             $table->unsignedBigInteger('asset_id');
-            $table->integer('amount_borrowed');
+            $table->string('activity');
             $table->timestamp('start_timestamp');
             $table->timestamp('end_timestamp')->nullable();
-            $table->string('description');
+            $table->integer('amount_borrowed')->nullable();
             $table->string('status');
             $table->timestamps();
             $table->foreign('borrower_id')->references('id')->on('borrowers');

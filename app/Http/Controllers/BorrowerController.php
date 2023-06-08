@@ -2,20 +2,31 @@
 
 namespace App\Http\Controllers;
 
-// use App\Models\Admin;
 use App\Models\Asset;
-// use Illuminate\Http\Request;
+use App\Models\BorrowRequest;
+use Illuminate\Support\Facades\Auth;
 
 class BorrowerController extends Controller
 {
-    public function home()
+    protected $borrowerId = Auth::user()->borrower->id;
+    public function index()
     {
-        return view('peminjam.dashboard');
+        return view('peminjam.index');
     }
 
     public function assets()
     {
-        $assets = Asset::with('pic', 'image')->get();
-        return view('peminjam.daftarAsset', compact('assets',));
+        $assets = Asset::all();
+        $statusArray = [ 'approved', 'borrowing'];
+        $scheduled = BorrowRequest::whereIn('status', $statusArray)->get([ 'asset_id', 'start_timestamp', 'end_timestamp']);
+        return view('peminjam.borrow', compact( $this->borrowerId, 'assets', 'scheduled'));
+    }
+
+    public function borrowing_requests()
+    {
+        $borrowRequests = BorrowRequest::where('borrower_id', '=', $this->borrowerId)->get();
+        return view('peminjam.manage-borrowing-requests', compact('borrowRequests'));
+
+
     }
 }

@@ -3,12 +3,12 @@
     <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endpush
-<div class="modal fade" id="ediAssetModal{{ $asset->id }}" tabindex="-1" role="dialog"
-    aria-labelledby="editAssetModalLabel" aria-hidden="true">
+<div class="modal fade" id="EditAssetModal{{ $asset->id }}" tabindex="-1" role="dialog"
+    aria-labelledby="EditAssetModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editAssetModalLabel">Edit Asset</h5>
+                <h5 class="modal-title" id="EditAssetModalLabel">Edit Asset</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
