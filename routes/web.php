@@ -22,20 +22,20 @@ use App\Http\Controllers\BorrowRequestController;
 // root
 
 Route::get('/', function () {
-    return redirect('login');
+    return redirect()->route('login');
 });
 
 // auth
 
-Route::get('login', [UserController::class, 'index'])->name('login');
+Route::get('/login', [UserController::class, 'index'])->name('login');
 
-Route::get('register', [UserController::class, 'create'])->name('register');
+Route::get('/register', [UserController::class, 'create'])->name('register');
 
-Route::post('register', [UserController::class, 'store'])->name('user.store');
+Route::post('/register', [UserController::class, 'store'])->name('user.store');
 
-Route::post('login', [UserController::class, 'login'])->name('user.login');
+Route::post('/login', [UserController::class, 'login'])->name('user.login');
 
-Route::post('logout', [UserController::class, 'logout'])->name('user.logout');
+Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
 
 Route::middleware('role:borrower')->group(function () {
     Route::get('/peminjam/home', [BorrowerController::class, 'home'])->name('borrower.index');
@@ -72,6 +72,8 @@ Route::middleware('role:pic')->group(function () {
 });
 Route::middleware('role:admin')->group(function () {
     Route::get('/admin/home', [AdminController::class, 'index'])->name('admin.index');
+
+    Route::get('/admin/view/assets', [AdminController::class, 'assets'])->name('admin.view_assets');
 
     Route::get('/admin/view/assets', [AdminController::class, 'assets'])->name('admin.view_assets');
 

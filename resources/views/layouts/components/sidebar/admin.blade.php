@@ -4,9 +4,9 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
-                href="{{ route('admin.dashboard') }}">
+                href="{{ route('admin.index') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <img src="{{ asset('img/') }}" width="" height="">
                 </div>
                 <div class="sidebar-brand-text mx-3">R&T Lends</div>
             </a>
@@ -16,7 +16,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('admin.dashboard') }}">
+                <a class="nav-link" href="{{ route('admin.index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -30,18 +30,18 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.kelolaAsset') }}">
+                <a class="nav-link" href="{{ route('admin.view_assets') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Assets</span></a>
             </li>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.history') }}">
+                <a class="nav-link" href="{{ route('admin.view_borrowing_requests') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>History</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.kelolaUser') }}">
+                <a class="nav-link" href="{{ route('admin.view_users') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Manajemen User</span></a>
             </li>

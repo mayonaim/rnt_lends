@@ -14,7 +14,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('editAsset', $asset->id) }}" enctype="multipart/form-data"
+                <form method="POST" action="{{ route('asset.edit', $asset->id) }}" enctype="multipart/form-data"
                     id="editAssetForm">
                     @csrf
                     @method('PUT')

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class RoleMiddleware
 {
@@ -12,7 +13,7 @@ class RoleMiddleware
         $user = Auth::user();
 
         if (!$user) {
-            return redirect()->route('login');
+            return Redirect::route('login');
         }
 
         foreach ($roles as $role) {
@@ -21,6 +22,6 @@ class RoleMiddleware
             }
         }
 
-        return back()->withErrors('Unauthorized Access');
+        return back()->withErrors(['Unauthorized Access']);
     }
 }

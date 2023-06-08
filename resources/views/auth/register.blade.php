@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Register</title>
-    @include('layouts.components.css')
+    @include('layouts.components.head')
 </head>
 
 <body style="background-color: #008b91">
@@ -26,7 +26,7 @@
         </div>
         <div class="card-body">
             <div class="d-flex justify-content-center align-items-center">
-                <form action="{{ route('register.post') }}" method="POST">
+                <form action="{{ route('user.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <select name="role" id="role" class="form-control" required>
@@ -65,7 +65,7 @@
                 </form>
             </div>
         </div>
-        @include('layouts.components.js')
+        @include('layouts.components.body')
 </body>
 
 

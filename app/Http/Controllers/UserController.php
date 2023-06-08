@@ -10,8 +10,12 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        return view('auth.login');
+    }
 
-    public function showRegisterForm()
+    public function create()
     {
         return view('auth.register');
     }
@@ -54,10 +58,6 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'User deleted successfully');
     }
 
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
 
     public function login(Request $request)
     {

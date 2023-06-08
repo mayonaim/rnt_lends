@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Login</title>
 
-    @include('layouts.components.css')
+    @include('layouts.components.head')
 </head>
 
 
@@ -28,7 +28,7 @@
         </div>
         <div class="card-body">
             <div class="d-flex justify-content-center align-items-center">
-                <form action="{{ route('login.post') }}" method="POST">
+                <form action="{{ route('user.login') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <select name="role" id="role" class="form-control" required>
@@ -68,7 +68,7 @@
                 </form>
             </div>
         </div>
-        @include('layouts.components.js')
+        @include('layouts.components.body')
 </body>
 
 
