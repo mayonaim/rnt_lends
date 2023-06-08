@@ -62,7 +62,7 @@
                             <div class="modal-footer, button-center">
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                     data-bs-target="#formPengajuanModal">
-                                    Borrow
+                                    Pinjam
                                 </button>
                             </div>
                         </td>
@@ -102,12 +102,12 @@
                                     <a class="carousel-control-prev" href="#ruanganCarousel" role="button"
                                         data-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Previous</span>
+                                        <span class="sr-only">Sebelumnya</span>
                                     </a>
                                     <a class="carousel-control-next" href="#ruanganCarousel" role="button"
                                         data-slide="next">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Next</span>
+                                        <span class="sr-only">Selanjutnya</span>
                                     </a>
                                 </div>
                                 <p>Nama Ruangan: TA 11.5</p>
@@ -154,7 +154,7 @@
                                 <div class="modal-footer, button-center">
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                         data-bs-target="#formPengajuanModal">
-                                        Borrow
+                                        Pinjam
                                     </button>
                                 </div>
                             </td>
@@ -242,8 +242,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Submit</button>
+                                        data-bs-dismiss="modal">Tutup</button>
+                                    <button type="button" class="btn btn-primary">Kirim</button>
                                 </div>
                             </div>
                         </div>

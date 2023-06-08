@@ -18,7 +18,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('admin.dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Beranda</span></a>
             </li>
 
             <!-- Divider -->
@@ -32,13 +32,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.kelolaAsset') }}">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Rooms</span></a>
+                    <span>Ruangan</span></a>
             </li>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.history') }}">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>History</span></a>
+                    <span>Riwayat</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.kelolaUser') }}">

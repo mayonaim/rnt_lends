@@ -115,7 +115,7 @@
                                         <a class="carousel-control-next" href="#carouselExample" role="button"
                                             data-slide="next">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
+                                            <span class="sr-only">Lanjut</span>
                                         </a>
                                     </div>
                                     <p>Informasi tentang Ruangan 1.</p>
@@ -178,7 +178,7 @@
                                         <a class="carousel-control-next" href="#carouselExample2" role="button"
                                             data-slide="next">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
+                                            <span class="sr-only">Lanjut</span>
                                         </a>
 
                                     </div>

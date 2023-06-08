@@ -11,12 +11,12 @@
             <table id="table1" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Category</th>
-                        <th>Stock</th>
+                        <th>Nama</th>
+                        <th>Deskripsi</th>
+                        <th>Kategori</th>
+                        <th>Stok</th>
                         <th>PIC</th>
-                        <th>Action</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +31,7 @@
                                 <a type="button" class="btn btn-warning btn-sm text-white"
                                     href="{{ route('') }}">Edit</a>
                                 <a type="button" class="btn btn-danger btn-sm text-white"
-                                    href="{{ route('') }}">Delete</a>
+                                    href="{{ route('') }}">Hapus</a>
                             </td>
                         </tr>
                     @endforeach
@@ -72,7 +72,7 @@
                                 <textarea name="description" class="form-control" id="deskripsi" placeholder="Deskripsi"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="stock">Stock</label>
+                                <label for="stock">Stok</label>
                                 <input type="number" name="stock" class="form-control" id="stock" placeholder="Stock"
                                     min="0">
                             </div>

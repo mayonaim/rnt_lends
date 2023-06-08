@@ -5,10 +5,10 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h2 class="h3 mb-0 text-gray-800">History</h2>
+            <h2 class="h3 mb-0 text-gray-800">Riwayat</h2>
         </div>
         <div class="card-body">
-            <p class="mb-4">History mahasiswa melakukan peminjaman.</p>
+            <p class="mb-4">Riwayat mahasiswa melakukan peminjaman.</p>
             <table id="table1" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
