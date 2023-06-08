@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSupervisorTrigger extends Migration
+class CreateInsertRoleTrigger extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,31 @@ class CreateSupervisorTrigger extends Migration
     public function up()
     {
         DB::unprepared('
+        CREATE TRIGGER insert_user_role
+        AFTER INSERT ON users
+        FOR EACH ROW
         BEGIN
             IF NEW.role = \'borrower\' THEN
                 INSERT INTO borrowers (user_id, created_at, updated_at)
                 VALUES (NEW.id, NOW(), NOW());
-            ELSEIF NEW.role = \'supervisor\' THEN
+            END IF;
+
+            IF NEW.role = \'supervisor\' THEN
                 INSERT INTO supervisors (user_id, created_at, updated_at)
                 VALUES (NEW.id, NOW(), NOW());
-            ELSEIF NEW.role = \'admin\' THEN
+            END IF;
+
+            IF NEW.role = \'admin\' THEN
                 INSERT INTO admins (user_id, created_at, updated_at)
                 VALUES (NEW.id, NOW(), NOW());
-            ELSEIF NEW.role = \'pic\' THEN
+            END IF;
+
+            IF NEW.role = \'pic\' THEN
                 INSERT INTO people_in_charge (user_id, created_at, updated_at)
                 VALUES (NEW.id, NOW(), NOW());
+            END IF;
         END;
-    ');
+            ');
     }
 
     /**

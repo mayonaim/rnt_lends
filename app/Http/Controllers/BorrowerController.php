@@ -8,7 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class BorrowerController extends Controller
 {
-    protected $borrowerId = Auth::user()->borrower->id;
+    protected $borrowerId;
+    protected $assetController;
+    protected $borrowRequestController;
+
+    public function __construct(AssetController $assetController, BorrowRequestController $borrowRequestController)
+    {
+        $this->borrowerId = Auth::user()->id;
+        $this->assetController = $assetController;
+        $this->borrowRequestController = $borrowRequestController;
+    }
+
     public function index()
     {
         return view('peminjam.index');
@@ -16,17 +26,20 @@ class BorrowerController extends Controller
 
     public function assets()
     {
-        $assets = Asset::all();
-        $statusArray = [ 'approved', 'borrowing'];
-        $scheduled = BorrowRequest::whereIn('status', $statusArray)->get([ 'asset_id', 'start_timestamp', 'end_timestamp']);
-        return view('peminjam.borrow', compact( $this->borrowerId, 'assets', 'scheduled'));
+        $assets = $this->assetController->index()['assets'];
+
+        $borrowRequests = $this->borrowRequestController->index()['borrowRequests'];
+        $statusFilter = ['approved', 'borrowing'];
+        $booked = $borrowRequests->whereIn('status', $statusFilter)->get(['asset_id', 'start_timestamp', 'end_timestamp']);
+
+        return view('peminjam.borrow', compact('assets', 'booked'));
     }
 
     public function borrowing_requests()
     {
-        $borrowRequests = BorrowRequest::where('borrower_id', '=', $this->borrowerId)->get();
-        return view('peminjam.manage-borrowing-requests', compact('borrowRequests'));
+        $borrowRequests = $this->borrowRequestController->index()['borrowRequests'];
+        $filteredRequests = $borrowRequests->where('borrower_id', $this->borrowerId)->get();
 
-
+        return view('peminjam.manage-borrowing-requests', compact('filteredRequests'));
     }
 }

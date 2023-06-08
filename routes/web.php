@@ -46,7 +46,7 @@ Route::middleware('role:borrower')->group(function () {
 
     Route::post('/peminjam/manage/borrowing-requests/create', [BorrowRequestController::class, 'store'])->name('borrow_request.store');
 
-    Route::post('/peminjam/manage/borrowing-requests/edit', [BorrowRequestController::class, 'update'])->name('borrow_request.update');
+    Route::post('/peminjam/manage/borrowing-requests/{id}/edit', [BorrowRequestController::class, 'update'])->name('borrow_request.update');
 
     Route::patch('/peminjam/manage/borrowing-requests/{id}/finish', [BorrowRequestController::class, 'update'])->name('borrow_request.update_status_finished');
 

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePICTrigger extends Migration
+class CreateSubtractStockTrigger extends Migration
 {
     /**
      * Run the migrations.

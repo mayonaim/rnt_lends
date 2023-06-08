@@ -5,18 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\BorrowRequest;
 use Illuminate\Support\Facades\Auth;
 
-class BorrowerController extends Controller
+class SupervisorController extends Controller
 {
-    protected $supervisorId = Auth::user()->supervisor->id;
+    protected $supervisorId;
+    protected $borrowRequests;
 
-    protected $borrowRequests = BorrowRequest::where('supervisor_id', '=', $this->supervisorId)->get();
-
+    public function __construct()
+    {
+        $this->supervisorId = Auth::user()->supervisor->id;
+        $this->borrowRequests = Auth::user()->supervisor->borrowRequests()->with('asset.pic')->get();
+    }
     public function index()
     {
         return view('PenanggungJawab.index');
     }
+
     public function borrowing_requests()
     {
-        return view('PenanggungJawab.manage-borrowing-requests', compact( $this->borrowRequests));
+        return view('PenanggungJawab.manage-borrowing-requests', compact('borrowRequests'));
     }
 }

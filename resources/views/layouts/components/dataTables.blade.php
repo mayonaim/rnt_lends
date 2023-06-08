@@ -1,8 +1,8 @@
 @include('layouts.components.css')
 @push('head')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.bootstrap5.min.css" />
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <link
+        href="https://cdn.datatables.net/v/bs5/dt-1.13.4/b-2.3.6/b-html5-2.3.6/b-print-2.3.6/cr-1.6.2/r-2.4.1/sc-2.1.1/datatables.min.css"
+        rel="stylesheet" />
 @endpush
 
 <table id="myTable" class="table table-striped" style="width:100%">
@@ -22,54 +22,78 @@
 
 @include('layouts.components.js')
 @push('body')
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script
+        src="https://cdn.datatables.net/v/bs5/dt-1.13.4/b-2.3.6/b-html5-2.3.6/b-print-2.3.6/cr-1.6.2/r-2.4.1/sc-2.1.1/datatables.min.js">
+    </script>
     <script>
         $(document).ready(function() {
-            var t = $('#myTable').DataTable({
-                responsive: true,
-                scrollX: true,
-                columnDefs: [{
-                    searchable: false,
-                    orderable: false,
-                    targets: 0,
-                }, ],
-                order: [
-                    [1, 'asc']
-                ],
+            $('#assetsTable').DataTable({
+                ajax: {
+                    url: '/assets', // Replace with the URL that corresponds to the assets endpoint
+                    dataSrc: 'assets',
+                },
+                columns: [{
+                        data: 'name'
+                    },
+                    {
+                        data: 'description'
+                    },
+                    {
+                        data: 'category'
+                    },
+                    {
+                        data: 'stock'
+                    },
+                    {
+                        data: null,
+                        render: function(data, type, row) {
+                            // Add action buttons or links for each asset row
+                            return '<a href="/assets/' + row.id + '">View</a>';
+                        }
+                    }
+                ]
             });
-
-            t.on('order.dt search.dt', function() {
-                let i = 1;
-
-                t.cells(null, 0, {
-                    search: 'applied',
-                    order: 'applied'
-                }).every(function(cell) {
-                    this.data(i++);
-                });
-            }).draw();
         });
     </script>
     <script>
         $(document).ready(function() {
-            var table = $('#table1').DataTable({
-                buttons: ['pdf', 'exel'],
-                dom:"<'row'<'col-md-3'l><'col-md-5'B><'col-md-4'f>>" +
-                    "<'row'<'col-md-12'tr>>" +
-                    "<'row'<'col-md-5'i><'col-md-7'p>>",
-                lengthMenu: [
-                    [5, 10, 25, -1],
-                    [5, 10, 25, "ALL"]
+            $('#borrowRequestsTable').DataTable({
+                ajax: {
+                    url: '/borrowing_requests', // Replace with the URL that corresponds to the borrowing requests endpoint
+                    dataSrc: 'borrowRequests',
+                },
+                columns: [{
+                        data: 'borrower.name'
+                    },
+                    {
+                        data: 'supervisor.name'
+                    },
+                    {
+                        data: 'asset.name'
+                    },
+                    {
+                        data: 'start_timestamp'
+                    },
+                    {
+                        data: 'end_timestamp'
+                    },
+                    {
+                        data: 'borrowed_amount'
+                    },
+                    {
+                        data: 'status'
+                    },
+                    {
+                        data: null,
+                        render: function(data, type, row) {
+                            // Add action buttons or links for each borrow request row
+                            return '<a href="/borrowing_requests/' + row.id + '">View</a>';
+                        }
+                    }
                 ]
             });
-
-            table.buttons().container()
-                .appendTo('#myTable_wrapper .col-md-6:eq(0)');
         });
     </script>
 @endpush

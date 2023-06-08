@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -20,19 +20,18 @@ class UserController extends Controller
         return view('auth.register');
     }
 
-    public function store(Request $request)
+    private function validateData(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        return $request->validate([
             'username' => 'required|string|unique:users',
             'password' => 'required|string|min:6',
             'role' => 'required|string',
         ]);
+    }
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $validatedData = $validator->validated();
+    public function store(Request $request)
+    {
+        $validatedData = $this->validateData($request);
 
         $user = User::create([
             'username' => $validatedData['username'],
@@ -40,37 +39,35 @@ class UserController extends Controller
             'password' => Hash::make($validatedData['password']),
         ]);
 
-        return redirect()->intended(route('login'))->with('success', 'Account created successfully');
+        if ($user) {
+            return redirect()->intended(route('login'))->with('success', 'User created successfully');
+        } else {
+            return back()->with('error', 'Failed to create user. Please try again.')->withInput();
+        }
     }
-    public function destroy($user_id)
-    {
-        $user = User::findOrFail($user_id);
 
-        // Delete the related records
+    public function destroy(User $user)
+    {
         $user->borrower()->delete();
         $user->supervisor()->delete();
         $user->pic()->delete();
         $user->admin()->delete();
-
-        // Delete the user
         $user->delete();
 
         return redirect()->back()->with('success', 'User deleted successfully');
     }
-
 
     public function login(Request $request)
     {
         $credentials = $request->only('username', 'password', 'role');
 
         if (Auth::attempt($credentials)) {
-            // Authentication passed...
             $role = $credentials['role'];
-            return redirect()->intended(route($role . '.dashboard'));
+            return redirect()->intended(route($role . '.index'));
         }
 
         return back()->withErrors([
-            'username' => 'Username atau password anda salah'
+            'username' => 'Invalid username or password',
         ]);
     }
 
@@ -79,7 +76,6 @@ class UserController extends Controller
         Auth::logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/');

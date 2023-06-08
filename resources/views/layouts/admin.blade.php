@@ -2,16 +2,6 @@
 <html lang="en">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>R&T Lends</title>
-
-    <!-- Custom fonts for this template-->
     @include('layouts.components.head')
 </head>
 
@@ -38,15 +28,13 @@
             <!-- End of Main Content -->
         </div>
         <!-- End of Content Wrapper -->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 
-    <!-- Bootstrap core JavaScript-->
     @include('layouts.components.body')
 
 </body>
