@@ -20,7 +20,7 @@
     </tbody>
 </table>
 
-@include('layouts.components.js')
+@include('layouts.components.body')
 @push('body')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
@@ -28,34 +28,7 @@
         src="https://cdn.datatables.net/v/bs5/dt-1.13.4/b-2.3.6/b-html5-2.3.6/b-print-2.3.6/cr-1.6.2/r-2.4.1/sc-2.1.1/datatables.min.js">
     </script>
     <script>
-        $(document).ready(function() {
-            $('#assetsTable').DataTable({
-                ajax: {
-                    url: '/assets', // Replace with the URL that corresponds to the assets endpoint
-                    dataSrc: 'assets',
-                },
-                columns: [{
-                        data: 'name'
-                    },
-                    {
-                        data: 'description'
-                    },
-                    {
-                        data: 'category'
-                    },
-                    {
-                        data: 'stock'
-                    },
-                    {
-                        data: null,
-                        render: function(data, type, row) {
-                            // Add action buttons or links for each asset row
-                            return '<a href="/assets/' + row.id + '">View</a>';
-                        }
-                    }
-                ]
-            });
-        });
+        
     </script>
     <script>
         $(document).ready(function() {

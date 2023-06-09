@@ -55,7 +55,7 @@ Route::middleware('role:borrower')->group(function () {
 Route::middleware('role:supervisor')->group(function () {
     Route::get('/supervisor/home', [SupervisorController::class, 'index'])->name('supervisor.index');
 
-    Route::get('/penanggung-jawab/view/borrowing-requests', [SupervisorController::class, 'borrowing_requests'])->name('borrower.view_borrowing_requests');
+    Route::get('/penanggung-jawab/view/borrowing-requests', [SupervisorController::class, 'borrowing_requests'])->name('supervisor.view_borrowing_requests');
 
     Route::patch('/penanggung-jawab/manage/borrowing-requests/{id}/validate', [BorrowRequestController::class, 'update'])->name('borrow_request.update_status_validated');
 
@@ -64,7 +64,7 @@ Route::middleware('role:supervisor')->group(function () {
 Route::middleware('role:pic')->group(function () {
     Route::get('/pic/home', [PICController::class, 'index'])->name('pic.index');
 
-    Route::get('/pic/view/borrowing-requests', [PICController::class, 'borrowing_requests'])->name('borrower.view_borrowing_requests');
+    Route::get('/pic/view/borrowing-requests', [PICController::class, 'borrowing_requests'])->name('pic.view_borrowing_requests');
 
     Route::patch('/pic/manage/borrowing-requests/{id}/validate', [BorrowRequestController::class, 'update'])->name('borrow_request.update_status_validated');
 
@@ -75,11 +75,19 @@ Route::middleware('role:admin')->group(function () {
 
     Route::get('/admin/view/assets', [AdminController::class, 'assets'])->name('admin.view_assets');
 
-    Route::get('/admin/view/assets', [AdminController::class, 'assets'])->name('admin.view_assets');
-
     Route::post('/admin/manage/assets/create', [AssetController::class, 'store'])->name('asset.store');
 
     Route::put('/admin/manage/assets/edit', [AssetController::class, 'update'])->name('asset.edit');
 
     Route::delete('/admin/manage/assets/delete', [AssetController::class, 'destroy'])->name('asset.destroy');
+
+    Route::get('/admin/view/borrowing-requests', [AdminController::class, 'borrowing_requests'])->name('admin.view_borrowing_requests');
+
+    Route::patch('/admin/manage/borrowing-requests/{id}/validate', [BorrowRequestController::class, 'update'])->name('borrow_request.update_status_validated');
+
+    Route::patch('/admin/manage/borrowing-requests/{id}/reject', [BorrowRequestController::class, 'update'])->name('borrow_request.update_status_rejected');
+
+    Route::delete('/admin/manage/borrowing-requests/{id}/delete', [BorrowRequestController::class, 'destroy'])->name('borrow_request.destroy');
+
+    Route::get('/admin/view/users', [AdminController::class, 'users'])->name('admin.view_users');
 });
