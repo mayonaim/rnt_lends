@@ -2,37 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
-use App\Models\Asset;
-use App\Models\PIC;
-use App\Http\Controllers\BorrowRequestController;
+use Illuminate\Routing\Controller;
 
 class AdminController extends Controller
 {
-    protected $borrowRequestController;
 
-    public function __construct(BorrowRequestController $borrowRequestController)
+    public function home()
     {
-        $this->borrowRequestController = $borrowRequestController;
-    }
-
-    public function index()
-    {
-        return view('admin.index');
+        return view('Admin.home');
     }
 
     public function assets()
     {
-        $assets = Asset::with('pic', 'images')->get();
-        $pics = PIC::all();
-
-        return view('admin.manage-assets', compact('assets', 'pics'));
+        return view('Admin.assets');
     }
 
-    public function borrowing_requests()
+    public function borrowRequests()
     {
-        $borrowRequests = $this->borrowRequestController->index()['borrowRequests'];
-
-        return view('admin.manage-borrowing-requests', compact('borrowRequests'));
+        return view('Admin.borrowing-requests');
     }
+
+    public function users()
+    {
+        return view('Admin.users');
+    }
+
 }

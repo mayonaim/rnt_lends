@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-primary btn-blockaa">Sign Up</button>
-                        <a href="{{ route('login') }}" class="btn btn-link">Kembali</a>
+                        <a href="{{ route('home') }}" class="btn btn-link">Kembali</a>
                     </div>
                 </form>
             </div>

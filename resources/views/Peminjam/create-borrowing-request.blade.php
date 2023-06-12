@@ -5,7 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 @endpush
-<div class="modal fade" id="CreateBorrowRequestModal{{ $asset->id }}" tabindex="-1" role="dialog"
+<div class="modal fade" id="CreateBorrowRequestModal ' + row.id + '" tabindex="-1" role="dialog"
     aria-labelledby="CreateBorrowRequestModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -20,7 +20,7 @@
                     @csrf
                     <div class="form-group">
                         <input type="hidden" name="borrower_id" value="{{ $borrowerId }}">
-                        <input type="hidden" name="asset_id" value="{{ $asset->id }}">
+                        <input type="hidden" name="asset_id" value=" ' + row.id + '">
                     </div>
                     <div class="form-group">
                         <label for="supervisor">Supervisor</label>

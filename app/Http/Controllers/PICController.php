@@ -2,36 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Asset;
-use App\Models\BorrowRequest;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class PICController extends Controller
-{
-    protected $picId;
-    protected $assets;
+use App\Models\BorrowRequest;
 
-    public function __construct(Asset $asset)
+class BorrowerController extends Controller
+{
+    protected $supervisorId;
+
+    public function __construct()
     {
-        $this->picId = Auth::user()->pic->id;
-        $this->assets = $asset->with('pic')->where('pic_id', $this->picId)->get();
+        $this->middleware(function ($request, $next) {
+            $this->supervisorId = Auth::user()->supervisor->id;
+            return $next($request);
+        });
     }
-    public function index()
+
+    public function home()
     {
-        return view('PICLab.index');
+        return view('PenanggungJawab.home');
     }
 
     public function assets()
     {
-        return view('PICLab.manage-assets', ['assets' => $this->assets]);
+        return view('PenanggungJawab.assets');
     }
 
-    public function borrowing_requests()
+    public function borrowRequests()
     {
-        $borrowRequests = BorrowRequest::with('asset.pic')
-            ->whereIn('asset_id', $this->assets->pluck('id'))
+        return view('PenanggungJawab.borrowing-requests');
+    }
+
+
+    private function getBorrowRequests()
+    {
+        $borrowRequests = BorrowRequest::query()
+            ->with('asset.image')
+            ->where('supervisor_id', $this->supervisorId)
             ->get();
 
-        return view('PICLab.manage-borrowing-requests', compact('borrowRequests'));
+        return response()->json(['borrowRequests' => $borrowRequests]);
     }
 }

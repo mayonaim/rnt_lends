@@ -2,64 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Asset;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
+
+use App\Models\Asset;
+use App\Models\BorrowRequest;
 
 class AssetController extends Controller
 {
     public function index()
     {
-        $assets = Asset::all();
-        return ['assets' => $assets];
+        $assets = Asset::with([ 'images', 'pic']);
+
+        return Response::json(['assets' => $assets]);
     }
 
-    private function validateData(Request $request)
+    public function getBookedAssets()
     {
-        return $request->validate([
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'category' => 'required|string',
-            'stock' => 'required|integer',
-            'pic_id' => 'required|exists:people_in_charge,id',
-        ]);
+        $bookedAssets =  BorrowRequest::query()
+            ->whereIn('status', ['approved', 'borrowing'])
+            ->get(['asset_id', 'start_timestamp', 'end_timestamp'])
+            ->toArray();
+
+        return response()->json(['bookedAssets' => $bookedAssets]);
     }
 
     public function store(Request $request)
     {
-        $validatedData = $this->validateData($request);
+        $this->validateAsset($request);
 
-        try {
-            DB::beginTransaction();
+        $asset = Asset::create($request->all());
 
-            $asset = Asset::create($validatedData);
-
-            DB::commit();
-
-            return redirect()->back()->with('success', 'Asset inserted successfully');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->with('error', 'An error occurred while inserting the asset');
-        }
+        return back()->with('success', 'Asset created successfully!');
     }
 
     public function update(Request $request, $id)
     {
-        $validatedData = $this->validateData($request);
+        $this->validateAsset($request);
 
-        try {
-            DB::beginTransaction();
+        $asset = Asset::findOrFail($id);
+        $asset->update($request->all());
 
-            $asset = Asset::findOrFail($id);
-            $asset->update($validatedData);
-
-            DB::commit();
-
-            return back();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return back()->with( 'error', 'An error occurred while updating the asset');
-        }
+        return back()->with('success', 'Asset updated successfully!');
     }
 
     public function destroy($id)
@@ -67,6 +52,17 @@ class AssetController extends Controller
         $asset = Asset::findOrFail($id);
         $asset->delete();
 
-        return redirect()->back()->with('success', 'Asset deleted successfully');
+        return back()->with('success', 'Asset deleted successfully!');
+    }
+
+    private function validateAsset(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'stock' => 'required|integer',
+            'category' => 'required',
+            'pic_id' => 'required|integer',
+        ]);
     }
 }

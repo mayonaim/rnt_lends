@@ -2,44 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Asset;
-use App\Models\BorrowRequest;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+
+use App\Models\BorrowRequest;
 
 class BorrowerController extends Controller
 {
     protected $borrowerId;
-    protected $assetController;
-    protected $borrowRequestController;
 
-    public function __construct(AssetController $assetController, BorrowRequestController $borrowRequestController)
+    public function __construct()
     {
-        $this->borrowerId = Auth::user()->id;
-        $this->assetController = $assetController;
-        $this->borrowRequestController = $borrowRequestController;
+        $this->middleware(function ($request, $next) {
+            $this->borrowerId = Auth::user()->borrower->id;
+            return $next($request);
+        });
     }
 
-    public function index()
+    public function home()
     {
-        return view('peminjam.index');
+        return view('Peminjam.home');
     }
 
     public function assets()
     {
-        $assets = $this->assetController->index()['assets'];
-
-        $borrowRequests = $this->borrowRequestController->index()['borrowRequests'];
-        $statusFilter = ['approved', 'borrowing'];
-        $booked = $borrowRequests->whereIn('status', $statusFilter)->get(['asset_id', 'start_timestamp', 'end_timestamp']);
-
-        return view('peminjam.borrow', compact('assets', 'booked'));
+        return view('Peminjam.assets');
     }
 
-    public function borrowing_requests()
+    public function borrowRequests()
     {
-        $borrowRequests = $this->borrowRequestController->index()['borrowRequests'];
-        $filteredRequests = $borrowRequests->where('borrower_id', $this->borrowerId)->get();
+        return view('Peminjam.borrowing-requests');
+    }
 
-        return view('peminjam.manage-borrowing-requests', compact('filteredRequests'));
+
+    private function getBorrowRequests()
+    {
+        $borrowRequests = BorrowRequest::query()
+            ->with('asset.image')
+            ->where('borrower_id', $this->borrowerId)
+            ->get();
+
+        return response()->json(['borrowRequests' => $borrowRequests]);
     }
 }

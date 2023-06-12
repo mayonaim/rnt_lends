@@ -2,82 +2,71 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Response;
+
+use App\Models\User;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return view('auth.login');
+        $users = User::with([ 'user.borrower', 'user.supervisor', 'user.pic']);
+
+        return Response::json(['users' => $users]);
     }
 
     public function create()
     {
-        return view('auth.register');
-    }
-
-    private function validateData(Request $request)
-    {
-        return $request->validate([
-            'username' => 'required|string|unique:users',
-            'password' => 'required|string|min:6',
-            'role' => 'required|string',
-        ]);
+        return view('register');
     }
 
     public function store(Request $request)
     {
-        $validatedData = $this->validateData($request);
+        $this->validateUser($request);
 
         $user = User::create([
-            'username' => $validatedData['username'],
-            'role' => $validatedData['role'],
-            'password' => Hash::make($validatedData['password']),
+            'username' => $request->input('username'),
+            'password' => bcrypt($request->input('password')),
+            'role' => $request->input('role'),
         ]);
 
-        if ($user) {
-            return redirect()->intended(route('login'))->with('success', 'User created successfully');
-        } else {
-            return back()->with('error', 'Failed to create user. Please try again.')->withInput();
-        }
+        return redirect()->route('login')->with('success', 'Registration successful! Please log in.');
     }
 
-    public function destroy(User $user)
+    public function update(Request $request, $id)
     {
-        $user->borrower()->delete();
-        $user->supervisor()->delete();
-        $user->pic()->delete();
-        $user->admin()->delete();
+        $this->validateUser($request);
+
+        $user = User::findOrFail($id);
+
+        $user->update([
+            'username' => $request->input('username'),
+            'password' => bcrypt($request->input('password')),
+            'role' => $request->input('role'),
+        ]);
+
+        $user->save();
+
+        return back()->with( 'success', 'User succesfully updated');;
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+
         $user->delete();
 
-        return redirect()->back()->with('success', 'User deleted successfully');
+        return back()->with( 'success', 'User succesfully deleted');
     }
 
-    public function login(Request $request)
+    private function validateUser(Request $request)
     {
-        $credentials = $request->only('username', 'password', 'role');
-
-        if (Auth::attempt($credentials)) {
-            $role = $credentials['role'];
-            return redirect()->intended(route($role . '.index'));
-        }
-
-        return back()->withErrors([
-            'username' => 'Invalid username or password',
+        $request->validate([
+            'username' => 'required|unique:users',
+            'password' => 'required|min:8',
+            'role' => 'required|in:borrower,supervisor,pic,admin',
         ]);
-    }
-
-    public function logout(Request $request)
-    {
-        Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/');
     }
 }

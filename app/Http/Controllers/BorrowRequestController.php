@@ -2,56 +2,56 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BorrowRequest;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Response;
+
+use App\Models\BorrowRequest;
 
 class BorrowRequestController extends Controller
 {
     public function index()
     {
-        $borrowRequests = BorrowRequest::all();
-        return ['borrowRequests' => $borrowRequests];
-    }
+        $borrowRequests = BorrowRequest::with([ 'borrower', 'supervisor', 'asset.image', 'asset.pic']);
 
-    private function validateData(Request $request)
-    {
-        return $request->validate([
-            'borrower_id' => 'required|exists:borrowers,id',
-            'supervisor_id' => 'required|exists:supervisors,id',
-            'asset_id' => 'required|exists:assets,id',
-            'start_timestamp' => 'required|date',
-            'end_timestamp' => 'required|date|after:start_timestamp',
-            'borrowed_amount' => 'required|integer',
-            'status' => 'required|string'
-        ]);
+        return Response::json(['borrowRequests' => $borrowRequests]);
     }
 
     public function store(Request $request)
     {
-        $validatedData = $this->validateData($request);
+        $this->validateborrowRequest($request);
 
-        $borrowRequest = BorrowRequest::create($validatedData);
+        $borrowRequest = BorrowRequest::create($request->all());
 
-        // Optionally, you can perform additional actions after creating the borrow request
-
-        return redirect()->route('borrower.view_borrowing_requests', $borrowRequest->id)
-            ->with('success', 'Borrow request created successfully');
+        return back()->with('success', 'Borrow Request created successfully!');
     }
 
-    public function update(Request $request, BorrowRequest $borrowRequest)
+    public function update(Request $request, $id)
     {
-        $validatedData = $this->validateData($request);
+        $this->validateborrowRequest($request);
 
-        $borrowRequest->update($validatedData);
+        $borrowRequest = BorrowRequest::findOrFail($id);
+        $borrowRequest->update($request->all());
 
-        return back()->with('success', 'Borrow request updated successfully');
+        return back()->with('success', 'Borrow Request updated successfully!');
     }
 
-    public function destroy(BorrowRequest $borrowRequest)
+    public function destroy($id)
     {
+        $borrowRequest = BorrowRequest::findOrFail($id);
         $borrowRequest->delete();
 
-        return back()->with('success', 'Borrow request deleted successfully');
+        return back()->with('success', 'Borrow Request deleted successfully!');
+    }
+    private function validateBorrowRequest(Request $request)
+    {
+        $request->validate([
+            'asset_id' => 'required',
+            'supervisor_id' => 'required',
+            'start_timestamp' => 'required|date',
+            'end_timestamp' => 'required|date',
+            'activity' => 'required',
+            'borrowed_amount' => 'required|numeric',
+        ]);
     }
 }

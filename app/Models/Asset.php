@@ -8,7 +8,11 @@ class Asset extends Model
 {
 
     protected $fillable = [
-        'name', 'description', 'category', 'stock', 'pic_id'
+        'name',
+        'description',
+        'category',
+        'stock',
+        'pic_id'
     ];
 
     public function pic()
@@ -19,4 +23,5 @@ class Asset extends Model
     public function images()
     {
         return $this->hasMany(AssetImage::class, 'asset_id');
-    }}
+    }
+}

@@ -10,18 +10,16 @@ class RoleMiddleware
 {
     public function handle($request, Closure $next, ...$roles)
     {
-        $user = Auth::user();
+        if (Auth::check()) {
+            $user = Auth::user();
 
-        if (!$user) {
-            return Redirect::route('login');
-        }
-
-        foreach ($roles as $role) {
-            if ($user->role === $role) {
-                return $next($request);
+            foreach ($roles as $role) {
+                if ($user->role === $role) {
+                    return $next($request);
+                }
             }
         }
 
-        return back()->withErrors(['Unauthorized Access']);
+        return redirect()->route('login');
     }
 }

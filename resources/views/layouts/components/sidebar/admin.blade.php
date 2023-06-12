@@ -4,7 +4,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
-                href="{{ route('admin.index') }}">
+                href="{{ route('admin.home') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <img src="{{ asset('img/') }}" width="" height="">
                 </div>
@@ -16,7 +16,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('admin.index') }}">
+                <a class="nav-link" href="{{ route('admin.home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
