@@ -37,7 +37,9 @@ class AdminController extends Controller
 
     public function users(Request $request)
     {
-        return view('Admin.users');
+        $users = User::with([ 'pic', 'supervisor', 'borrower'])->get();
+
+        return view('Admin.users', compact('users'));
     }
 
 }

@@ -38,6 +38,11 @@ Route::get('/register', [UserController::class, 'create'])->name('register');
 
 Route::post('/register/create', [UserController::class, 'store'])->name('user.store');
 
+Route::post('/register/update', [UserController::class, 'update'])->name('user.update');
+
+Route::DELETE('/register/delete', [UserController::class, 'destroy'])->name('user.destroy');
+Route::DELETE('/register/delete/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
 
 Route::middleware('role:borrower')->group(function () {
     Route::get('/borrower/home', [BorrowerController::class, 'home'])->name('borrower.home');

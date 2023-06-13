@@ -31,7 +31,7 @@ class UserController extends Controller
             'role' => $request->input('role'),
         ]);
 
-        return redirect()->route('login')->with('success', 'Registration successful! Please log in.');
+        return redirect()->route('home')->with('success', 'Registration successful! Please log in.');
     }
 
     public function update(Request $request, $id)
