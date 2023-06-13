@@ -1,4 +1,7 @@
-@extends('layouts.admin')
+@extends('layouts.main')
+@push('head')
+    <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+@endpush
 @section('content')
     <div class="container-fluid">
         @if ($errors->any())
@@ -14,28 +17,53 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="h3 mb-0 text-gray-800">Kelola Ruangan</h2>
         </div>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CreateAssetModal">Tambah</button>
-        <div class="card-body">
-            <table id="myTable" class="table table-striped" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Asset</th>
-                        <th>Description</th>
-                        <th>PIC</th>
-                        <th>Category</th>
-                        <th>Stock</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+        <div class="row">
+            <div class="col-md-12">
+                <table id="myTable" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Asset</th>
+                            <th>Description</th>
+                            <th>PIC</th>
+                            <th>Category</th>
+                            <th>Stock</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($assets as $asset)
+                            <tr>
+                                <td></td>
+                                <td>{{ $asset->name }}</td>
+                                <td>{{ $asset->description }}</td>
+                                <td>{{ $asset->pic->name }}</td>
+                                <td>{{ $asset->category }}</td>
+                                <td>{{ $asset->stock }}</td>
+                                <td>
+                                    <a type="button" class="btn btn-warning btn-sm text-white" data-toggle="modal"
+                                        data-target="#editAssetModal{{ $asset->id }}">Edit</a>
+                                    <form action="{{ route('asset.destroy', $asset->id) }}" method="POST" id="deleteForm">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm text-white"
+                                            onclick="confirmDelete(event)">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {{-- Modal Edit Asset --}}
+                            @include('admin.edit-asset')
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
+        {{-- Modal Tambah Asset --}}
+        @include('admin.create-asset')
     </div>
-    @include('admin.create-asset')
 @endsection
 @push('body')
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script
@@ -43,90 +71,62 @@
     </script>
     <script>
         $(document).ready(function() {
-            var retrievedData;
-
-            function selectElement() {
-                var selectOptions = '';
-
-                $.each(retrievedData.pics, function(index, pic) {
-                    selectOptions += '<option value="' + pic.id + '">' + pic.name + '</option>';
-                });
-
-                $('#pic').html(selectOptions);
-            }
-        }; $('#myTable').DataTable({
-            ajax: {
-                url: '/admin/data/assets',
-                type: 'GET',
-                dataType: 'json',
-                dataSrc: 'assets',
-                success: function(data) {
-                    retrievedData = data;
-                    selectElement();
-                }
-            },
-            columns: [{
-                    data: null,
-                    render: function(_, _, _, meta) {
-                        return meta.row + 1;
-                    }
-                },
-                {
-                    data: 'name'
-                },
-                {
-                    data: 'description'
-                },
-                {
-                    data: 'pic.name'
-                },
-                {
-                    data: 'category',
-                    render: function(data, type, row) {
-                        // Generate the dropdown select based on the category
-                        var select = '<select>';
-                        row.categories.forEach(function(category) {
-                            select += '<option value="' + category + '">' + category +
-                                '</option>';
-                        });
-                        select += '</select>';
-
-                        return select;
-                    }
-                },
-                {
-                    data: 'stock'
-                },
-                {
-                    data: null,
-                    render: function(data, type, row) {
-                        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CreateBorrowRequestModal' +
-                            row.id + '">Borrow</button>';
+            var table = $('#myTable').DataTable({
+                dom: `
+                        <'row'<'col-md-3'l><'col-md-5'B><'col-md-4'f>>
+                        <'row'<'col-md-12'tr>>
+                        <'row'<'col-md-3'i><'col-md-5 button-container'><'col-md-4'p>>
+                        `,
+                columnDefs: [{
+                        targets: 0,
+                        render: function(data, type, row, meta) {
+                            return meta.row + 1;
+                        },
+                        orderable: false,
+                        searchable: false
                     },
-                }
-            ],
-        });
-        });
-    </script>
-    @php
-    dd($variable);
-@endphp
-    <script>
-        function confirmDelete(event) {
-            event.preventDefault();
+                    {
+                        targets: 4,
+                        render: function(data, type, row, meta) {
+                            if (type === 'display') {
+                                var selectHtml = '<select>';
+                                selectHtml += '<option value="">All</option>';
+                                selectHtml += '<option value="room">Rooms</option>';
+                                selectHtml += '<option value="tool">Tools</option>';
+                                selectHtml += '</select>';
+                                return selectHtml;
+                            }
+                            return data;
+                        }
+                    }
+                ],
+                buttons: [{
+                    extend: 'pdf',
+                    customize: function(doc) {
+                        var now = new Date();
+                        var formattedDate = now.getDate() + '/' + (now.getMonth() + 1) + '/' +
+                            now.getFullYear();
+                        doc.content.splice(0, 0, {
+                            text: 'Created on: ' + formattedDate,
+                            alignment: 'right',
+                            margin: [0, 0, 20, 0]
+                        });
+                    }
+                }],
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, 'All']
+                ]
+            });
 
-            if (confirm("Are you sure you want to delete this asset?")) {
-                document.getElementById('deleteForm').submit();
-            }
-        }
+            $('#myTable').on('change', 'select', function() {
+                var category = $(this).val();
+                table.column(4).search(category).draw();
+            });
+
+            $('.button-container').html(
+                '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#CreateAssetModal">Tambah <i class="fa-regular fa-plus"></i></button>'
+            );
+        });
     </script>
 @endpush
-{{-- <td>
-    <a type="button" class="btn btn-warning btn-sm text-white" data-toggle="modal"
-        data-target="#editAssetModal{{ $asset->id }}">Edit</a>
-    <form action="{{ route('asset.destroy', $asset->id) }}" method="POST" id="deleteForm">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger btn-sm text-white" onclick="confirmDelete(event)">Delete</button>
-    </form>
-</td> --}}

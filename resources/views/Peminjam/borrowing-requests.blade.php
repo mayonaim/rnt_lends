@@ -1,4 +1,4 @@
-@extends('layouts.peminjam')
+@extends('layouts.main')
 @push('head')
     <link
         href="https://cdn.datatables.net/v/bs5/dt-1.13.4/b-2.3.6/b-html5-2.3.6/b-print-2.3.6/cr-1.6.2/r-2.4.1/sc-2.1.1/datatables.min.css"

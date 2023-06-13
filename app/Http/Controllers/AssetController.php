@@ -4,19 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 
 use App\Models\Asset;
 use App\Models\BorrowRequest;
 
 class AssetController extends Controller
 {
-    public function index()
-    {
-        $assets = Asset::with([ 'images', 'pic']);
-
-        return Response::json(['assets' => $assets]);
-    }
 
     public function getBookedAssets()
     {

@@ -20,6 +20,6 @@ class RoleMiddleware
             }
         }
 
-        return redirect()->route('login');
+        return Redirect::route('home');
     }
 }

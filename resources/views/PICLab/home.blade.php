@@ -1,4 +1,4 @@
-@extends('layouts.picLab')
+@extends('layouts.main')
 @section('content')
 
 <!-- Begin Page Content -->

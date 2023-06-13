@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 
 use App\Models\User;
 
@@ -14,12 +13,12 @@ class UserController extends Controller
     {
         $users = User::with([ 'user.borrower', 'user.supervisor', 'user.pic']);
 
-        return Response::json(['users' => $users]);
+        return ['users' => $users];
     }
 
     public function create()
     {
-        return view('register');
+        return view('auth.register');
     }
 
     public function store(Request $request)

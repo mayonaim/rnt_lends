@@ -1,7 +1,6 @@
 @push('head')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endpush
 <div class="modal fade" id="CreateAssetModal" tabindex="-1" role="dialog" aria-labelledby="CreateAssetModalLabel"
@@ -33,21 +32,23 @@
                         <label for="pic">PIC</label>
                         <select class="form-control" id="pic" name="pic_id" required>
                             <option value="">pic</option>
-                            @foreach ($pics as $pic)
-                                <option value="{{ $pic->id }}">{{ $pic->name }}</option>
+                            @foreach ($users as $user)
+                                @if ($user->role == 'pic')
+                                <option value="{{ $user->pic->id }}">{{ $user->pic->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="aktivitas">Aktivitas</label>
-                        <textarea name="activity" class="form-control" id="aktivitas" placeholder="aktivitas"></textarea>
+                        <label for="deskripsi">Deskripsi</label>
+                        <textarea name="description" class="form-control" id="aktivitas" placeholder="deskripsi"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="stock">Stock</label>
                         <input type="number" name="stock" class="form-control" id="stock" placeholder="Stock"
                             min="0">
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="images">Images</label>
                         <input type="file" name="images[]" id="images" class="form-control-file dropzone" multiple
                             accept="image/jpeg,image/png" required>
@@ -57,7 +58,7 @@
                         <div id="uploadedImages" class="d-flex flex-wrap">
                             <!-- Display uploaded images here -->
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group justify-content-end">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -70,47 +71,4 @@
 
 @push('body')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
-    <script>
-        // JavaScript code to display uploaded images
-        function readURL(input) {
-            if (input.files && input.files.length > 0) {
-                var uploadedImagesContainer = document.getElementById('uploadedImages');
-                uploadedImagesContainer.innerHTML = ''; // Clear the container
-
-                var fileLimit = 3; // Maximum number of files to display
-                var filesToDisplay = Math.min(input.files.length, fileLimit);
-
-                if (input.files.length > fileLimit) {
-                    // Display an error message or perform any necessary action
-                    alert('You can only upload a maximum of ' + fileLimit + ' files.');
-                }
-
-                for (var i = 0; i < filesToDisplay; i++) {
-                    var reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        var imageContainer = document.createElement('div');
-                        imageContainer.classList.add('d-inline-block', 'mr-3',
-                            'mb-2'); // Apply Bootstrap classes for spacing
-
-                        var image = document.createElement('img');
-                        image.src = e.target.result;
-                        image.classList.add('uploaded-image');
-                        image.style.maxWidth = '150px'; // Set max width for the image
-                        image.style.maxHeight = '150px'; // Set max height for the image
-
-                        imageContainer.appendChild(image);
-                        uploadedImagesContainer.appendChild(imageContainer);
-                    }
-
-                    reader.readAsDataURL(input.files[i]);
-                }
-            }
-        }
-
-        // Trigger the function when a file is selected
-        document.getElementById('images').addEventListener('change', function() {
-            readURL(this);
-        });
-    </script>
 @endpush

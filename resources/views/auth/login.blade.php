@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Login</title>
-
-    @include('layouts.components.head')
-</head>
-
-
-<body style="background-color: #008b91">
+@extends('layouts.app')
+@push('body')
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -45,8 +34,8 @@
                                     <i class="fa fa-user"></i>
                                 </span>
                             </div>
-                            <input type="text" name="username" id="username" class="form-control"
-                                placeholder="Username" autocomplete="off" required="">
+                            <input type="text" name="username" id="username" class="form-control" placeholder="Username"
+                                autocomplete="off" required="">
                         </div>
                     </div>
                     <div class="form-group">
@@ -68,8 +57,12 @@
                 </form>
             </div>
         </div>
-        @include('layouts.components.body')
-</body>
+    </div>
 
+    <style>
+        body {
+            background-color: #008b91;
+        }
+    </style>
 
-</html>
+@endpush

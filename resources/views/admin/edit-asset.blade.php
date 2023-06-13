@@ -14,7 +14,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('asset.edit', $asset->id) }}" enctype="multipart/form-data"
+                <form method="POST" action="{{ route('admin.edit_asset', $asset->id) }}" enctype="multipart/form-data"
                     id="editAssetForm">
                     @csrf
                     @method('PUT')
@@ -36,7 +36,7 @@
                         <label for="pic_id">PIC</label>
                         <select name="pic_id" id="pic" class="form-control" required>
                             <option value="">pic</option>
-                            @foreach ($pics as $pic)
+                            @foreach ($users as $pic)
                                 <option value="{{ $pic->id }}"
                                     {{ old('pic_id', $asset->pic_id) == $pic->id ? 'selected' : '' }}>
                                     {{ $pic->name }}</option>
@@ -73,40 +73,3 @@
         </div>
     </div>
 </div>
-@push('body')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
-    <script>
-        Dropzone.autoDiscover = false;
-
-        var dropzone = new Dropzone('#dropzone', {
-            url: '{{ route('uploadAssetImage') }}',
-            paramName: 'image',
-            maxFilesize: 2, // Maximum file size in MB
-            acceptedFiles: 'image/*', // Only allow image files
-            addRemoveLinks: true,
-            dictRemoveFile: 'Remove',
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            init: function() {
-                this.on('success', function(file, response) {
-                    // Add the newly uploaded image to the form
-                    var imageIdInput = document.createElement('input');
-                    imageIdInput.setAttribute('type', 'hidden');
-                    imageIdInput.setAttribute('name', 'imageIds[]');
-                    imageIdInput.setAttribute('value', response.image_id);
-                    document.getElementById('editAssetForm').appendChild(imageIdInput);
-                });
-                this.on('removedfile', function(file) {
-                    // Remove the image ID input if the file is removed from dropzone
-                    var imageIdInput = document.querySelector('input[name="imageIds[]"][value="' + file
-                        .upload.uuid + '"]');
-                    if (imageIdInput) {
-                        imageIdInput.remove();
-                    }
-                });
-            }
-        });
-    </script>
-@endpush

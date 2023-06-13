@@ -1,4 +1,4 @@
-@extends('layouts.picLab')
+@extends('layouts.main')
 @section('content')
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -87,7 +87,7 @@
                                                 <b>Informasi tentang Alat 1.</b>
                                                 <p>Anda dapat menambahkan Informasi Alat yang lebih detail di sini.</p>
                                             </div>
-                                    
+
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                             </div>
@@ -161,7 +161,7 @@
                                                 <b>Informasi tentang Alat 2.</b>
                                                 <p>Anda dapat menambahkan Informasi Alat yang lebih detail di sini.</p>
                                             </div>
-                                    
+
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                             </div>
@@ -235,7 +235,7 @@
                                 </td>
                             </tr>
                 </tbody>
-                
+
                 <!-- Button Tambah Alat -->
                 <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog"
                     aria-labelledby="tambahModalLabel">
