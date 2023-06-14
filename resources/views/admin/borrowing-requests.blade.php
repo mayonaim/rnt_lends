@@ -22,7 +22,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($userBorrowRequests as $borrowing)
+                        @foreach ($BorrowRequests as $borrowing)
                             @php
                                 $startTimestamp = \Carbon\Carbon::parse($borrowing->start_timestamp)->format('Y-m-d H:i:s');
                                 $endTimestamp = \Carbon\Carbon::parse($borrowing->end_timestamp)->format('Y-m-d H:i:s');
