@@ -9,6 +9,7 @@ use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\BorrowRequestController;
+use App\Http\Controllers\Dragdropcontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,13 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [UserController::class, 'create'])->name('register');
 
 Route::post('/register/create', [UserController::class, 'store'])->name('user.store');
+
+Route::post('/register/update', [UserController::class, 'update'])->name('user.update');
+
+Route::PUT('/register/update/{id}', [UserController::class, 'update'])->name('user.update');
+
+Route::DELETE('/register/delete', [UserController::class, 'destroy'])->name('user.destroy');
+Route::DELETE('/register/delete/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 
 Route::middleware('role:borrower')->group(function () {
@@ -82,6 +90,9 @@ Route::middleware('role:admin')->group(function () {
     Route::get('/admin/view/assets', [AdminController::class, 'assets'])->name('admin.view_assets');
 
     Route::post('/admin/manage/assets/create', [AssetController::class, 'store'])->name('asset.store');
+    
+    //Drag Drop
+    Route::post('/upload', [Dragdropcontroller::class,'store'])->name('asset.store');
 
     Route::put('/admin/manage/assets/{id}/edit', [AssetController::class, 'update'])->name('admin.edit_asset');
 

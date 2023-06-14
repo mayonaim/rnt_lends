@@ -13,7 +13,7 @@ class CreateAssetImagesTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('asset_id');
             $table->timestamps();
-            $table->foreign('asset_id')->references('id')->on('assets');
+            $table->foreign('asset_id')->references('id')->on('assets')->onDelete('cascade');
         });
     }
 

@@ -14,7 +14,7 @@ class CreateSupervisorsTable extends Migration
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
