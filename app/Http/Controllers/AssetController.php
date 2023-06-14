@@ -31,14 +31,15 @@ class AssetController extends Controller
         return back()->with('success', 'Asset updated successfully!');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id = $request->input('id');
         $asset = Asset::findOrFail($id);
         $asset->delete();
 
         return back()->with('success', 'Asset deleted successfully!');
     }
-
+    
     private function validateAsset(Request $request)
     {
         $request->validate([

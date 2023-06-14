@@ -34,12 +34,10 @@
                     </div>
                     <div class="form-group">
                         <label for="pic_id">PIC</label>
-                        <select name="pic_id" id="pic" class="form-control" required>
+                        <select class="form-control" id="mySelect" name="pic_id" required>
                             <option value="">pic</option>
                             @foreach ($users as $pic)
-                                <option value="{{ $pic->id }}"
-                                    {{ old('pic_id', $asset->pic_id) == $pic->id ? 'selected' : '' }}>
-                                    {{ $pic->name }}</option>
+                                <option value="{{ $pic->id }}" {{ old('pic_id', $asset->pic_id) == $pic->id ? 'selected' : '' }}>{{ $pic->name }}</option>
                             @endforeach
                         </select>
                     </div>
