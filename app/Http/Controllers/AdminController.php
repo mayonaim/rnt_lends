@@ -28,7 +28,7 @@ class AdminController extends Controller
 
     public function borrowRequests()
     {
-        $borrowRequests = BorrowRequest::with('')
+        $borrowRequests = BorrowRequest::with('');
         return view('Admin.borrowing-requests');
     }
 
