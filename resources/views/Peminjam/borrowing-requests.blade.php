@@ -24,6 +24,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ( as )
+
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
