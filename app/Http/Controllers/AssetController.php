@@ -11,15 +11,6 @@ use App\Models\BorrowRequest;
 class AssetController extends Controller
 {
 
-    public function getBookedAssets()
-    {
-        $bookedAssets =  BorrowRequest::query()
-            ->whereIn('status', ['approved', 'borrowing'])
-            ->get(['asset_id', 'start_timestamp', 'end_timestamp'])
-            ->toArray();
-
-        return response()->json(['bookedAssets' => $bookedAssets]);
-    }
 
     public function store(Request $request)
     {

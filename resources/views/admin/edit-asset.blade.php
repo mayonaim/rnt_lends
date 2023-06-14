@@ -43,7 +43,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="images">Images</label>
                         <div id="dropzone" class="dropzone">
                             <label>Existing Images</label>
@@ -59,7 +59,7 @@
                                 @endforeach
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <input type="hidden" class="form-control" name="category" id="category"
                             value="{{ old('category', $asset->category) }}">

@@ -14,7 +14,7 @@
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
                 href="{{ route($userRole . '.home') }}">
                 <div class="sidebar-brand-icon">
-                    <img src="{{ asset('img/dashboard-icon.png') }}" width="150px" height="150px">
+                    <img src="{{ asset('img/dashboard-icon.png') }}" width="100em" height="100em">
                 </div>
             </a>
 

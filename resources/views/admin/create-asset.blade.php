@@ -1,7 +1,9 @@
 @push('head')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 @endpush
 <div class="modal fade" id="CreateAssetModal" tabindex="-1" role="dialog" aria-labelledby="CreateAssetModalLabel"
     aria-hidden="true">
@@ -17,8 +19,8 @@
                 <form action="{{ route('asset.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="jenis">Jenis Asset</label>
-                        <select class="form-control" id="jenis" name="category" required>
+                        <label for="category">Jenis Asset</label>
+                        <select class="form-control" id="category" name="category" required>
                             <option value="room">Ruangan</option>
                             <option value="tool">Alat</option>
                         </select>
@@ -30,11 +32,10 @@
                     </div>
                     <div class="form-group">
                         <label for="pic">PIC</label>
-                        <select class="form-control" id="pic" name="pic_id" required>
-                            <option value="">pic</option>
+                        <select class="form-control" id="mySelect" name="pic_id" required>
                             @foreach ($users as $user)
                                 @if ($user->role == 'pic')
-                                <option value="{{ $user->pic->id }}">{{ $user->pic->name }}</option>
+                                    <option value="{{ $user->pic->id }}">{{ $user->pic->name }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -52,16 +53,12 @@
                         <label for="images">Images</label>
                         <input type="file" name="images[]" id="images" class="form-control-file dropzone" multiple
                             accept="image/jpeg,image/png" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Uploaded Images</label>
-                        <div id="uploadedImages" class="d-flex flex-wrap">
-                            <!-- Display uploaded images here -->
-                        </div>
                     </div> --}}
-                    <div class="form-group justify-content-end">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    <div class="modal-footer">
+                        <div class="form-group justify-content-end">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -71,4 +68,26 @@
 
 @push('body')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+    <script>
+        $('#mySelect').select2({
+            theme: 'bootstrap-5',
+            dropdownParent: $('#CreateAssetModal')
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#category').change(function() {
+                var selectedCategory = $(this).val();
+                var stockField = $('#stock');
+
+                if (selectedCategory === 'room') {
+                    stockField.prop('disabled', true);
+                } else {
+                    stockField.prop('disabled', false);
+                }
+            });
+        });
+    </script>
 @endpush

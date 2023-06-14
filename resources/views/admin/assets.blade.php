@@ -73,10 +73,10 @@
         $(document).ready(function() {
             var table = $('#myTable').DataTable({
                 dom: `
-                        <'row'<'col-md-3'l><'col-md-5'B><'col-md-4'f>>
+                        <'row'<'col-md-3'l><'col-md-3'B><'col-md-2 selectHtml'><'col-md-4'f>>
                         <'row'<'col-md-12'tr>>
                         <'row'<'col-md-3'i><'col-md-5 button-container'><'col-md-4'p>>
-                        `,
+                    `,
                 columnDefs: [{
                         targets: 0,
                         render: function(data, type, row, meta) {
@@ -88,14 +88,7 @@
                     {
                         targets: 4,
                         render: function(data, type, row, meta) {
-                            if (type === 'display') {
-                                var selectHtml = '<select>';
-                                selectHtml += '<option value="">All</option>';
-                                selectHtml += '<option value="room">Rooms</option>';
-                                selectHtml += '<option value="tool">Tools</option>';
-                                selectHtml += '</select>';
-                                return selectHtml;
-                            }
+                            if (type === 'display') {}
                             return data;
                         }
                     }
@@ -119,7 +112,15 @@
                 ]
             });
 
-            $('#myTable').on('change', 'select', function() {
+            var selectHtml = '<select>';
+            selectHtml += '<option value="">All</option>';
+            selectHtml += '<option value="room">Rooms</option>';
+            selectHtml += '<option value="tool">Tools</option>';
+            selectHtml += '</select>';
+
+            $('.selectHtml').html(selectHtml);
+
+            $('.selectHtml').on('change', 'select', function() {
                 var category = $(this).val();
                 table.column(4).search(category).draw();
             });

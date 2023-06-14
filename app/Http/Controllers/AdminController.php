@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\AssetController;
-use App\Http\Controllers\BorrowRequestController;
-use App\Http\Controllers\UserController;
 
 use App\Models\Asset;
 use App\Models\BorrowRequest;
@@ -29,13 +26,13 @@ class AdminController extends Controller
         return view('Admin.assets', compact('assets', 'users'));
     }
 
-    public function borrowRequests(Request $request)
+    public function borrowRequests()
     {
-
+        $borrowRequests = BorrowRequest::with('')
         return view('Admin.borrowing-requests');
     }
 
-    public function users(Request $request)
+    public function users()
     {
         return view('Admin.users');
     }

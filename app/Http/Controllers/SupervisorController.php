@@ -7,41 +7,29 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\BorrowRequest;
 
-class BorrowerController extends Controller
+class SupervisorController extends Controller
 {
-    protected $supervisorId;
+    private $supervisorId;
 
-    public function __construct()
+    public function initialize()
     {
-        $this->middleware(function ($request, $next) {
-            $this->supervisorId = Auth::user()->supervisor->id;
-            return $next($request);
-        });
+        $this->supervisorId = Auth::user()->supervisor->id;
     }
 
     public function home()
     {
-        return view('PenanggungJawab.home');
+        return view('penanggungJawab.home');
     }
 
-    public function assets()
-    {
-        return view('PenanggungJawab.assets');
-    }
 
     public function borrowRequests()
     {
-        return view('PenanggungJawab.borrowing-requests');
+        $this->initialize();
+        $supervisorId = $this->supervisorId;
+        $borrowRequestsAll = BorrowRequest::with(['supervisor', 'supervisor', 'asset']);
+        $userBorrowRequests = $borrowRequestsAll->where('supervisor_id', $supervisorId);
+
+        return view('penanggungJawab.borrowing-requests', compact('userBorrowRequests', 'supervisorId'));
     }
 
-
-    private function getBorrowRequests()
-    {
-        $borrowRequests = BorrowRequest::query()
-            ->with('asset.image')
-            ->where('supervisor_id', $this->supervisorId)
-            ->get();
-
-        return response()->json(['borrowRequests' => $borrowRequests]);
-    }
 }
