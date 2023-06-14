@@ -51,7 +51,7 @@ class BorrowRequestController extends Controller
             'start_timestamp' => 'required|date',
             'end_timestamp' => 'required|date',
             'activity' => 'required',
-            'borrowed_amount' => 'required|numeric|min:0',
+            'amount_borrowed' => 'required|numeric|min:0',
         ]);
     }
 }
