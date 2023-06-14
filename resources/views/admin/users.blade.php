@@ -9,7 +9,6 @@
         </div>
         <div class="card-body">
             <p class="mb-4">Table Data Manajemen User</p>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambahModal">Tambah Data</button>
             <table id="myTable" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
@@ -34,7 +33,7 @@
                             <td>{{ $userRole}}</td>
                             <td>
                                 <a type="button" class="btn btn-warning btn-sm text-white" data-toggle="modal"
-                                    data-target="#editAssetModal{{ $user->id }}">Edit</a>
+                                    data-target="#EditUserModal{{ $user->id }}">Edit</a>
                                 <form action="{{ route('user.destroy', $user->id) }}" method="POST" id="deleteForm">
                                     @csrf
                                     @method('DELETE')
@@ -102,7 +101,7 @@
             });
 
             $('.button-container').html(
-                '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#CreateAssetModal">Tambah <i class="fa-regular fa-plus"></i></button>'
+                '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#CreateUserModal">Tambah <i class="fa-regular fa-plus"></i></button>'
             );
         });
     </script>

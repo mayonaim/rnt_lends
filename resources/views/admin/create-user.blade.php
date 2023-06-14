@@ -3,7 +3,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endpush
-<div class="modal fade" id="CreateAssetModal" tabindex="-1" role="dialog" aria-labelledby="CreateAssetModalLabel"
+<div class="modal fade" id="CreateUserModal" tabindex="-1" role="dialog" aria-labelledby="CreateAssetModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -22,7 +22,6 @@
                         <input type="text" name="username" id="username" class="form-control"
                             value="{{ old('username') }}">
                     </div>
-
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" id="password" class="form-control">
@@ -31,8 +30,8 @@
                     <div class="form-group">
                         <label for="role">Role</label>
                         <select name="role" id="role" class="form-control">
-                            <option value="admin">Peminjam</option>
-                            <option value="admin">Penanggung Jawab</option>
+                            <option value="borrower">Peminjam</option>
+                            <option value="supervisor">Penanggung Jawab</option>
                             <option value="pic">PIC</option>
                             <option value="admin">Admin</option>
                             <!-- Add more options for different roles if needed -->
