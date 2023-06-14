@@ -1,8 +1,4 @@
 @push('head')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"
-        rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
 @endpush
 <div class="modal fade" id="CreateBorrowRequestModal{{ $asset->id }}" tabindex="-1" role="dialog"
@@ -22,12 +18,15 @@
                     <div class="form-group">
                         <input type="hidden" name="borrower_id" value="{{ $borrowerId }}">
                         <input type="hidden" name="asset_id" value="{{ $asset->id }}">
+                        <input type="hidden" name="status" value="pending">
                     </div>
                     <div class="form-group">
                         <label for="supervisor">Supervisor</label>
-                        <select class="form-control" id="mySelect{{ $asset->id }}" name="supervisor_id" required>
-                            @foreach ($users as $supervisor)
-                                <option value="{{ $supervisor->id }}">{{ $supervisor->name }}</option>
+                        <select class="form-control" id="mySelect" name="supervisor_id" required>
+                            @foreach ($users as $user)
+                                @if ($user->role == 'supervisor')
+                                    <option value="{{ $user->supervisor->id }}">{{ $user->supervisor->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
@@ -43,11 +42,11 @@
                     </div>
                     <div class="form-group">
                         @if ($asset->category == 'tool')
-                            <label for="borrowed_amount{{ $asset->id }}">Jumlah yang dipinjam</label>
-                            <input type="number" class="form-control" id="borrowed_amount{{ $asset->id }}"
-                                name="borrowed_amount" placeholder="total" required max="{{ $asset->stock }}">
+                            <label for="amount_borrowed{{ $asset->id }}">Jumlah yang dipinjam</label>
+                            <input type="number" class="form-control" id="amount_borrowed{{ $asset->id }}"
+                                name="amount_borrowed" placeholder="total" required max="{{ $asset->stock }}">
                         @else
-                            <input type="hidden" name="borrowed_amount" value="0">
+                            <input type="hidden" name="amount_borrowed" value="0">
                         @endif
                     </div>
                     <div class="form-group">
@@ -55,15 +54,15 @@
                         <textarea class="form-control" id="activity{{ $asset->id }}" name="activity" placeholder="Enter request activity"
                             required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Create Borrowing Request</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Create Borrowing Request</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
 @push('body')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         $(document).ready(function() {
@@ -93,7 +92,12 @@
                 $(this).flatpickr({
                     enableTime: true,
                     minDate: 'today',
+                    altInput: true,
+                    altFormat: 'd F Y H:i',
                     dateFormat: 'Y-m-d H:i',
+                    minTime: '08:00',
+                    maxTime: '18:00',
+                    time_24hr: true,
                     disable: [
                         disableDates
                     ]
@@ -101,15 +105,4 @@
             });
         });
     </script>
-    <script>
-        $(document).ready(function() {
-            $('[id^="mySelect"]').select2({
-                theme: 'bootstrap-5',
-                dropdownParent: function() {
-                    return $(this).closest('.modal');
-                }
-            });
-        });
-    </script>
-    <script>
-    @endpush
+@endpush

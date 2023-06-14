@@ -131,14 +131,4 @@
             );
         });
     </script>
-
-    {{-- <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
-    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
-    <script type="text/javascript">
-    var dropzone = new Dropzone("#image-upload",{
-        thumbnailWidth:200,
-        maxFilesize:1,
-        acceptedFiles:".jpeg, .jpg, .png, .gif"
-    });
-    </script> --}}
 @endpush

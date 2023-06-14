@@ -36,30 +36,39 @@
                                 <td>{{ $borrowing->borrowed_amount }}</td>
                                 <td>{{ $borrowing->status }}</td>
                                 <td>
-                                    @if ($borrowing->status === 'pending')
-                                        <a type="button" class="btn btn-warning btn-sm text-white" data-toggle="modal"
-                                            data-target="#editAssetModal{{ $borrowing->id }}">Edit</a>
+                                    @if ($borrowing->status === 'validated')
+                                        <form action="{{ route('admin.approve_borrow_request', $borrowing->id) }}"
+                                            method="POST" id="approveForm">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="status" value="approved">
+                                            <button type="submit" class="btn btn-primary btn-sm text-white">Approve</button>
+                                        </form>
+                                        <form action="{{ route('admin.reject_borrow_request', $borrowing->id) }}"
+                                            method="POST" id="rejectForm">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="status" value="rejected">
+                                            <button type="submit" class="btn btn-warning btn-sm text-white">Reject</button>
+                                        </form>
                                     @endif
                                     @if ($borrowing->status === 'borrowing')
-                                    <form action="{{ route('borrow_request.update_status_finished', $borrowing->id) }}" method="POST"
-                                        id="finishForm">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button type="submit" class="btn btn-primary btn-sm text-white"
-                                            onclick="confirmDelete(event)">Finish</button>
-                                    </form>
+                                        <form action="{{ route('borrow_request.update_status_finished', $borrowing->id) }}"
+                                            method="POST" id="finishForm">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="btn btn-success btn-sm text-white">Finish</button>
+                                        </form>
                                     @endif
-                                    <form action="{{ route('borrow_request.destro', $borrowing->id) }}" method="POST"
+                                    <form action="{{ route('borrow_request.destroy') }}" method="POST"
                                         id="deleteForm">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm text-white"
-                                            onclick="confirmDelete(event)">Delete</button>
+                                        <input type="hidden" name="id" value="{{$borrowing->id}}">
+                                        <button type="submit" class="btn btn-danger btn-sm text-white" onclick="confirmDelete(event)">Delete</button>
                                     </form>
                                 </td>
                             </tr>
-                            {{-- Modal Edit Asset --}}
-                            @include('admin.edit-asset')
                         @endforeach
                     </tbody>
                 </table>

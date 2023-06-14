@@ -26,7 +26,7 @@ class SupervisorController extends Controller
     {
         $this->initialize();
         $supervisorId = $this->supervisorId;
-        $borrowRequestsAll = BorrowRequest::with(['supervisor', 'supervisor', 'asset']);
+        $borrowRequestsAll = BorrowRequest::with(['supervisor', 'supervisor', 'asset'])->get();
         $userBorrowRequests = $borrowRequestsAll->where('supervisor_id', $supervisorId);
 
         return view('penanggungJawab.borrowing-requests', compact('userBorrowRequests', 'supervisorId'));

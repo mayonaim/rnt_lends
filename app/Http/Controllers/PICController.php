@@ -36,8 +36,8 @@ class PICController extends Controller
         $this->initialize();
         $picId = $this->picId;
         $assetIds = Asset::where('pic_id', $picId)->pluck('id')->toArray();
-        $borrowRequestsAll = BorrowRequest::with(['borrower', 'supervisor', 'asset']);
-        $userBorrowRequests = $borrowRequestsAll->whereIn('asset_id', $assetIds)->get();
+        $borrowRequestsAll = BorrowRequest::with(['borrower', 'supervisor', 'asset'])->get();
+        $userBorrowRequests = $borrowRequestsAll->whereIn('asset_id', $assetIds);
 
         return view('PICLab.borrowing-requests', compact('userBorrowRequests', 'picId'));
     }

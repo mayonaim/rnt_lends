@@ -6,104 +6,127 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="h3 mb-0 text-gray-800">History</h2>
         </div>
-        <div class="card-body">
-            <p class="mb-4">History mahasiswa melakukan peminjaman.</p>
-            <table id="table1" class="table table-striped" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>NIM</th>
-                        <th>Penanggung Jawab</th>
-                        <th>Peminjaman</th>
-                        <th>Tangggal Peminjaman</th>
-                        <th>Jam Peminjaman</th>
-                        <th>Aksi</th>
-                        <th>Keterangan </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mahasiswa 1</td>
-                        <td>0000000001</td>
-                        <td>Penanggung Jawab 1</td>
-                        <td>Ruangan 1</td>
-                        <td>2023/03/19</td>
-                        <td>12:00</td>
-                        <td><a href="" class="btn btn-primary btn-sm text-white"> Teruskan </a>
-                            <a href="" class="btn btn-danger btn-sm text-white"> Tolak </a>
-                        </td>
-                        <td>Pengajuan <strong>diteruskan</strong> </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Mahasiswa 2</td>
-                        <td>0000000002</td>
-                        <td>Penanggung Jawab 2</td>
-                        <td>Ruangan 2</td>
-                        <td>2023/03/20</td>
-                        <td>12:00</td>
-                        <td><a href="" class="btn btn-primary btn-sm text-white"> Teruskan </a>
-                            <a href="" class="btn btn-danger btn-sm text-white"> Tolak </a>
-                        </td>
-                        <td>Pengajuan <strong>ditolak</strong> </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Mahasiswa 3</td>
-                        <td>0000000003 </td>
-                        <td>Penanggung Jawab 3</td>
-                        <td>Ruangan 3</td>
-                        <td>2023/03/21</td>
-                        <td>12:00</td>
-                        <td><a href="" class="btn btn-primary btn-sm text-white"> Teruskan </a>
-                            <a href="" class="btn btn-danger btn-sm text-white"> Tolak </a>
-                        </td>
-                        <td>Pengajuan <strong>diteruskan</strong> </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Mahasiswa 4</td>
-                        <td>0000000004</td>
-                        <td>Penanggung Jawab 4</td>
-                        <td>Ruangan 4</td>
-                        <td>2023/03/22</td>
-                        <td>12:00</td>
-                        <td><a href="" class="btn btn-primary btn-sm text-white"> Teruskan </a>
-                            <a href="" class="btn btn-danger btn-sm text-white"> Tolak </a>
-                        </td>
-                        <td>Pengajuan <strong>ditolak</strong> </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Mahasiswa 5</td>
-                        <td>0000000005</td>
-                        <td>Penanggung Jawab 5</td>
-                        <td>Alat 1</td>
-                        <td>2023/03/19</td>
-                        <td>12:00</td>
-                        <td><a href="" class="btn btn-primary btn-sm text-white"> Teruskan </a>
-                            <a href="" class="btn btn-danger btn-sm text-white"> Tolak </a>
-                        </td>
-                        <td>Pengajuan <strong>diteruskan</strong> </td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Mahasiswa 6</td>
-                        <td>0000000006</td>
-                        <td>Penanggung Jawab 2</td>
-                        <td>Alat 2</td>
-                        <td>2023/03/19</td>
-                        <td>12:00</td>
-                        <td><a href="" class="btn btn-primary btn-sm text-white"> Teruskan </a>
-                            <a href="" class="btn btn-danger btn-sm text-white"> Tolak </a>
-                        </td>
-                        <td>Pengajuan <strong>ditolak</strong> </td>
-                    </tr>
-
-                </tbody>
-            </table>
+        <div class="row">
+            <div class="col-md-12">
+                <table id="myTable" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Asset</th>
+                            <th>Supervisor</th>
+                            <th>Activity</th>
+                            <th>Amount</th>
+                            <th>Schedule</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($userBorrowRequests as $borrowing)
+                            @php
+                                $startTimestamp = \Carbon\Carbon::parse($borrowing->start_timestamp)->format('Y-m-d H:i:s');
+                                $endTimestamp = \Carbon\Carbon::parse($borrowing->end_timestamp)->format('Y-m-d H:i:s');
+                            @endphp
+                            <tr>
+                                <td></td>
+                                <td>{{ $borrowing->asset->name }}</td>
+                                <td>{{ $borrowing->supervisor->name }}</td>
+                                <td>{{ $borrowing->activity }}</td>
+                                <td>{{ $startTimestamp . ' - ' . $endTimestamp }}</td>
+                                <td>{{ $borrowing->borrowed_amount }}</td>
+                                <td>{{ $borrowing->status }}</td>
+                                <td>
+                                    @if ($borrowing->status === 'validated')
+                                        <form action="{{ route('pic.approve_borrow_request', $borrowing->id) }}"
+                                            method="POST" id="approveForm">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="status" value="approved">
+                                            <button type="submit"
+                                                class="btn btn-success btn-sm text-white">Approve</button>
+                                        </form>
+                                        <form action="{{ route('pic.reject_borrow_request', $borrowing->id) }}"
+                                            method="POST" id="rejectForm">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="status" value="rejected">
+                                            <button type="submit" class="btn btn-warning btn-sm text-white">Reject</button>
+                                        </form>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection
+@push('body')
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script
+        src="https://cdn.datatables.net/v/bs5/dt-1.13.4/b-2.3.6/b-html5-2.3.6/b-print-2.3.6/cr-1.6.2/r-2.4.1/sc-2.1.1/datatables.min.js">
+    </script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#myTable').DataTable({
+                dom: `
+                        <'row'<'col-md-3'l><'col-md-3'B><'col-md-2 selectHtml'><'col-md-4'f>>
+                        <'row'<'col-md-12'tr>>
+                        <'row'<'col-md-3'i><'col-md-5 button-container'><'col-md-4'p>>
+                    `,
+                columnDefs: [{
+                        targets: 0,
+                        render: function(data, type, row, meta) {
+                            return meta.row + 1;
+                        },
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        targets: 4,
+                        render: function(data, type, row, meta) {
+                            if (type === 'display') {}
+                            return data;
+                        }
+                    }
+                ],
+                buttons: [{
+                    extend: 'pdf',
+                    customize: function(doc) {
+                        var now = new Date();
+                        var formattedDate = now.getDate() + '/' + (now.getMonth() + 1) + '/' +
+                            now.getFullYear();
+                        doc.content.splice(0, 0, {
+                            text: 'Created on: ' + formattedDate,
+                            alignment: 'right',
+                            margin: [0, 0, 20, 0]
+                        });
+                    }
+                }],
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, 'All']
+                ]
+            });
+
+            var selectHtml = '<select>';
+            selectHtml += '<option value="">All</option>';
+            selectHtml += '<option value="pending">Pending</option>';
+            selectHtml += '<option value="verified">Verified</option>';
+            selectHtml += '<option value="approved">Approved</option>';
+            selectHtml += '<option value="borrowing">Borrowing</option>';
+            selectHtml += '<option value="rejected">Rejected</option>';
+            selectHtml += '</select>';
+
+            $('.selectHtml').html(selectHtml);
+
+            $('.selectHtml').on('change', 'select', function() {
+                var category = $(this).val();
+                table.column(4).search(category).draw();
+            });
+        });
+    </script>
+@endpush
