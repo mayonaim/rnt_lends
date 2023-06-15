@@ -34,7 +34,8 @@
                                     <i class="fa fa-user"></i>
                                 </span>
                             </div>
-                            <input type="text" name="username" id="username" class="form-control" placeholder="Username"
+
+                            <input type="text" class="form-control" value="{{ old('username') }}" name="username" id="username" placeholder="Username"
                                 autocomplete="off" required="">
                         </div>
                     </div>
@@ -45,11 +46,16 @@
                                     <i class="fa fa-lock"></i>
                                 </span>
                             </div>
-                            <input type="password" name="password" id="password" class="form-control"
+
+                            <input type="password" class="form-control" name="password" id="password"
                                 placeholder="Password" required="">
                         </div>
                     </div>
                     <div class="form-group text-center">
+                        <input class="form-check-input me-2" type="checkbox" value="remember_me" id="remember_me" name="remember_me">
+                            <label class="form-check-label text-gray-600" for="flexCheckDefault">
+                                Remember Me
+                            </label>
                         <button type="submit" class="btn btn-primary btn-block">Sign
                             In</button>
                         <a href="{{ route('register') }}" class="btn btn-link">Buat akun baru</a>

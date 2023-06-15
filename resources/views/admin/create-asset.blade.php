@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group">
                         <label for="images">Images</label>
-                        <input type="file" name="images[]" id="images" class="form-control-file" multiple
+                        <input type="file" name="images" id="images" class="form-control-file" multiple
                             accept="image/jpeg,image/png" required>
                     </div>
                     <div class="form-group justify-content-end">

@@ -22,6 +22,9 @@ class LoginController extends Controller
 
             $redirectTo = '/' . $role . '/home';
 
+                session()->flash('notifikasi', 'Login berhasil !');
+                session()->flash('type', 'success');
+
             return redirect()->intended($redirectTo);
         }
 

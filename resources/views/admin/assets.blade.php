@@ -28,6 +28,7 @@
                             <th>PIC</th>
                             <th>Category</th>
                             <th>Stock</th>
+                            <th>images</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -40,6 +41,7 @@
                                 <td>{{ $asset->pic->name }}</td>
                                 <td>{{ $asset->category }}</td>
                                 <td>{{ $asset->stock }}</td>
+                                <td>{{ $asset->images }}</td>
                                 <td>
                                     <a type="button" class="btn btn-warning btn-sm text-white" data-toggle="modal"
                                         data-target="#EditAssetModal{{ $asset->id }}">Edit</a>
