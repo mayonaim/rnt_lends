@@ -91,7 +91,6 @@ Route::middleware('role:admin')->group(function () {
 
     Route::post('/admin/manage/assets/create', [AssetController::class, 'store'])->name('asset.store');
 
-    //Drag Drop
     Route::post('/upload', [AssetController::class,'store'])->name('asset.store');
 
     Route::put('/admin/manage/assets/{id}/edit', [AssetController::class, 'update'])->name('admin.edit_asset');

@@ -37,8 +37,12 @@
                                         <td>{{ $borrowing->asset->name }}</td>
                                         <td>{{ $borrowing->supervisor->name }}</td>
                                         <td>{{ $borrowing->activity }}</td>
+                                        @if ($borrowing->asset->category == 'tool')
+                                            <td>{{ $borrowing->amount_borrowed }}</td>
+                                        @else
+                                            <td>-</td>
+                                        @endif
                                         <td>{{ $startTimestamp . ' - ' . $endTimestamp }}</td>
-                                        <td>{{ $borrowing->borrowed_amount }}</td>
                                         <td>{{ $borrowing->status }}</td>
                                         <td>
                                             @if ($borrowing->status === 'borrowing')
