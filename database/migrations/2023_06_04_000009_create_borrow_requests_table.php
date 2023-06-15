@@ -17,7 +17,7 @@ class CreateBorrowRequestsTable extends Migration
             $table->timestamp('start_timestamp');
             $table->timestamp('end_timestamp')->nullable();
             $table->integer('amount_borrowed')->nullable();
-            $table->string('status');
+            $table->enum('status', ['pending', 'approved', 'rejected', 'borrowing', 'finished'])->default('pending');
             $table->timestamps();
             $table->foreign('borrower_id')->references('id')->on('borrowers')->onDelete('cascade');
             $table->foreign('supervisor_id')->references('id')->on('supervisors')->onDelete('set null');

@@ -11,74 +11,133 @@
             <!-- Page Heading -->
             <div class="d-sm-relative align-items-center justify-content-between lg-4">
                 <h2 class="h3 mb-0 text-gray-800">Riwayat Peminjaman</h2>
-                <div class="card-body">
-                    <table id="myTable" class="table table-striped" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Asset</th>
-                                <th>Supervisor</th>
-                                <th>Activity</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ( as )
-
-                            @endforeach
-                        </tbody>
-                    </table>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="myTable" class="table table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Asset</th>
+                                    <th>Supervisor</th>
+                                    <th>Activity</th>
+                                    <th>Amount</th>
+                                    <th>Schedule</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($userBorrowRequests as $borrowing)
+                                    @php
+                                        $startTimestamp = \Carbon\Carbon::parse($borrowing->start_timestamp)->format('Y-m-d H:i:s');
+                                        $endTimestamp = \Carbon\Carbon::parse($borrowing->end_timestamp)->format('Y-m-d H:i:s');
+                                    @endphp
+                                    <tr>
+                                        <td></td>
+                                        <td>{{ $borrowing->asset->name }}</td>
+                                        <td>{{ $borrowing->supervisor->name }}</td>
+                                        <td>{{ $borrowing->activity }}</td>
+                                        @if ($borrowing->asset->category == 'tool')
+                                            <td>{{ $borrowing->amount_borrowed }}</td>
+                                        @else
+                                            <td>-</td>
+                                        @endif
+                                        <td>{{ $startTimestamp . ' - ' . $endTimestamp }}</td>
+                                        <td>{{ $borrowing->status }}</td>
+                                        <td>
+                                            @if ($borrowing->status === 'borrowing')
+                                                <form
+                                                    action="{{ route('borrow_request.update_status_finished', $borrowing->id) }}"
+                                                    method="POST" id="finishForm">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit"
+                                                        class="btn btn-success btn-sm text-white">Finish</button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('borrower.destroy_borrow_request') }}" method="POST"
+                                                    id="deleteForm">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="hidden" name="id" value="{{ $borrowing->id }}">
+                                                    <button type="submit" class="btn btn-danger btn-sm text-white"
+                                                        onclick="confirmDelete(event)">Delete</button>
+                                                </form>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-    @endsection
-    @push('body')
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-        <script
-            src="https://cdn.datatables.net/v/bs5/dt-1.13.4/b-2.3.6/b-html5-2.3.6/b-print-2.3.6/cr-1.6.2/r-2.4.1/sc-2.1.1/datatables.min.js">
-        </script>
-        <script>
-            $(document).ready(function() {
-                $('#myTable').DataTable({
-                    ajax: {
-                        url: '/borrowing-request/index',
-                        type: 'GET',
-                        dataType: 'json',
-                        dataSrc: 'borrowRequests',
-                        success: function(data) {
-                            retrievedData = data;
-                            processRetrievedData();
-                        }
-                    },
-                    columns: [{
-                            data: null,
-                            render: function(_, _, _, meta) {
-                                return meta.row + 1;
-                            }
-                        },
-                        {
-                            data: 'asset.name'
-                        },
-                        {
-                            data: 'supervisor.name'
-                        },
-                        {
-                            data: 'activity'
-                        },
-                        {
-                            data: 'borrowed_amount'
-                        },
-                        {
-                            data: 'status',
-                            render: function(data, type, row, meta) {
-                                return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CreateBorrowRequestModal' +
-                                    row.id + '">Borrow</button>';
+        @endsection
+        @push('body')
+            <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+            <script
+                src="https://cdn.datatables.net/v/bs5/dt-1.13.4/b-2.3.6/b-html5-2.3.6/b-print-2.3.6/cr-1.6.2/r-2.4.1/sc-2.1.1/datatables.min.js">
+            </script>
+            <script>
+                $(document).ready(function() {
+                    var table = $('#myTable').DataTable({
+                        dom: `
+                                <'row'<'col-md-3'l><'col-md-3'B><'col-md-2 selectHtml'><'col-md-4'f>>
+                                <'row'<'col-md-12'tr>>
+                                <'row'<'col-md-3'i><'col-md-5 button-container'><'col-md-4'p>>
+                            `,
+                        columnDefs: [{
+                                targets: 0,
+                                render: function(data, type, row, meta) {
+                                    return meta.row + 1;
+                                },
+                                orderable: false,
+                                searchable: false
                             },
-                        }
-                    ],
+                            {
+                                targets: 4,
+                                render: function(data, type, row, meta) {
+                                    if (type === 'display') {}
+                                    return data;
+                                }
+                            }
+                        ],
+                        buttons: [{
+                            extend: 'pdf',
+                            customize: function(doc) {
+                                var now = new Date();
+                                var formattedDate = now.getDate() + '/' + (now.getMonth() + 1) + '/' +
+                                    now.getFullYear();
+                                doc.content.splice(0, 0, {
+                                    text: 'Created on: ' + formattedDate,
+                                    alignment: 'right',
+                                    margin: [0, 0, 20, 0]
+                                });
+                            }
+                        }],
+                        lengthMenu: [
+                            [10, 25, 50, -1],
+                            [10, 25, 50, 'All']
+                        ]
+                    });
+
+                    var selectHtml = '<select>';
+                    selectHtml += '<option value="">All</option>';
+                    selectHtml += '<option value="pending">Pending</option>';
+                    selectHtml += '<option value="verified">Verified</option>';
+                    selectHtml += '<option value="approved">Approved</option>';
+                    selectHtml += '<option value="borrowing">Borrowing</option>';
+                    selectHtml += '<option value="rejected">Rejected</option>';
+                    selectHtml += '</select>';
+
+                    $('.selectHtml').html(selectHtml);
+
+                    $('.selectHtml').on('change', 'select', function() {
+                        var category = $(this).val();
+                        table.column(4).search(category).draw();
+                    });
                 });
-            });
-        </script>
-    @endpush
+            </script>
+        @endpush

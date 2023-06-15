@@ -56,11 +56,11 @@ Route::middleware('role:borrower')->group(function () {
 
     Route::post('/borrower/manage/borrowing-requests/create', [BorrowRequestController::class, 'store'])->name('borrow_request.store');
 
-    Route::post('/borrower/manage/borrowing-requests/{id}/edit', [BorrowRequestController::class, 'update'])->name('borrow_request.update');
+    Route::put('/borrower/manage/borrowing-requests/{id}/edit', [BorrowRequestController::class, 'update'])->name('borrow_request.update');
 
     Route::patch('/borrower/manage/borrowing-requests/{id}/finish', [BorrowRequestController::class, 'update'])->name('borrow_request.update_status_finished');
 
-    Route::delete('/borrower/manage/borrowing-requests/{id}/delete', [BorrowRequestController::class, 'destroy'])->name('borrow_request.destroy');
+    Route::delete('/borrower/manage/borrowing-requests/delete', [BorrowRequestController::class, 'destroy'])->name('borrower.destroy_borrow_request');
 });
 Route::middleware('role:supervisor')->group(function () {
     Route::get('/supervisor/home', [SupervisorController::class, 'home'])->name('supervisor.home');
@@ -90,8 +90,7 @@ Route::middleware('role:admin')->group(function () {
     Route::get('/admin/view/assets', [AdminController::class, 'assets'])->name('admin.view_assets');
 
     Route::post('/admin/manage/assets/create', [AssetController::class, 'store'])->name('asset.store');
-    
-    //Drag Drop
+
     Route::post('/upload', [AssetController::class,'store'])->name('asset.store');
 
     Route::put('/admin/manage/assets/{id}/edit', [AssetController::class, 'update'])->name('admin.edit_asset');
@@ -104,7 +103,7 @@ Route::middleware('role:admin')->group(function () {
 
     Route::patch('/admin/manage/borrowing-requests/{id}/reject', [BorrowRequestController::class, 'update'])->name('admin.reject_borrow_request');
 
-    Route::delete('/admin/manage/borrowing-requests/{id}/delete', [BorrowRequestController::class, 'destroy'])->name('borrow_request.destroy');
+    Route::delete('/admin/manage/borrowing-requests/delete', [BorrowRequestController::class, 'destroy'])->name('admin.destroy_borrow_request');
 
     Route::get('/admin/view/users', [AdminController::class, 'users'])->name('admin.view_users');
 

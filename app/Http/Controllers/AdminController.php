@@ -28,7 +28,7 @@ class AdminController extends Controller
 
     public function borrowRequests()
     {
-        $borrowRequests = BorrowRequest::with(['borrower', 'supervisor', 'asset']);
+        $borrowRequests = BorrowRequest::with(['borrower', 'supervisor', 'asset'])->get();
         return view('Admin.borrowing-requests', compact('borrowRequests'));
     }
 

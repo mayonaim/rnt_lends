@@ -1,11 +1,3 @@
-@push('head')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    {{--<link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
-    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>--}}
-@endpush
 <div class="modal fade" id="CreateAssetModal" tabindex="-1" role="dialog" aria-labelledby="CreateAssetModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -28,13 +20,14 @@
                     </div>
                     <div class="form-group">
                         <label for="namaAsset">Nama Asset</label>
-                        <input type="text" class="form-control" id="namaAsset" name="name" placeholder="Nama Asset" required>
+                        <input type="text" class="form-control" id="namaAsset" name="name"
+                            placeholder="Nama Asset" required>
                     </div>
                     <div class="form-group">
                         <label for="pic">PIC</label>
-                        <select name="pic_id" class="form-control" id="mySelect" required>
-                            @foreach($users as $user)
-                                @if($user->role == 'pic')
+                        <select name="pic_id" class="form-control" id="pic" required>
+                            @foreach ($users as $user)
+                                @if ($user->role == 'pic')
                                     <option value="{{ $user->pic->id }}">{{ $user->pic->name }}</option>
                                 @endif
                             @endforeach
@@ -46,7 +39,8 @@
                     </div>
                     <div class="form-group">
                         <label for="stock">Stock</label>
-                        <input type="number" name="stock" class="form-control" id="stock" placeholder="Stock" min="0">
+                        <input type="number" name="stock" class="form-control" id="stock" placeholder="Stock"
+                            min="0">
                     </div>
                     <div class="form-group">
                         <label for="images">Images</label>
@@ -62,29 +56,3 @@
         </div>
     </div>
 </div>
-
-@push('body')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
-    <script>
-        $('#mySelect').select2({
-            theme: 'bootstrap-5',
-            dropdownParent: $('#CreateAssetModal')
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#category').change(function() {
-                var selectedCategory = $(this).val();
-                var stockField = $('#stock');
-
-                if (selectedCategory === 'room') {
-                    stockField.prop('disabled', true);
-                } else {
-                    stockField.prop('disabled', false);
-                }
-            });
-        });
-    </script>
-@endpush

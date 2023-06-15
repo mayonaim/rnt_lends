@@ -38,7 +38,7 @@ class BorrowerController extends Controller
     {
         $this->initialize();
         $borrowerId = $this->borrowerId;
-        $borrowRequestsAll = BorrowRequest::with(['borrower', 'supervisor', 'asset']);
+        $borrowRequestsAll = BorrowRequest::with(['borrower', 'supervisor', 'asset'])->get();
         $userBorrowRequests = $borrowRequestsAll->where('borrower_id', $borrowerId);
 
         return view('Peminjam.borrowing-requests', compact('userBorrowRequests', 'borrowerId'));
