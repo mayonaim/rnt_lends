@@ -24,8 +24,13 @@
                             placeholder="{{ old('name', $asset->name) }}">
                     </div>
                     <div class="form-group">
-                        <label for="description">Description</label>
+                        <label for="description">Deskripsi</label>
                         <textarea class="form-control" name="description" id="description">{{ old('description', $asset->description) }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="stock">Stock</label>
+                        <input type="number" class="form-control" name="stock" id="stock"
+                            placeholder="{{ old('stock', $asset->stock) }}">
                     </div>
                     <div class="form-group">
                         <label for="pic_id">PIC</label>

@@ -14,10 +14,10 @@
                     <tr>
                         <th>#</th>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Phone Number</th>
+                        <th>Nama</th>
+                        <th>Nomor Hp</th>
                         <th>Role</th>
-                        <th>Action</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,7 +37,7 @@
                                 <form action="{{ route('user.destroy', $user->id) }}" method="POST" id="deleteForm">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm text-white" onclick="confirmDelete(event)">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm text-white" onclick="confirmDelete(event)">Hapus</button>
                                 </form>
                             </td>
                         </tr>

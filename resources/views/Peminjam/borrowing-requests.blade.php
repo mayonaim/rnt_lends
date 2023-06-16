@@ -18,12 +18,12 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Asset</th>
-                                    <th>Supervisor</th>
-                                    <th>Activity</th>
-                                    <th>Amount</th>
-                                    <th>Schedule</th>
+                                    <th>Pengawas</th>
+                                    <th>Aktivitas</th>
+                                    <th>Jumlah</th>
+                                    <th>Jadwal</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,7 +52,7 @@
                                                     @csrf
                                                     @method('PATCH')
                                                     <button type="submit"
-                                                        class="btn btn-success btn-sm text-white">Finish</button>
+                                                        class="btn btn-success btn-sm text-white">Selesai</button>
                                                 </form>
                                             @else
                                                 <form action="{{ route('borrower.destroy_borrow_request') }}" method="POST"
@@ -61,7 +61,7 @@
                                                     @method('DELETE')
                                                     <input type="hidden" name="id" value="{{ $borrowing->id }}">
                                                     <button type="submit" class="btn btn-danger btn-sm text-white"
-                                                        onclick="confirmDelete(event)">Delete</button>
+                                                        onclick="confirmDelete(event)">Hapus</button>
                                                 </form>
                                             @endif
                                         </td>
