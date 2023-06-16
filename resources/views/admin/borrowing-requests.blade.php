@@ -4,7 +4,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h2 class="h3 mb-0 text-gray-800">History</h2>
+            <h2 class="h3 mb-0 text-gray-800">Riwayat</h2>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -13,12 +13,12 @@
                         <tr>
                             <th>#</th>
                             <th>Asset</th>
-                            <th>Supervisor</th>
-                            <th>Activity</th>
-                            <th>Amount</th>
-                            <th>Schedule</th>
+                            <th>Pengawas</th>
+                            <th>Aktivitas</th>
+                            <th>Jumlah</th>
+                            <th>Jadwal</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,14 +46,14 @@
                                             @csrf
                                             @method('PATCH')
                                             <input type="hidden" name="status" value="approved">
-                                            <button type="submit" class="btn btn-primary btn-sm text-white">Approve</button>
+                                            <button type="submit" class="btn btn-primary btn-sm text-white">Menyetujui</button>
                                         </form>
                                         <form action="{{ route('admin.reject_borrow_request', $borrowing->id) }}"
                                             method="POST" id="rejectForm">
                                             @csrf
                                             @method('PATCH')
                                             <input type="hidden" name="status" value="rejected">
-                                            <button type="submit" class="btn btn-warning btn-sm text-white">Reject</button>
+                                            <button type="submit" class="btn btn-warning btn-sm text-white">Menolak</button>
                                         </form>
                                     @endif
                                     @if ($borrowing->status === 'borrowing')
@@ -61,7 +61,7 @@
                                             method="POST" id="finishForm">
                                             @csrf
                                             @method('PATCH')
-                                            <button type="submit" class="btn btn-success btn-sm text-white">Finish</button>
+                                            <button type="submit" class="btn btn-success btn-sm text-white">Selesai</button>
                                         </form>
                                     @endif
                                     <form action="{{ route('admin.destroy_borrow_request') }}" method="POST"
@@ -69,7 +69,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <input type="hidden" name="id" value="{{$borrowing->id}}">
-                                        <button type="submit" class="btn btn-danger btn-sm text-white" onclick="confirmDelete(event)">Delete</button>
+                                        <button type="submit" class="btn btn-danger btn-sm text-white" onclick="confirmDelete(event)">Hapus</button>
                                     </form>
                                 </td>
                             </tr>

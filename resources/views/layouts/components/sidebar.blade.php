@@ -23,7 +23,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route($userRole . '.home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Beranda</span></a>
             </li>
 
             <hr class="sidebar-divider">
@@ -50,7 +50,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route($userRole . '.view_borrowing_requests') }}">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>History</span></a>
+                    <span>Riwayat</span></a>
             </li>
 
             <hr class="sidebar-divider">

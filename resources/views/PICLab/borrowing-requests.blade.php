@@ -4,7 +4,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h2 class="h3 mb-0 text-gray-800">History</h2>
+            <h2 class="h3 mb-0 text-gray-800">Riwayat</h2>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -13,12 +13,12 @@
                         <tr>
                             <th>#</th>
                             <th>Asset</th>
-                            <th>Supervisor</th>
-                            <th>Activity</th>
-                            <th>Amount</th>
-                            <th>Schedule</th>
+                            <th>Pengawas</th>
+                            <th>Aktivitas</th>
+                            <th>Jumlah</th>
+                            <th>Jadwal</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,14 +47,14 @@
                                             @method('PATCH')
                                             <input type="hidden" name="status" value="approved">
                                             <button type="submit"
-                                                class="btn btn-success btn-sm text-white">Approve</button>
+                                                class="btn btn-success btn-sm text-white">Menyetujui</button>
                                         </form>
                                         <form action="{{ route('pic.reject_borrow_request', $borrowing->id) }}"
                                             method="POST" id="rejectForm">
                                             @csrf
                                             @method('PATCH')
                                             <input type="hidden" name="status" value="rejected">
-                                            <button type="submit" class="btn btn-warning btn-sm text-white">Reject</button>
+                                            <button type="submit" class="btn btn-warning btn-sm text-white">Menolak</button>
                                         </form>
                                     @endif
                                 </td>

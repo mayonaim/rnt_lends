@@ -21,7 +21,7 @@
                         <input type="hidden" name="status" value="pending">
                     </div>
                     <div class="form-group">
-                        <label for="supervisor">Supervisor</label>
+                        <label for="supervisor">Pengawas</label>
                         <select class="form-control" id="mySelect" name="supervisor_id" required>
                             @foreach ($users as $user)
                                 @if ($user->role == 'supervisor')
@@ -50,12 +50,12 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="activity{{ $asset->id }}">Ativitas</label>
-                        <textarea class="form-control" id="activity{{ $asset->id }}" name="activity" placeholder="Enter request activity"
+                        <label for="activity{{ $asset->id }}">Aktivitas</label>
+                        <textarea class="form-control" id="activity{{ $asset->id }}" name="activity" placeholder="Masukkan Aktivitas Anda"
                             required></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Create Borrowing Request</button>
+                        <button type="submit" class="btn btn-primary">Mengajukan Peminjaman</button>
                     </div>
                 </form>
             </div>

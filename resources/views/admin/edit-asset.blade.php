@@ -19,16 +19,16 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="name">Nama</label>
                         <input type="text" class="form-control" name="name" id="name"
                             placeholder="{{ old('name', $asset->name) }}">
                     </div>
                     <div class="form-group">
-                        <label for="description">Description</label>
+                        <label for="description">Deskripsi</label>
                         <textarea class="form-control" name="description" id="description">{{ old('description', $asset->description) }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="stock">Stock</label>
+                        <label for="stock">Stok</label>
                         <input type="number" class="form-control" name="stock" id="stock"
                             placeholder="{{ old('stock', $asset->stock) }}">
                     </div>

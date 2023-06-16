@@ -49,11 +49,11 @@
                         <tr>
                             <th>#</th>
                             <th>Asset</th>
-                            <th>Description</th>
+                            <th>Deskripsi</th>
                             <th>PIC</th>
-                            <th>Category</th>
-                            <th>Stock</th>
-                            <th>Action</th>
+                            <th>Kategori</th>
+                            <th>Stok</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,7 +67,7 @@
                                 <td>{{ $asset->stock }}</td>
                                 <td>
                                     <a type="button" class="btn btn-primary btn-sm text-white" data-toggle="modal"
-                                        data-target="#CreateBorrowRequestModal{{ $asset->id }}">Borrow</a>
+                                        data-target="#CreateBorrowRequestModal{{ $asset->id }}">Pinjam</a>
                                 </td>
                             </tr>
                             {{-- Modal Pinjam Asset --}}

@@ -24,11 +24,11 @@
                         <tr>
                             <th>#</th>
                             <th>Asset</th>
-                            <th>Description</th>
+                            <th>Deskripsi</th>
                             <th>PIC</th>
-                            <th>Category</th>
-                            <th>Stock</th>
-                            <th>Action</th>
+                            <th>Kategori</th>
+                            <th>Stok</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,7 +48,7 @@
                                         @method('DELETE')
                                         <input type="hidden" name="id" value="{{ $asset->id }}">
                                         <button type="submit" class="btn btn-danger btn-sm text-white"
-                                            onclick="confirmDelete(event)">Delete</button>
+                                            onclick="confirmDelete(event)">Hapus</button>
                                     </form>
                                 </td>
                             </tr>

@@ -38,12 +38,12 @@
                         <textarea name="description" class="form-control" id="aktivitas" placeholder="deskripsi"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="stock">Stock</label>
-                        <input type="number" name="stock" class="form-control" id="stock" placeholder="Stock"
+                        <label for="stock">Stok</label>
+                        <input type="number" name="stock" class="form-control" id="stock" placeholder="Stok"
                             min="0">
                     </div>
                     <div class="form-group">
-                        <label for="images">Images</label>
+                        <label for="images">Gambar</label>
                         <input type="file" name="images[]" id="images" class="form-control-file" multiple
                             accept="image/jpeg,image/png" required>
                     </div>
