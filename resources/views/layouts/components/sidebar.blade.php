@@ -39,18 +39,26 @@
                 </li>
             @endif
 
-            @if ($roleTiers[$userRole] >= 1)
+            @if ($roleTiers[$userRole] >= 2)
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route($userRole . '.view_assets') }}">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>Assets</span></a>
+                        <span>Manajemen Asset</span></a>
+                </li>
+            @endif
+
+            @if ($roleTiers[$userRole] == 1)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route($userRole . '.view_assets') }}">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Pinjam</span></a>
                 </li>
             @endif
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route($userRole . '.view_borrowing_requests') }}">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Riwayat</span></a>
+                    <span>Riwayat Peminjaman</span></a>
             </li>
 
             <hr class="sidebar-divider">
