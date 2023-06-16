@@ -15,13 +15,38 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('username', 'password', 'role');
 
-        if (Auth::attempt($credentials)) {
-            $role = Auth::user()->role;
+        $rememberMe = $request->has('remember_me');
 
-            $redirectTo = '/' . $role . '/home';
+        if (Auth::attempt($credentials, $rememberMe)) {
 
+            // Cookie
+            if ($rememberMe == 1) {
+                session(['remember_me' => true]);
+
+                setcookie('username', $request->username, time() + 60 * 60 * 24 * 30); // Set cookie selama 30 hari
+        
+            } else {
+                unset($_COOKIE['username']);
+            }
+            
+            $user = Auth::user();
+            $role = $user->role;
+            $redirectTo = '';
+
+            if ($role === 'borrower') {
+
+                $redirectTo = '/borrower/home';
+            } elseif ($role === 'supervisor') {
+                $redirectTo = '/supervisor/home';
+            } elseif ($role === 'pic') {
+                $redirectTo = '/pic/home';
+            } elseif ($role === 'admin') {
+                $redirectTo = '/admin/home';
+
+            }
+                //Sweetalert
                 session()->flash('notifikasi', 'Login berhasil !');
                 session()->flash('type', 'success');
 

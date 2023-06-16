@@ -19,18 +19,13 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="name">Asset</label>
                         <input type="text" class="form-control" name="name" id="name"
                             placeholder="{{ old('name', $asset->name) }}">
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="form-control" name="description" id="description">{{ old('description', $asset->description) }}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="stock">Stock</label>
-                        <input type="number" class="form-control" name="stock" id="stock"
-                            placeholder="{{ old('stock', $asset->stock) }}">
                     </div>
                     <div class="form-group">
                         <label for="pic_id">PIC</label>
@@ -40,6 +35,15 @@
                                 <option value="{{ $pic->id }}" {{ old('pic_id', $asset->pic_id) == $pic->id ? 'selected' : '' }}>{{ $pic->name }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                            <textarea class="form-control" name="category" id="category" placeholder="{{ old('category', $asset->category) }}"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="stock">Stock</label>
+                        <input type="number" class="form-control" name="stock" id="stock"
+                            placeholder="{{ old('stock', $asset->stock) }}">
                     </div>
                     {{-- <div class="form-group">
                         <label for="images">Images</label>
@@ -59,8 +63,8 @@
                         </div>
                     </div> --}}
                     <div class="form-group">
-                        <input type="hidden" class="form-control" name="category" id="category"
-                            value="{{ old('category', $asset->category) }}">
+                        <label for="images">Images</label>
+                        <input type="file" name="images" id="images" class="form-control-file" value="{{ old('images', $asset->images) }}" multiple accept="image/jpeg,image/png" required>
                     </div>
                     <div class="form-group justify-content-end">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
