@@ -14,6 +14,9 @@
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/dataTables/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+
     @stack('head')
 </head>
 
@@ -30,6 +33,21 @@
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
     <script script src="{{ asset('vendor/dataTables/js/dataTables.min.js') }}"></script>
     <script script src="{{ asset('vendor/dataTables/js/dataTables.bootstrap5.min.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+    @if(session('notifikasi'))
+        <script>
+        Swal.fire({
+            text: '{{ session('notifikasi') }}',
+            icon: '{{ session('type') }}',
+            confirmButtonText: 'OK',
+            timer: 2000,
+        }); 
+        </script>
+
+    @endif
+
     @stack('body')
 </body>
 
