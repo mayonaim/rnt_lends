@@ -6,7 +6,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        <h1 class="h3 mb-0 text-gray-800">Beranda</h1>
     </div>
 
     <!-- Content Row -->
@@ -61,7 +61,7 @@
             <!-- About Us -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">About Us</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Tentang kami</h6>
                 </div>
                 <div class="card-body">
                     <p>Kami mengerti bahwa mencari dan memesan ruangan atau alat bisa menjadi tugas yang melelahkan dan memakan waktu. Itulah sebabnya kami hadir untuk memberikan solusi cepat dan mudah untuk kebutuhan peminjaman Anda. Dengan platform peminjaman online yang modern dan inovatif, Anda dapat memesan ruangan atau alat dengan cepat dan mudah.</p>

@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="form-group text-center">
-                        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                        <button type="submit" class="btn btn-primary btn-block">Daftar Akun</button>
                         <a href="{{ route('home') }}" class="btn btn-link">Kembali</a>
                     </div>
                 </form>

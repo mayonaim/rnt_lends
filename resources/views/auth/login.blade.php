@@ -34,8 +34,7 @@
                                     <i class="fa fa-user"></i>
                                 </span>
                             </div>
-                            <input type="text" name="username" id="username" class="form-control" placeholder="Username"
-                                autocomplete="off" required="">
+                            <input type="text" class="form-control" value="{{ old('username', isset($_COOKIE['username']) ? $_COOKIE['username'] : '') }}" name="username" id="username" placeholder="Username" autocomplete="off" required="">
                         </div>
                     </div>
                     <div class="form-group">
@@ -45,14 +44,19 @@
                                     <i class="fa fa-lock"></i>
                                 </span>
                             </div>
-                            <input type="password" name="password" id="password" class="form-control"
+
+                            <input type="password" class="form-control" name="password" id="password"
                                 placeholder="Password" required="">
                         </div>
                     </div>
                     <div class="form-group text-center">
-                        <button type="submit" class="btn btn-primary btn-block">Sign
-                            In</button>
-                        <a href="{{ route('register') }}" class="btn btn-link">Buat akun baru</a>
+                        <input class="form-check-input me-2" type="checkbox" value="remember_me" id="remember_me" name="remember_me">
+                            <label class="form-check-label text-gray-600" for="flexCheckDefault">
+                                Ingatkan saya
+                            </label>
+                        <button type="submit" class="btn btn-primary btn-block">Masuk Akun
+                        </button>
+                        <a href="{{ route('register') }}" class="btn btn-link">Buat Akun Baru</a>
                     </div>
                 </form>
             </div>

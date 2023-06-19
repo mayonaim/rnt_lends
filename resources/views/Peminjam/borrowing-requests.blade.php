@@ -18,12 +18,12 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Asset</th>
-                                    <th>Supervisor</th>
-                                    <th>Activity</th>
-                                    <th>Amount</th>
-                                    <th>Schedule</th>
+                                    <th>Pengawas</th>
+                                    <th>Aktivitas</th>
+                                    <th>Jumlah</th>
+                                    <th>Jadwal</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,7 +43,26 @@
                                             <td>-</td>
                                         @endif
                                         <td>{{ $startTimestamp . ' - ' . $endTimestamp }}</td>
-                                        <td>{{ $borrowing->status }}</td>
+                                        <td>
+                                            @if ($borrowing->status === 'pending')
+                                                <div class="text-info">Diproses</div>
+                                            @endif
+                                            @if ($borrowing->status === 'validated')
+                                                <div class="text-warning">Disetujui Penanggung Jawab</div>
+                                            @endif
+                                            @if ($borrowing->status === 'approved')
+                                                <div class="text-success">Disetujui PIC Lab</div>
+                                            @endif
+                                            @if ($borrowing->status === 'borrowing')
+                                                <div class="text-primary">Meminjam</div>
+                                            @endif
+                                            @if ($borrowing->status === 'finished')
+                                                <div class="text-secondary">Selesai</div>
+                                            @endif
+                                            @if ($borrowing->status === 'rejected')
+                                                <div class="text-danger">Ditolak</div>
+                                            @endif
+                                        </td>
                                         <td>
                                             @if ($borrowing->status === 'borrowing')
                                                 <form
@@ -52,7 +71,7 @@
                                                     @csrf
                                                     @method('PATCH')
                                                     <button type="submit"
-                                                        class="btn btn-success btn-sm text-white">Finish</button>
+                                                        class="btn btn-success btn-sm text-white">Selesai</button>
                                                 </form>
                                             @else
                                                 <form action="{{ route('borrower.destroy_borrow_request') }}" method="POST"
@@ -61,7 +80,7 @@
                                                     @method('DELETE')
                                                     <input type="hidden" name="id" value="{{ $borrowing->id }}">
                                                     <button type="submit" class="btn btn-danger btn-sm text-white"
-                                                        onclick="confirmDelete(event)">Delete</button>
+                                                        onclick="confirmDelete(event)">Hapus</button>
                                                 </form>
                                             @endif
                                         </td>
