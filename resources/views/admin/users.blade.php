@@ -2,6 +2,15 @@
 @section('content')
     <!-- Begin Page Content -->
     <div class="container-fluid">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -22,22 +31,20 @@
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
-                        @php
-                            $userRole = $user->role;
-                        @endphp
                         <tr>
                             <td></td>
                             <td>{{ $user->username }}</td>
-                            <td>{{ $user->$userRole->name }}</td>
-                            <td>{{ $user->$userRole->phone }}</td>
-                            <td>{{ $userRole}}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->phone }}</td>
+                            <td>{{ $user->role }}</td>
                             <td>
                                 <a type="button" class="btn btn-warning btn-sm text-white" data-toggle="modal"
                                     data-target="#EditUserModal{{ $user->id }}">Edit</a>
                                 <form action="{{ route('user.destroy', $user->id) }}" method="POST" id="deleteForm">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm text-white" onclick="confirmDelete(event)">Hapus</button>
+                                    <button type="submit" class="btn btn-danger btn-sm text-white"
+                                        onclick="confirmDelete(event)">Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -68,14 +75,13 @@
                 <'row'<'col-md-3'i><'col-md-5 button-container'><'col-md-4'p>>
                 `,
                 columnDefs: [{
-                        targets: 0,
-                        render: function(data, type, row, meta) {
-                            return meta.row + 1;
-                        },
-                        orderable: false,
-                        searchable: false
+                    targets: 0,
+                    render: function(data, type, row, meta) {
+                        return meta.row + 1;
                     },
-                ],
+                    orderable: false,
+                    searchable: false
+                }, ],
                 buttons: [{
                     extend: 'pdf',
                     customize: function(doc) {

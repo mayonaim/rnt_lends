@@ -28,6 +28,7 @@
                             <th>PIC</th>
                             <th>Kategori</th>
                             <th>Stok</th>
+                            <th>Images</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
