@@ -50,11 +50,13 @@
                         </div>
                     </div>
                     <div class="form-group text-center">
-                        <input class="form-check-input me-2" type="checkbox" value="1" id="remember_me" name="remember_me" {{ session('remember_me') ? 'checked' : '' }}>
-                            <label class="form-check-label text-gray-600" for="checkbox-remember">Remember Me</label>
-                        <button type="submit" class="btn btn-primary btn-block">Sign
-                            In</button>
-                        <a href="{{ route('register') }}" class="btn btn-link">Buat akun baru</a>
+                        <input class="form-check-input me-2" type="checkbox" value="remember_me" id="remember_me" name="remember_me">
+                            <label class="form-check-label text-gray-600" for="flexCheckDefault">
+                                Ingatkan saya
+                            </label>
+                        <button type="submit" class="btn btn-primary btn-block">Masuk Akun
+                        </button>
+                        <a href="{{ route('register') }}" class="btn btn-link">Buat Akun Baru</a>
                     </div>
                 </form>
             </div>
