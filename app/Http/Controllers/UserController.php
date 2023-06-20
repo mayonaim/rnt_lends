@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with([ 'user.borrower', 'user.supervisor', 'user.pic']);
+        $users = User::with(['user.borrower', 'user.supervisor', 'user.pic']);
 
         return ['users' => $users];
     }
@@ -39,16 +39,38 @@ class UserController extends Controller
         $this->validateUser($request);
 
         $user = User::findOrFail($id);
+        $userRole = $user->role;
 
         $user->update([
             'username' => $request->input('username'),
             'password' => bcrypt($request->input('password')),
-            'role' => $request->input('role'),
+            'role' => $userRole,
         ]);
+
+        if ($request->input('name') || $request->input('phone')) {
+            $userData['name'] = $request->input('name');
+            $userData['phone'] = $request->input('phone');
+        };
 
         $user->save();
 
-        return back()->with( 'success', 'User succesfully updated');;
+        switch ($userRole) {
+            case 'borrower':
+                $user->borrower()->update($userData);
+                break;
+            case 'supervisor':
+                $user->supervisor()->update($userData);
+                break;
+            case 'pic':
+                $user->pic()->update($userData);
+                break;
+            case 'admin':
+                $user->admin()->update($userData);
+                break;
+        };
+
+        return back()->with('success', 'User succesfully updated');
+
     }
 
     public function destroy($id)
@@ -57,7 +79,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        return back()->with( 'success', 'User succesfully deleted');
+        return back()->with('success', 'User succesfully deleted');
     }
 
     private function validateUser(Request $request)

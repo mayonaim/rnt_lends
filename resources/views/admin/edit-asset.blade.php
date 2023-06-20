@@ -50,26 +50,9 @@
                         <input type="number" class="form-control" name="stock" id="stock"
                             placeholder="{{ old('stock', $asset->stock) }}">
                     </div>
-                    {{-- <div class="form-group">
-                        <label for="images">Images</label>
-                        <div id="dropzone" class="dropzone">
-                            <label>Existing Images</label>
-                            <div id="existingImagesList" class="d-flex flex-wrap">
-                                @foreach ($asset->images as $image)
-                                    <div class="mr-3 mb-2">
-                                        <img src="{{ asset('storage/assets/' . $image->name) }}" alt="Asset Image"
-                                            style="max-width: 150px; max-height: 150px;"
-                                            class="d-inline-block existing-image">
-                                        <button type="button" class="btn btn-sm btn-danger delete-image"
-                                            data-image-id="{{ $image->id }}">Delete</button>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div> --}}
                     <div class="form-group">
                         <label for="images">Images</label>
-                        <input type="file" name="images" id="images" class="form-control-file" value="{{ old('images', $asset->images) }}" multiple accept="image/jpeg,image/png" required>
+                        <input type="file" name="images" id="images" class="form-control-file" value="{{ old('images', $asset->images) }}" multiple accept="image/jpeg,image/png">
                     </div>
                     <div class="form-group justify-content-end">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
