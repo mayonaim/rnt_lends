@@ -70,6 +70,7 @@
                                                     method="POST" id="finishForm">
                                                     @csrf
                                                     @method('PATCH')
+                                                    <input type="hidden" name="status" value="finished">
                                                     <button type="submit"
                                                         class="btn btn-success btn-sm text-white">Selesai</button>
                                                 </form>

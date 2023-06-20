@@ -22,7 +22,6 @@
                         <tr>
                             <th>#</th>
                             <th>Asset</th>
-                            <th>Pengawas</th>
                             <th>Aktivitas</th>
                             <th>Jumlah</th>
                             <th>Jadwal</th>
@@ -39,7 +38,6 @@
                             <tr>
                                 <td></td>
                                 <td>{{ $borrowing->asset->name }}</td>
-                                <td>{{ $borrowing->supervisor->name }}</td>
                                 <td>{{ $borrowing->activity }}</td>
                                 @if ($borrowing->asset->category == 'tool')
                                     <td>{{ $borrowing->amount_borrowed }}</td>
