@@ -38,8 +38,27 @@
                                     <td>-</td>
                                 @endif
                                 <td>{{ $startTimestamp . ' - ' . $endTimestamp }}</td>
-                                <td>{{ $borrowing->status }}</td>
                                 <td>
+                                    @if ($borrowing->status === 'pending')
+                                        <div class="text-info">Diproses</div>
+                                    @endif
+                                    @if ($borrowing->status === 'validated')
+                                        <div class="text-warning">Disetujui Penanggung Jawab</div>
+                                    @endif
+                                    @if ($borrowing->status === 'approved')
+                                        <div class="text-success">Disetujui PIC Lab</div>
+                                    @endif
+                                    @if ($borrowing->status === 'borrowing')
+                                        <div class="text-primary">Meminjam</div>
+                                    @endif
+                                    @if ($borrowing->status === 'finished')
+                                        <div class="text-secondary">Selesai</div>
+                                    @endif
+                                    @if ($borrowing->status === 'rejected')
+                                        <div class="text-danger">Ditolak</div>
+                                    @endif
+                                </td>
+                        <td>
                                     @if ($borrowing->status === 'validated')
                                         <form action="{{ route('pic.approve_borrow_request', $borrowing->id) }}"
                                             method="POST" id="approveForm">
