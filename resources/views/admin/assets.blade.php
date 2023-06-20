@@ -115,9 +115,9 @@
             });
 
             var selectHtml = '<select>';
-            selectHtml += '<option value="">All</option>';
-            selectHtml += '<option value="room">Rooms</option>';
-            selectHtml += '<option value="tool">Tools</option>';
+            selectHtml += '<option value="">Semua</option>';
+            selectHtml += '<option value="room">Ruangan</option>';
+            selectHtml += '<option value="tool">Alat</option>';
             selectHtml += '</select>';
 
             $('.selectHtml').html(selectHtml);

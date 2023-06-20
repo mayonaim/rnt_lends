@@ -36,39 +36,19 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $user = User::findOrFail($id);
-        $userRole = $user->role;
-    
-        if ($request->input('name') || $request->input('phone')) {
-            $userData['name'] = $request->input('name');
-            $userData['phone'] = $request->input('phone');
-        };
-    
+        $user->role;
+
         $user->update([
             'username' => $request->input('username'),
             'password' => bcrypt($request->input('password')),
             'name' => $request->input('name'),
             'phone' => $request->input('phone'),
-            'role' => $userRole,
+            'role' => $request->input('role'),
         ]);
-    
-        switch ($userRole) {
-            case 'borrower':
-                $user->borrower()->update($userData);
-                break;
-            case 'supervisor':
-                $user->supervisor()->update($userData);
-                break;
-            case 'pic':
-                $user->pic()->update($userData);
-                break;
-            case 'admin':
-                $user->admin()->update($userData);
-                break;
-        };
-    
-        return back()->with('success', 'User successfully updated');
 
+        return back()->with( 'success', 'User succesfully updated');
     }
 
     public function destroy($id)
