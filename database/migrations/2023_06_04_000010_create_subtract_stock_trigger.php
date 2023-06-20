@@ -13,16 +13,17 @@ class CreateSubtractStockTrigger extends Migration
     public function up()
     {
         DB::unprepared('
-            CREATE TRIGGER subtract_stock_trigger
-            AFTER UPDATE ON borrow_requests
-            FOR EACH ROW
             BEGIN
                 IF NEW.status = \'approved\' AND NEW.amount_borrowed > 0 THEN
                     UPDATE assets
                     SET stock = stock - NEW.amount_borrowed
                     WHERE id = NEW.asset_id;
+                ELSEIF NEW.status = \'finished\' THEN
+                    UPDATE assets
+                    SET stock = stock + NEW.amount_borrowed
+                    WHERE id = NEW.asset_id;
                 END IF;
-            END;
+            END
         ');
     }
 

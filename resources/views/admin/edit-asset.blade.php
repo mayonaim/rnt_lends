@@ -28,6 +28,14 @@
                         <textarea class="form-control" name="description" id="description">{{ old('description', $asset->description) }}</textarea>
                     </div>
                     <div class="form-group">
+<<<<<<< HEAD
+=======
+                        <label for="stock">Stok</label>
+                        <input type="number" class="form-control" name="stock" id="stock"
+                            placeholder="{{ old('stock', $asset->stock) }}">
+                    </div>
+                    <div class="form-group">
+>>>>>>> db405c1d51145df02dd1083f6046e51c38255a81
                         <label for="pic_id">PIC</label>
                         <select class="form-control" id="mySelect" name="pic_id" required>
                             <option value="">pic</option>
@@ -37,33 +45,16 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="category">Category</label>
+                        <label for="category">Kategori</label>
                             <textarea class="form-control" name="category" id="category" placeholder="{{ old('category', $asset->category) }}"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="stock">Stock</label>
+                        <label for="stock">Stok</label>
                         <input type="number" class="form-control" name="stock" id="stock"
                             placeholder="{{ old('stock', $asset->stock) }}">
                     </div>
-                    {{-- <div class="form-group">
-                        <label for="images">Images</label>
-                        <div id="dropzone" class="dropzone">
-                            <label>Existing Images</label>
-                            <div id="existingImagesList" class="d-flex flex-wrap">
-                                @foreach ($asset->images as $image)
-                                    <div class="mr-3 mb-2">
-                                        <img src="{{ asset('storage/assets/' . $image->name) }}" alt="Asset Image"
-                                            style="max-width: 150px; max-height: 150px;"
-                                            class="d-inline-block existing-image">
-                                        <button type="button" class="btn btn-sm btn-danger delete-image"
-                                            data-image-id="{{ $image->id }}">Delete</button>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div> --}}
                     <div class="form-group">
-                        <label for="images">Images</label>
+                        <label for="images">Gambar</label>
                         <input type="file" name="images" id="images" class="form-control-file" value="{{ old('images', $asset->images) }}" multiple accept="image/jpeg,image/png" required>
                     </div>
                     <div class="form-group justify-content-end">

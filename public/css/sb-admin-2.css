@@ -5700,7 +5700,7 @@ a.close.disabled {
 }
 
 .modal-dialog-scrollable .modal-body {
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 .modal-dialog-centered {

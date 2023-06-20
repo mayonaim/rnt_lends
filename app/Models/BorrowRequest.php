@@ -8,7 +8,7 @@ class BorrowRequest extends Model
 {
     protected $fillable = [
         'borrower_id', 'asset_id', 'supervisor_id', 'activity', 'start_timestamp', 'end_timestamp',
-        'borrowed_amount',  'status'
+        'amount_borrowed',  'status'
     ];
 
     public function borrower()
