@@ -36,32 +36,22 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        
-
         $user = User::findOrFail($id);
         $userRole = $user->role;
-
-        $user->update([
-            'username' => $request->input('username'),
-            'password' => bcrypt($request->input('password')),
-<<<<<<< HEAD
-            'name' => $request->input('name'),
-            'phone' => $request->input('phone'),
-            'role' => $request->input('role'),
-        ]);
-
-        return back()->with( 'success', 'User succesfully updated');
-=======
-            'role' => $userRole,
-        ]);
-
+    
         if ($request->input('name') || $request->input('phone')) {
             $userData['name'] = $request->input('name');
             $userData['phone'] = $request->input('phone');
         };
-
-        $user->save();
-
+    
+        $user->update([
+            'username' => $request->input('username'),
+            'password' => bcrypt($request->input('password')),
+            'name' => $request->input('name'),
+            'phone' => $request->input('phone'),
+            'role' => $userRole,
+        ]);
+    
         switch ($userRole) {
             case 'borrower':
                 $user->borrower()->update($userData);
@@ -76,10 +66,9 @@ class UserController extends Controller
                 $user->admin()->update($userData);
                 break;
         };
+    
+        return back()->with('success', 'User successfully updated');
 
-        return back()->with('success', 'User succesfully updated');
-
->>>>>>> db405c1d51145df02dd1083f6046e51c38255a81
     }
 
     public function destroy($id)
@@ -96,6 +85,8 @@ class UserController extends Controller
         $request->validate([
             'username' => 'required|unique:users',
             'password' => 'required|min:8',
+            'name' => 'required',
+            'phone' => 'required',
             'role' => 'required|in:borrower,supervisor,pic,admin',
         ]);
     }
