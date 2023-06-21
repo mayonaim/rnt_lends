@@ -106,16 +106,19 @@
                 <div class="row" data-aos="fade-up" data-aos-delay="150">
                     <div class="col-lg-12 d-flex justify-content-center">
                         <ul id="portfolio-flters">
-                            <li data-filter="*" class="filter-active">Semua</li>
-                            <li data-filter=".filter-app">Ruangan</li>
-                            <li data-filter=".filter-card">Alat</li>
+                            <li data-filter="*" class="filter-active"><button onclick="filterImages('*')"
+                                    style="border: none;">Semua</button>
+                            </li>
+                            <li data-filter=".filter-app" onclick="filterImages('filter-app')" style="border: none;">Ruangan
+                            </li>
+                            <li data-filter=".filter-card"><button onclick="filterImages('filter-card')"
+                                    style="border: none;">Alat</button></li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="300">
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="150" class="image filter-app">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app" style="transition: opacity 0.5s ease;">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('img/ruangan1.jpg') }}" class="img-fluid" alt=""
                                 style="width: 600px; height: 200px;">
@@ -131,23 +134,25 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-card filter-alat"
+                        style="transition: opacity 0.5s ease;">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('img/logo.jpg') }}" class="img-fluid" alt=""
+                            <img src="{{ asset('img/ruangan2.jpg') }}" class="img-fluid" alt=""
                                 style="width: 600px; height: 200px;">
                             <div class="portfolio-info">
-                                <h4>Web 3</h4>
-                                <p>Web</p>
+                                <h4>Alat 1</h4>
+                                <p>Alat</p>
                                 <div class="portfolio-links">
-                                    <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery"
-                                        class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
+                                    <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery"
+                                        class="portfolio-lightbox" title="Alat 1"><i class="bx bx-plus"></i></a>
                                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app" data-aos="fade" data-aos-delay="400">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app" data-aos="fade" data-aos-delay="400"
+                        style="transition: opacity 0.5s ease;">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('img/ruangan2.jpg') }}" class="img-fluid" alt=""
                                 style="width: 600px; height: 200px;">
@@ -163,7 +168,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-card" style="transition: opacity 0.5s ease;">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('img/ruangan2.jpg') }}" class="img-fluid" alt=""
                                 style="width: 600px; height: 200px;">
@@ -179,7 +184,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-web" style="transition: opacity 0.5s ease;">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('img/ruangan2.jpg') }}" class="img-fluid" alt=""
                                 style="width: 600px; height: 200px;">
@@ -195,7 +200,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app" style="transition: opacity 0.5s ease;">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('img/ruangan2.jpg') }}" class="img-fluid" alt=""
                                 style="width: 600px; height: 200px;">
@@ -211,7 +216,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-card" style="transition: opacity 0.5s ease;">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('img/ruangan2.jpg') }}" class="img-fluid" alt=""
                                 style="width: 600px; height: 200px;">
@@ -227,7 +232,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-card" style="transition: opacity 0.5s ease;">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('img/ruangan2.jpg') }}" class="img-fluid" alt=""
                                 style="width: 600px; height: 200px;">
@@ -243,7 +248,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-web" style="transition: opacity 0.5s ease;">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('img/ruangan2.jpg') }}" class="img-fluid" alt=""
                                 style="width: 600px; height: 200px;">
@@ -266,3 +271,49 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
+
+@push('body')
+    <script>
+        function filterImages(filter) {
+            var images = document.getElementsByClassName('portfolio-item');
+
+            for (var i = 0; i < images.length; i++) {
+                if (filter === '*') {
+                    fadeIn(images[i]);
+                } else if (images[i].classList.contains(filter)) {
+                    fadeIn(images[i]);
+                } else {
+                    fadeOut(images[i]);
+                }
+            }
+        }
+
+        function fadeIn(element) {
+            element.style.opacity = 0;
+            element.style.display = 'block';
+
+            var opacity = 0;
+            var timer = setInterval(function() {
+                if (opacity >= 1) {
+                    clearInterval(timer);
+                }
+                element.style.opacity = opacity;
+                opacity += 0.1;
+            }, 50);
+        }
+
+        function fadeOut(element) {
+            element.style.opacity = 1;
+
+            var opacity = 1;
+            var timer = setInterval(function() {
+                if (opacity <= 0) {
+                    element.style.display = 'none';
+                    clearInterval(timer);
+                }
+                element.style.opacity = opacity;
+                opacity -= 0.1;
+            }, 50);
+        }
+    </script>
+@endpush
