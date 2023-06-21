@@ -28,7 +28,7 @@
                         <select name="pic_id" class="form-control" id="pic" required>
                             @foreach ($users as $user)
                                 @if ($user->role == 'pic')
-                                    <option value="{{ $user->pic->id }}">{{ $user->pic->name }}</option>
+                                    <option value="{{ $user->pic->id }}">{{ $user->name }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -37,10 +37,10 @@
                         <label for="deskripsi">Deskripsi</label>
                         <textarea name="description" class="form-control" id="aktivitas" placeholder="deskripsi"></textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" >
                         <label for="stock">Stok</label>
                         <input type="number" name="stock" class="form-control" id="stock" placeholder="Stok"
-                            min="0">
+                            min="1" value="1">
                     </div>
                     <div class="form-group">
                         <label for="images">Gambar</label>

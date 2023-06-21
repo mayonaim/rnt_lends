@@ -28,7 +28,6 @@
                             <th>PIC</th>
                             <th>Kategori</th>
                             <th>Stok</th>
-                            <th>Images</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -38,7 +37,7 @@
                                 <td></td>
                                 <td>{{ $asset->name }}</td>
                                 <td>{{ $asset->description }}</td>
-                                <td>{{ $asset->pic->name }}</td>
+                                <td>{{ $asset->pic->user->name }}</td>
                                 <td>{{ $asset->category }}</td>
                                 <td>{{ $asset->stock }}</td>
                                 <td>
@@ -130,6 +129,21 @@
             $('.button-container').html(
                 '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#CreateAssetModal">Tambah <i class="fa-regular fa-plus"></i></button>'
             );
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#CreateAssetModal').on('shown.bs.modal', function() {
+                const categorySelect = document.getElementById('category');
+                const stockField = document.getElementById('stock');
+                categorySelect.addEventListener('change', function() {
+                    if (categorySelect.value === 'room') {
+                        stockField.style.display = 'none';
+                    } else {
+                        stockField.style.display = 'block';
+                    }
+                });
+            });
         });
     </script>
 @endpush

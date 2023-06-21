@@ -31,6 +31,7 @@
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
+                    @if($user->role != 'admin')
                         <tr>
                             <td></td>
                             <td>{{ $user->username }}</td>
@@ -48,6 +49,7 @@
                                 </form>
                             </td>
                         </tr>
+                        @endif
                         {{-- Modal Edit Asset --}}
                         @include('admin.edit-user')
                     @endforeach

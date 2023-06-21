@@ -37,19 +37,14 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
 
-
         $user = User::findOrFail($id);
-        $userRole = $user->role;
 
         $user->update([
-            'username' => $request->input('username'),
-            'password' => bcrypt($request->input('password')),
             'name' => $request->input('name'),
             'phone' => $request->input('phone'),
-            'role' => $request->input('role'),
         ]);
 
-        return back()->with( 'success', 'User succesfully updated');
+        return back()->with('success', 'User succesfully updated');
     }
 
     public function destroy($id)

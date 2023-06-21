@@ -28,14 +28,6 @@
                         <textarea class="form-control" name="description" id="description">{{ old('description', $asset->description) }}</textarea>
                     </div>
                     <div class="form-group">
-<<<<<<< HEAD
-=======
-                        <label for="stock">Stok</label>
-                        <input type="number" class="form-control" name="stock" id="stock"
-                            placeholder="{{ old('stock', $asset->stock) }}">
-                    </div>
-                    <div class="form-group">
->>>>>>> db405c1d51145df02dd1083f6046e51c38255a81
                         <label for="pic_id">PIC</label>
                         <select class="form-control" id="mySelect" name="pic_id" required>
                             <option value="">pic</option>

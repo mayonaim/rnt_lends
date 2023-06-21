@@ -17,41 +17,14 @@
                 <form action="{{ route('user.update', $user->id) }}" method="POST">
                     @csrf
                     @method('PUT')
-<<<<<<< HEAD
-                    <input type="hidden" name="role" value="{{ $user->role }}">
-=======
-                    <input type="hidden" name="role" value="{{$user->role}}">
->>>>>>> db405c1d51145df02dd1083f6046e51c38255a81
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" name="username" id="username" class="form-control"
-                            value="{{ $user->username }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" id="password" class="form-control"
-                        value="{{ $user->password }}">
-                    </div>
-
                     <div class="form-group">
                         <label for="name">Nama</label>
-<<<<<<< HEAD
-                        <input type="text" name="name" class="form-control" id="name"
-                            value="{{ $user->name }}">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Nomor Hp</label>
-                        <input type="text" name="phone" class="form-control" id="phone"
-                            value="{{ $user->phone }}">
-=======
                         <input type="text" name="name" id="name" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Nomor telfon</label>
                         <input type="text" name="phone" id="phone" class="form-control">
->>>>>>> db405c1d51145df02dd1083f6046e51c38255a81
                     </div>
                     <button type="submit" class="btn btn-primary">Update User</button>
                 </form>
