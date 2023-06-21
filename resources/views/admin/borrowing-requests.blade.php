@@ -1,6 +1,15 @@
 @extends('layouts.main')
 @section('content')
     <div class="container-fluid">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -150,12 +159,12 @@
             });
 
             var selectHtml = '<select>';
-            selectHtml += '<option value="">All</option>';
-            selectHtml += '<option value="pending">Pending</option>';
-            selectHtml += '<option value="verified">Verified</option>';
-            selectHtml += '<option value="approved">Approved</option>';
-            selectHtml += '<option value="borrowing">Borrowing</option>';
-            selectHtml += '<option value="rejected">Rejected</option>';
+            selectHtml += '<option value="">Semua</option>';
+            selectHtml += '<option value="pending">Diproses</option>';
+            selectHtml += '<option value="verified">Disetujui Penanggung Jawab</option>';
+            selectHtml += '<option value="approved">Disetujui PIC Lab</option>';
+            selectHtml += '<option value="borrowing">Meminjam</option>';
+            selectHtml += '<option value="rejected">Ditolak</option>';
             selectHtml += '</select>';
 
             $('.selectHtml').html(selectHtml);

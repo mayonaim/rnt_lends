@@ -22,7 +22,6 @@
                         <tr>
                             <th>#</th>
                             <th>Asset</th>
-                            <th>Pengawas</th>
                             <th>Aktivitas</th>
                             <th>Jumlah</th>
                             <th>Jadwal</th>
@@ -39,7 +38,6 @@
                             <tr>
                                 <td></td>
                                 <td>{{ $borrowing->asset->name }}</td>
-                                <td>{{ $borrowing->supervisor->name }}</td>
                                 <td>{{ $borrowing->activity }}</td>
                                 @if ($borrowing->asset->category == 'tool')
                                     <td>{{ $borrowing->amount_borrowed }}</td>
@@ -145,12 +143,12 @@
             });
 
             var selectHtml = '<select>';
-            selectHtml += '<option value="">All</option>';
-            selectHtml += '<option value="pending">Pending</option>';
-            selectHtml += '<option value="verified">Verified</option>';
-            selectHtml += '<option value="approved">Approved</option>';
-            selectHtml += '<option value="borrowing">Borrowing</option>';
-            selectHtml += '<option value="rejected">Rejected</option>';
+            selectHtml += '<option value="">Semua</option>';
+            selectHtml += '<option value="pending">Diproses</option>';
+            selectHtml += '<option value="verified">Disetujui Penanggung Jawab</option>';
+            selectHtml += '<option value="approved">Disetujui PIC Lab</option>';
+            selectHtml += '<option value="borrowing">Meminjam</option>';
+            selectHtml += '<option value="rejected">Ditolak</option>';
             selectHtml += '</select>';
 
             $('.selectHtml').html(selectHtml);

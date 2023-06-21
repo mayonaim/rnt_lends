@@ -15,30 +15,40 @@ class UpdateBorrowingRequests extends Command
     {
         $now = Carbon::now();
 
-        // Find borrowing requests with status 'approved' or 'borrowing'
-        $borrowRequests = BorrowRequest::whereIn('status', ['pending', 'approved', 'borrowing'])->get();
+        // Retrieve all borrowing requests
+        $borrowRequests = BorrowRequest::all();
+
+        $rejectedIds = [];
+        $borrowingIds = [];
+        $finishedIds = [];
 
         foreach ($borrowRequests as $borrowRequest) {
             $startTimestamp = Carbon::parse($borrowRequest->start_timestamp);
             $endTimestamp = Carbon::parse($borrowRequest->end_timestamp);
 
-            // Check if borrowing time has begun and status is 'approved'
-            if ($now >= $startTimestamp && $borrowRequest->status === 'pending') {
-                $borrowRequest->status = 'rejected';
-                $borrowRequest->save();
+            if (($now >= $startTimestamp && $borrowRequest->status === 'pending') || $borrowRequest->status === 'validated') {
+                $rejectedIds[] = $borrowRequest->id;
             }
 
-            // Check if borrowing time has begun and status is 'approved'
             if ($now >= $startTimestamp && $borrowRequest->status === 'approved') {
-                $borrowRequest->status = 'borrowing';
-                $borrowRequest->save();
+                $borrowingIds[] = $borrowRequest->id;
             }
 
-            // Check if borrowing time has ended and status is 'borrowing'
             if ($now >= $endTimestamp && $borrowRequest->status === 'borrowing') {
-                $borrowRequest->status = 'completed';
-                $borrowRequest->save();
+                $finishedIds[] = $borrowRequest->id;
             }
+        }
+
+        if (!empty($rejectedIds)) {
+            BorrowRequest::whereIn('id', $rejectedIds)->update(['status' => 'rejected']);
+        }
+
+        if (!empty($borrowingIds)) {
+            BorrowRequest::whereIn('id', $borrowingIds)->update(['status' => 'borrowing']);
+        }
+
+        if (!empty($finishedIds)) {
+            BorrowRequest::whereIn('id', $finishedIds)->update(['status' => 'finished']);
         }
 
         $this->info('Borrowing requests updated successfully.');
