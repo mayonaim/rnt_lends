@@ -61,6 +61,8 @@ class UserController extends Controller
         $request->validate([
             'username' => 'required|unique:users',
             'password' => 'required|min:8',
+            'name' => 'required',
+            'phone' => 'required',
             'role' => 'required|in:borrower,supervisor,pic,admin',
         ]);
     }
