@@ -52,6 +52,7 @@ class BorrowerController extends Controller
             ->toArray();
 
         return ['bookedAssets' => $bookedAssets];
+        dd($bookedAssets);
     }
 
 }

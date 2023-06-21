@@ -38,14 +38,10 @@ class UserController extends Controller
     {
 
         $user = User::findOrFail($id);
-        $user->role;
 
         $user->update([
-            'username' => $request->input('username'),
-            'password' => bcrypt($request->input('password')),
             'name' => $request->input('name'),
             'phone' => $request->input('phone'),
-            'role' => $request->input('role'),
         ]);
 
         return back()->with('success', 'User succesfully updated');
