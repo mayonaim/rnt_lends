@@ -18,28 +18,14 @@
                 <form action="{{ route('user.update', $user->id) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name="role" value="{{$user->role}}">
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" name="username" id="username" class="form-control"
-                            value="{{ $user->username }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" id="password" class="form-control"
-                        value="">
-                    </div>
-
                     <div class="form-group">
                         <label for="name">Nama</label>
-                        <input type="text" name="name" class="form-control" id="name"
-                            value="{{ $user->name }}">
+                        <input type="text" name="name" id="name" class="form-control">
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">Nomor Hp</label>
-                        <input type="text" name="phone" class="form-control" id="phone"
-                            value="{{ $user->phone }}">
+                        <label for="phone">Nomor telfon</label>
+                        <input type="text" name="phone" id="phone" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary">Update User</button>
                 </form>

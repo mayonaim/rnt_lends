@@ -38,17 +38,13 @@ class UserController extends Controller
     {
 
         $user = User::findOrFail($id);
-        $user->role;
 
         $user->update([
-            'username' => $request->input('username'),
-            'password' => bcrypt($request->input('password')),
             'name' => $request->input('name'),
             'phone' => $request->input('phone'),
-            'role' => $request->input('role'),
         ]);
 
-        return back()->with( 'success', 'User succesfully updated');
+        return back()->with('success', 'User succesfully updated');
     }
 
     public function destroy($id)
@@ -65,8 +61,6 @@ class UserController extends Controller
         $request->validate([
             'username' => 'required|unique:users',
             'password' => 'required|min:8',
-            'name' => 'required',
-            'phone' => 'required',
             'role' => 'required|in:borrower,supervisor,pic,admin',
         ]);
     }
