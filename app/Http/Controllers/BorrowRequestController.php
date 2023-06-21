@@ -28,13 +28,18 @@ class BorrowRequestController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $borrowRequest = BorrowRequest::findOrFail($id);
 
         if ($request->method() === 'PATCH') {
-            $borrowRequest->status = $request->input('status');
+            $status = $request->input('status');
+
+        if (in_array($status, ['pending', 'approved', 'validated', 'rejected', 'borrowing'])) {
+            $borrowRequest->status = $status;
             $borrowRequest->save();
             return back()->with('success', 'Borrow Request status updated successfully!');
+        } else {
+            return back()->with('error', 'Invalid status value!');
+            }
         }
 
         $this->validateBorrowRequest($request);
@@ -42,6 +47,7 @@ class BorrowRequestController extends Controller
         $borrowRequest->update($request->all());
 
         return back()->with('success', 'Borrow Request updated successfully!');
+        
     }
 
     public function destroy(Request $request)
