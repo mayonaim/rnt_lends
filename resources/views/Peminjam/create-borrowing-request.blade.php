@@ -25,7 +25,7 @@
                         <select class="form-control" id="mySelect" name="supervisor_id" required>
                             @foreach ($users as $user)
                                 @if ($user->role == 'supervisor')
-                                    <option value="{{ $user->supervisor->id }}">{{ $user->supervisor->name }}</option>
+                                    <option value="{{ $user->supervisor->id }}">{{ $user->name }}</option>
                                 @endif
                             @endforeach
                         </select>

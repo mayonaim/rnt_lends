@@ -15,7 +15,6 @@ class CreateAssetsTable extends Migration
             $table->unsignedBigInteger('pic_id')->nullable();
             $table->string('category');
             $table->integer('stock');
-            $table->string('images')->nullable();
             $table->timestamps();
             $table->foreign('pic_id')->references('id')->on('people_in_charge')->onDelete('set null');
         });

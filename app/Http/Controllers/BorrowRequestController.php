@@ -10,13 +10,6 @@ use App\Models\BorrowRequest;
 
 class BorrowRequestController extends Controller
 {
-    public function index()
-    {
-        $borrowRequests = BorrowRequest::with([ 'borrower', 'supervisor', 'asset.image', 'asset.pic']);
-
-        return Response::json(['borrowRequests' => $borrowRequests]);
-    }
-
     public function store(Request $request)
     {
         $this->validateBorrowRequest($request);
@@ -33,7 +26,7 @@ class BorrowRequestController extends Controller
         if ($request->method() === 'PATCH') {
             $status = $request->input('status');
 
-        if (in_array($status, ['pending', 'approved', 'validated', 'rejected', 'borrowing'])) {
+        if (in_array($status, ['pending', 'approved', 'validated', 'rejected', 'borrowing', 'finished'])) {
             $borrowRequest->status = $status;
             $borrowRequest->save();
             return back()->with('success', 'Borrow Request status updated successfully!');

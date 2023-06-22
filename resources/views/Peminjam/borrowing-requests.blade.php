@@ -35,7 +35,7 @@
                                     <tr>
                                         <td></td>
                                         <td>{{ $borrowing->asset->name }}</td>
-                                        <td>{{ $borrowing->supervisor->name }}</td>
+                                        <td>{{ $borrowing->supervisor->user->name }}</td>
                                         <td>{{ $borrowing->activity }}</td>
                                         @if ($borrowing->asset->category == 'tool')
                                             <td>{{ $borrowing->amount_borrowed }}</td>
@@ -44,6 +44,7 @@
                                         @endif
                                         <td>{{ $startTimestamp . ' - ' . $endTimestamp }}</td>
                                         <td>
+                                            
                                             @if ($borrowing->status === 'pending')
                                                 <div class="text-info">Diproses</div>
                                             @endif
@@ -104,7 +105,7 @@
                 $(document).ready(function() {
                     var table = $('#myTable').DataTable({
                         dom: `
-                                <'row'<'col-md-3'l><'col-md-3'B><'col-md-2 selectHtml'><'col-md-4'f>>
+                                <'row'<'col-md-3'l><'col-md-3'><'col-md-2 selectHtml'><'col-md-4'f>>
                                 <'row'<'col-md-12'tr>>
                                 <'row'<'col-md-3'i><'col-md-5 button-container'><'col-md-4'p>>
                             `,
@@ -116,26 +117,8 @@
                                 orderable: false,
                                 searchable: false
                             },
-                            {
-                                targets: 4,
-                                render: function(data, type, row, meta) {
-                                    if (type === 'display') {}
-                                    return data;
-                                }
-                            }
                         ],
                         buttons: [{
-                            extend: 'pdf',
-                            customize: function(doc) {
-                                var now = new Date();
-                                var formattedDate = now.getDate() + '/' + (now.getMonth() + 1) + '/' +
-                                    now.getFullYear();
-                                doc.content.splice(0, 0, {
-                                    text: 'Created on: ' + formattedDate,
-                                    alignment: 'right',
-                                    margin: [0, 0, 20, 0]
-                                });
-                            }
                         }],
                         lengthMenu: [
                             [10, 25, 50, -1],
